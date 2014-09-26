@@ -1,39 +1,36 @@
 <?php
 
-require 'vendor/autoload.php';
+require '../../../lib/vendor/autoload.php';
 
+use \Genesis\Base as Genesis;
 use \Genesis\Configuration as Config;
 
-Config::setDebug();
-Config::setEnvironment('');
-Config::setToken('');
-Config::setUsername('');
-Config::setPassword('');
+Config::loadSettings('/Users/petermanchev/Documents/Workspace/git/github/ldap/genesis_php/legacy/settings.ini');
 
-$genesisRequest = new \Genesis\API\Request\Financial\Capture();
+Genesis::loadRequest('Financial\Capture');
 
-$genesisRequest->setTransactionId('4035747662996176904');
-$genesisRequest->setUsage('40208 Concert Tickets');
-$genesisRequest->setRemoteIp('127.0.0.1');
-$genesisRequest->setReferenceId('REF-001');
-$genesisRequest->setAmount(1);
-$genesisRequest->setCurrency('USD');
+Genesis::Request()->setTransactionId($_POST['transaction_id']);
+Genesis::Request()->setUsage($_POST['usage']);
+Genesis::Request()->setRemoteIp($_POST['remote_ip']);
+Genesis::Request()->setReferenceId($_POST['reference_id']);
+Genesis::Request()->setAmount($_POST['amount']);
+Genesis::Request()->setCurrency($_POST['currency']);
+
+$out = array(
+    'request'   => null,
+    'response'  => null,
+);
 
 try
 {
-    $genesisRequest->generateXML();
-    $genesisRequest->submitRequest();
-
-    $genesisResponse = new \Genesis\API\Response();
-    $genesisResponse->parseResponse($genesisRequest->getGenesisResponse());
-
-    if (!$genesisResponse->checkResponseCode()) {
-        echo $genesisResponse->getResponseObject()->technical_message . "\r\n";
-        echo \Genesis\API\Errors::getErrorDescription($genesisResponse->getResponseObject()->code) . "\r\n";
-        throw new \Exception("\r\nInvalid Response from Genesis, something went wrong!\r\n");
-    }
+    $out['request']  = Genesis::Request()->getDocument();
+    Genesis::Request()->Send();
+    $out['response'] = Genesis::Request()->getGenesisResponse();
 }
 catch (\Exception $e)
 {
-    echo $e->getMessage();
+    $out['response'] = $e->getMessage();
 }
+
+echo json_encode($out);
+exit(0);
