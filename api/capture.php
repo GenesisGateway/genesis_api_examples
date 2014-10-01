@@ -1,6 +1,6 @@
 <?php
 
-require '../../../lib/vendor/autoload.php';
+require '../lib/vendor/autoload.php';
 
 use \Genesis\Base as Genesis;
 use \Genesis\Configuration as Config;
@@ -16,21 +16,21 @@ Genesis::Request()->setReferenceId($_POST['reference_id']);
 Genesis::Request()->setAmount($_POST['amount']);
 Genesis::Request()->setCurrency($_POST['currency']);
 
-$out = array(
+$output = array(
     'request'   => null,
     'response'  => null,
 );
 
 try
 {
-    $out['request']  = Genesis::Request()->getDocument();
+    $output['request']  = Genesis::Request()->getDocument();
     Genesis::Request()->Send();
-    $out['response'] = Genesis::Request()->getGenesisResponse();
+    $output['response'] = Genesis::Request()->getGenesisResponse();
 }
 catch (\Exception $e)
 {
-    $out['response'] = $e->getMessage();
+    $output['response'] = $e->getMessage();
 }
 
-echo json_encode($out);
+echo json_encode($output);
 exit(0);

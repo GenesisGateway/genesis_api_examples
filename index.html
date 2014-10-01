@@ -9,12 +9,21 @@
                 <link rel="stylesheet" href="js/highlight/monokai_sublime.css">
                 <!-- Style -->
                 <style type="text/css">
-                    article {margin-top:99px;}
                     .container {margin:0 auto;}
                     .form {/*width:384px;*/margin:0 auto;}
-                        .form .icon-container {position:absolute;padding:10px;}
-                        .form input[type="text"] {text-indent:22px;}
+                        .form .icon-group .icon-container {position:absolute;padding:10px;}
+                        .form .icon-group input[type="text"] {text-indent:22px;}
+                    .no-gutter {margin:15px;}
+                    .code-drops {display:none}
+                    .dropdown-menu {text-align:center}
+                    .dropdown-header {text-decoration:underline;}
                     pre {border-color:#23241F;background-color:#23241F;}
+                    legend {margin-bottom:15px;}
+                    article {margin:66px 0;}
+                    /*fieldset {border:1px solid #eee;}*/
+                    footer {position:fixed;bottom:0px;width:100%;margin-top:52px;}
+                        header .navbar, footer .navbar {margin-bottom:0;}
+                        footer .copyright-notice {float:right;line-height:52px;font-family:Georgia,sans-serif;font-size:9pt;margin-right:16px;}
                 </style>
                 <!-- jQuery -->
                 <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
@@ -22,6 +31,10 @@
                 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
                 <!-- Highlight -->
                 <script src="js/highlight/highlight.pack.js"></script>
+                <!-- Mustache -->
+                <script src="js/mustache.js"></script>
+                <!-- EN Language -->
+                <script src="js/en_lang.js"></script>
             </head>
             <body>
                 <header>
@@ -35,7 +48,7 @@
                                     <span class="icon-bar"></span>
                                     <span class="icon-bar"></span>
                                 </button>
-                                <a class="navbar-brand" href="#">Genesis PHP Examples</a>
+                                <a class="navbar-brand" href="/">Genesis PHP Client</a>
                             </div>
                             <div class="navbar-collapse collapse">
                                 <ul class="nav navbar-nav">
@@ -43,42 +56,50 @@
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Financial <span class="caret"></span></a>
                                         <ul class="dropdown-menu" role="menu">
                                             <li class="dropdown-header">Generic</li>
-                                            <li><a href="#">Authorize</a></li>
-                                            <li><a href="#">Capture</a></li>
-                                            <li><a href="#">Credit</a></li>
-                                            <li><a href="#">Payout</a></li>
-                                            <li><a href="#">Refund</a></li>
-                                            <li><a href="#">Sale</a></li>
-                                            <li><a href="#">Void</a></li>
+                                            <li><a href="#content" data-id="authorize" class="trx-type">Authorize</a></li>
+                                            <li><a href="#content" data-id="capture" class="trx-type">Capture</a></li>
+                                            <li><a href="#content" data-id="credit" class="trx-type">Credit</a></li>
+                                            <li><a href="#content" data-id="payout" class="trx-type">Payout</a></li>
+                                            <li><a href="#content" data-id="refund" class="trx-type">Refund</a></li>
+                                            <li><a href="#content" data-id="sale" class="trx-type">Sale</a></li>
+                                            <li><a href="#content" data-id="void" class="trx-type">Void</a></li>
                                             <li class="divider"></li>
                                             <li class="dropdown-header">Recurring</li>
-                                            <li><a href="#">Init Recurring Sale</a></li>
-                                            <li><a href="#">Recurring Sale</a></li>
+                                            <li><a href="#content" data-id="init_recurring_sale" class="trx-type">Init Recurring Sale</a></li>
+                                            <li><a href="#content" data-id="recurring_sale" class="trx-type">Recurring Sale</a></li>
                                             <li class="divider"></li>
                                             <li class="dropdown-header">3D Transactions</li>
-                                            <li><a href="#">Authorize 3D</a></li>
-                                            <li><a href="#">InitRecurring 3D</a></li>
-                                            <li><a href="#">Sale 3D</a></li>
+                                            <li><a href="#content" data-id="authorize3d" class="trx-type">3D Authorize</a></li>
+                                            <li><a href="#content" data-id="init_recurring_sale3d" class="trx-type">3D InitRecurring</a></li>
+                                            <li><a href="#content" data-id="sale3d" class="trx-type">3D Sale</a></li>
                                         </ul>
                                     </li>
                                     <li class="dropdown">
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">Non-Financial <span class="caret"></span></a>
                                         <ul class="dropdown-menu" role="menu">
-                                            <li class="dropdown-header">Address</li>
-                                            <li><a href="#">AV</a></li>
-                                            <li><a href="#">AVS</a></li>
+                                            <li class="dropdown-header">Verifications</li>
+                                            <li><a href="#content" data-id="av" class="trx-type">Account Verification</a></li>
+                                            <li><a href="#content" data-id="avs" class="trx-type">Address Verification</a></li>
                                             <li class="divider"></li>
-                                            <li class="dropdown-header">Reconcile</li>
-                                            <li><a href="#">Reconile by Date</a></li>
-                                            <li><a href="#">Reconile by TRX</a></li>
+                                            <li class="dropdown-header">Charge-Back Information</li>
+                                            <li><a href="#content" data-id="chargeback_by_date" class="trx-type">By Date / Date-Range</a></li>
+                                            <li><a href="#content" data-id="chargeback_by_trx_id" class="trx-type">By Transaction ID</a></li>
+                                            <li class="divider"></li>
+                                            <li class="dropdown-header">Reconcile List</li>
+                                            <li><a href="#content" data-id="reconcile_by_date" class="trx-type">By Date / Date-Range</a></li>
+                                            <li><a href="#content" data-id="reconcile_by_trx_id" class="trx-type">By Transaction ID</a></li>
+                                            <li class="divider"></li>
+                                            <li class="dropdown-header">Retrieval Information</li>
+                                            <li><a href="#content" data-id="retrieval_by_date" class="trx-type">By Date / Date-Range</a></li>
+                                            <li><a href="#content" data-id="retrieval_by_trx_id" class="trx-type">By Transaction ID</a></li>
                                         </ul>
                                     </li>
                                     <li class="dropdown">
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">WPF <span class="caret"></span></a>
                                         <ul class="dropdown-menu" role="menu">
                                             <li class="dropdown-header">Web Payment Form</li>
-                                            <li><a href="#">Create</a></li>
-                                            <li><a href="#">Reconcile</a></li>
+                                            <li><a href="#content" data-id="wpf_create" class="trx-type">Create</a></li>
+                                            <li><a href="#content" data-id="wpf_reconcile" class="trx-type">Reconcile</a></li>
                                         </ul>
                                     </li>
                                 </ul>
@@ -89,307 +110,78 @@
                 </header>
 
                 <article>
-                    <!-- Authorize -->
-                    <!--
-                    <div class="row container generic">
-                        <div class="col-xs-12">
-                            <div id="financial-authorize">
-                                <form class="form" id="financial-authorize-form">
-                                    <div class="row no-gutter form-group">
-                                        <div class="col-xs-12 left-inner-addon">
-                                            <div class="icon-container">
-                                                <i class="glyphicon glyphicon-earphone"></i>
-                                            </div>
-                                            <input class="form-control" type="text" name="transaction_type" placeholder="Enter phone number..." value="authorize" disabled="disabled" />
-                                        </div>
-                                    </div>
-                                    <div class="row no-gutter form-group">
-                                        <div class="col-xs-12 left-inner-addon">
-                                            <div class="icon-container">
-                                                <i class="glyphicon glyphicon-earphone"></i>
-                                            </div>
-                                            <input class="form-control" type="text" name="transaction_id" placeholder="Enter transaction id..." />
-                                        </div>
-                                    </div>
-                                    <div class="row no-gutter form-group">
-                                        <div class="col-xs-12 left-inner-addon">
-                                            <div class="icon-container">
-                                                <i class="glyphicon glyphicon-envelope"></i>
-                                            </div>
-                                            <input class="form-control" type="text" name="usage" placeholder="Enter usage description..." />
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <label for="authorize-gaming" class="control-label input-group">Gaming:</label>
-                                        <div class="btn-group" data-toggle="buttons">
-                                            <label class="btn btn-default">
-                                                <input name="gaming" value="Yes" type="radio">Yes
-                                            </label>
-                                            <label class="btn btn-default">
-                                                <input id="authorize-gaming" name="gaming" value="No" type="radio">No
-                                            </label>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <label for="authorize-gaming" class="control-label input-group">Moto:</label>
-                                        <div class="btn-group" data-toggle="buttons">
-                                            <label class="btn btn-default">
-                                                <input name="moto" value="Yes" type="radio">Yes
-                                            </label>
-                                            <label class="btn btn-default">
-                                                <input id="authorize-moto" name="moto" value="No" type="radio">No
-                                            </label>
-                                        </div>
-                                    </div>
-
-                                    <div class="row no-gutter form-group">
-                                        <div class="col-xs-12 left-inner-addon">
-                                            <div class="icon-container">
-                                                <i class="glyphicon glyphicon-globe"></i>
-                                            </div>
-                                            <input class="form-control" type="text" name="remote_ip" placeholder="Enter remote ip address..." />
-                                        </div>
-                                    </div>
-                                    <div class="row no-gutter form-group">
-                                        <div class="col-xs-12 left-inner-addon">
-                                            <div class="icon-container">
-                                                <i class="glyphicon glyphicon-barcode"></i>
-                                            </div>
-                                            <input class="form-control" type="text" name="reference_id" placeholder="Enter reference id..." />
-                                        </div>
-                                    </div>
-                                    <div class="row no-gutter form-group">
-                                        <div class="col-xs-12 left-inner-addon">
-                                            <div class="icon-container">
-                                                <i class="glyphicon glyphicon-usd"></i>
-                                            </div>
-                                            <input class="form-control" type="text" name="amount" placeholder="Enter amount..." />
-                                        </div>
-                                    </div>
-                                    <div class="row no-gutter form-group">
-                                        <div class="col-xs-12 left-inner-addon">
-                                            <div class="icon-container">
-                                                <i class="glyphicon glyphicon-shopping-cart"></i>
-                                            </div>
-                                            <input class="form-control" type="text" name="currency" placeholder="Enter currency..." />
-                                        </div>
-                                    </div>
-                                    <div class="row no-gutter form-group">
-                                        <div class="col-xs-12 left-inner-addon">
-                                            <div class="icon-container">
-                                                <i class="glyphicon glyphicon-shopping-cart"></i>
-                                            </div>
-                                            <input class="form-control" type="text" name="card_holder" placeholder="Enter CC Holder Name..." />
-                                        </div>
-                                    </div>
-                                    <div class="row no-gutter form-group">
-                                        <div class="col-xs-12 left-inner-addon">
-                                            <div class="icon-container">
-                                                <i class="glyphicon glyphicon-shopping-cart"></i>
-                                            </div>
-                                            <input class="form-control" type="text" name="expiration_month" placeholder="Enter CC Expiration Month..." />
-                                        </div>
-                                    </div>
-                                    <div class="row no-gutter form-group">
-                                        <div class="col-xs-12 left-inner-addon">
-                                            <div class="icon-container">
-                                                <i class="glyphicon glyphicon-shopping-cart"></i>
-                                            </div>
-                                            <input class="form-control" type="text" name="cvv" placeholder="Enter CC CVV Number..." />
-                                        </div>
-                                    </div>
-                                    <div class="row no-gutter form-group">
-                                        <div class="col-xs-12 left-inner-addon">
-                                            <div class="icon-container">
-                                                <i class="glyphicon glyphicon-shopping-cart"></i>
-                                            </div>
-                                            <input class="form-control" type="text" name="customer_email" placeholder="Enter Client's Email Address..." />
-                                        </div>
-                                    </div>
-                                    <div class="row no-gutter form-group">
-                                        <div class="col-xs-12 left-inner-addon">
-                                            <div class="icon-container">
-                                                <i class="glyphicon glyphicon-shopping-cart"></i>
-                                            </div>
-                                            <input class="form-control" type="text" name="customer_phone" placeholder="Enter Client's Phone Number..." />
-                                        </div>
-                                    </div>
-                                    <div class="row no-gutter form-group">
-                                        <div class="col-xs-12 left-inner-addon">
-                                            <div class="icon-container">
-                                                <i class="glyphicon glyphicon-shopping-cart"></i>
-                                            </div>
-                                            <input class="form-control" type="text" name="billing_address[first_name]" placeholder="Enter the First Name for the Billing Address..." />
-                                        </div>
-                                    </div>
-                                    <div class="row no-gutter form-group">
-                                        <div class="col-xs-12 left-inner-addon">
-                                            <div class="icon-container">
-                                                <i class="glyphicon glyphicon-shopping-cart"></i>
-                                            </div>
-                                            <input class="form-control" type="text" name="billing_address[last_name]" placeholder="Enter the Last Name for the Billing Address..." />
-                                        </div>
-                                    </div>
-                                    <div class="row no-gutter form-group">
-                                        <div class="col-xs-12 left-inner-addon">
-                                            <div class="icon-container">
-                                                <i class="glyphicon glyphicon-shopping-cart"></i>
-                                            </div>
-                                            <input class="form-control" type="text" name="billing_address[address1]" placeholder="Enter the Address for the Billing Address.." />
-                                        </div>
-                                    </div>
-                                    <div class="row no-gutter form-group">
-                                        <div class="col-xs-12 left-inner-addon">
-                                            <div class="icon-container">
-                                                <i class="glyphicon glyphicon-shopping-cart"></i>
-                                            </div>
-                                            <input class="form-control" type="text" name="billing_address[address2]" placeholder="Enter the Address2 for the Billing Address..." />
-                                        </div>
-                                    </div>
-                                    <div class="row no-gutter form-group">
-                                        <div class="col-xs-12 left-inner-addon">
-                                            <div class="icon-container">
-                                                <i class="glyphicon glyphicon-shopping-cart"></i>
-                                            </div>
-                                            <input class="form-control" type="text" name="billing_address[zip_code]" placeholder="Enter the ZipCode for the Billing Address.." />
-                                        </div>
-                                    </div>
-                                    <div class="row no-gutter form-group">
-                                        <div class="col-xs-12 left-inner-addon">
-                                            <div class="icon-container">
-                                                <i class="glyphicon glyphicon-shopping-cart"></i>
-                                            </div>
-                                            <input class="form-control" type="text" name="billing_address[city]" placeholder="Enter the City for the Billing Address..." />
-                                        </div>
-                                    </div>
-                                    <div class="row no-gutter form-group">
-                                        <div class="col-xs-12 left-inner-addon">
-                                            <div class="icon-container">
-                                                <i class="glyphicon glyphicon-shopping-cart"></i>
-                                            </div>
-                                            <input class="form-control" type="text" name="billing_address[country]" placeholder="Enter the Country for the Billing Address..." />
-                                        </div>
-                                    </div>
-
-                                    <div class="row no-gutter form-group">
-                                        <div class="col-xs-12 submit">
-                                            <input class="form-control" class="submit" type="submit" />
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                    -->
-
                     <!-- Capture -->
                     <div class="row container">
-                        <div class="col-xs-12">
-                            <div id="financial-capture">
-                                <form class="form genesis-api-example form-horizontal" id="financial-capture-form" role="form" data-target="examples/api/processing/api_processing_capture.php">
-                                    <div class="row">
-                                        <div class="col-xs-6">
-                                            <div class="row no-gutter form-group">
-                                                <div class="col-xs-12 left-inner-addon">
-                                                    <div class="icon-container">
-                                                        <i class="glyphicon glyphicon-earphone"></i>
-                                                    </div>
-                                                    <input class="form-control" type="text" name="transaction_type" value="capture" disabled="disabled" />
-                                                </div>
+                        <div id="content" class="col-xs-12">
+                            <form class="form genesis-api-example form-horizontal" role="form">
+                                <div class="row">
+                                    <div class="col-xs-6 form-fields">
+
+                                    </div>
+                                    <div class="col-xs-6 code-drops">
+                                        <div class="row no-gutter form-group">
+                                            <div class="col-xs-12 submit">
+                                                <pre><code class="request xml"></code></pre>
                                             </div>
-                                            <div class="row no-gutter form-group">
-                                                <div class="col-xs-12 left-inner-addon">
-                                                    <div class="icon-container">
-                                                        <i class="glyphicon glyphicon-earphone"></i>
-                                                    </div>
-                                                    <input class="form-control" type="text" name="transaction_id" placeholder="Enter transaction id..." />
-                                                </div>
-                                            </div>
-                                            <div class="row no-gutter form-group">
-                                                <div class="col-xs-12 left-inner-addon">
-                                                    <div class="icon-container">
-                                                        <i class="glyphicon glyphicon-envelope"></i>
-                                                    </div>
-                                                    <input class="form-control" type="text" name="usage" placeholder="Enter usage description..." />
-                                                </div>
-                                            </div>
-                                            <div class="row no-gutter form-group">
-                                                <div class="col-xs-12 left-inner-addon">
-                                                    <div class="icon-container">
-                                                        <i class="glyphicon glyphicon-globe"></i>
-                                                    </div>
-                                                    <input class="form-control" type="text" name="remote_ip" placeholder="Enter remote ip address..." />
-                                                </div>
-                                            </div>
-                                            <div class="row no-gutter form-group">
-                                                <div class="col-xs-12 left-inner-addon">
-                                                    <div class="icon-container">
-                                                        <i class="glyphicon glyphicon-barcode"></i>
-                                                    </div>
-                                                    <input class="form-control" type="text" name="reference_id" placeholder="Enter reference id..." />
-                                                </div>
-                                            </div>
-                                            <div class="row no-gutter form-group">
-                                                <div class="col-xs-12 left-inner-addon">
-                                                    <div class="icon-container">
-                                                        <i class="glyphicon glyphicon-usd"></i>
-                                                    </div>
-                                                    <input class="form-control" type="text" name="amount" placeholder="Enter amount..." />
-                                                </div>
-                                            </div>
-                                            <div class="row no-gutter form-group">
-                                                <div class="col-xs-12 left-inner-addon">
-                                                    <div class="icon-container">
-                                                        <i class="glyphicon glyphicon-shopping-cart"></i>
-                                                    </div>
-                                                    <input class="form-control" type="text" name="currency" placeholder="Enter currency..." />
-                                                </div>
-                                            </div>
-                                            <div class="row no-gutter form-group">
-                                                <div class="col-xs-12 submit">
-                                                    <input class="form-control" class="submit" type="submit" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-xs-6">
-                                            <div class="row no-gutter form-group">
-                                                <div class="col-xs-12 submit">
-                                                    <pre><code class="request xml"></code></pre>
-                                                </div>
-                                                <div class="col-xs-12 submit">
-                                                    <pre><code class="response xml"></code></pre>
-                                                </div>
+                                            <div class="col-xs-12 submit">
+                                                <pre><code class="response xml"></code></pre>
                                             </div>
                                         </div>
                                     </div>
-                                </form>
-                            </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </article>
 
                 <footer>
-
+                    <div class="navbar navbar-default">
+                        <div class="copyright-notice">Copyright &copy; 2014 eMerchantPay Ltd.</div>
+                    </div>
                 </footer>
+
                 <script type="text/javascript">
                     $(document).ready(function() {
+                        // Fetch template
+                        $('a.trx-type').click(function(i,e) {
+                            var tplFile = $(this).attr('data-id');
+
+                            $.get('templates/api/' + tplFile + '.mustache')
+                                    .done(function(data) {
+                                        var tplData = mustache_en_strings;
+                                        var tplRender = Mustache.render(data, tplData);
+
+                                        $('.form .form-fields').html(tplRender);
+                                    });
+                        });
+                        // Submit Form
                         $('.genesis-api-example').submit(function() {
-                            var form = $(this);
-                            $.post(form.attr('data-target'), form.serialize())
+                            var formObj = $(this);
+
+                            var finalUrl = 'api/' + formObj.find('input[name="target"]').val() + '.php';
+
+                            formObj.find('input[type="submit"]').attr('disabled','disabled');
+
+                            $.post(finalUrl, formObj.serialize())
                                     .done(function(data) {
                                         data = jQuery.parseJSON(data);
 
-                                        form.find('.request').text(data.request);
-                                        form.find('.response').text(data.response);
+                                        formObj.find('.request').text(data.request);
+                                        formObj.find('.response').text(data.response);
+
+                                        formObj.find('.code-drops').fadeIn(750);
+
+                                        formObj.find('input[type="submit"]').removeAttr('disabled');
 
                                         updateHighlight();
+
+                                        $('html, body').animate({
+                                            scrollTop: $("#content").offset().top
+                                        }, 1250);
                                     }, 'json');
                             return false;
-                        })
+                        });
                     });
-
                     function updateHighlight() {
                         $('pre code').each(function(i, block) {
                             hljs.highlightBlock(block);
