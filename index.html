@@ -7,6 +7,16 @@
                 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
                 <!-- Highlight Monokai Style -->
                 <link rel="stylesheet" href="js/highlight/monokai_sublime.css">
+                <!-- jQuery -->
+                <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+                <!-- Latest compiled and minified JavaScript -->
+                <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+                <!-- Highlight -->
+                <script src="js/highlight/highlight.pack.js"></script>
+                <!-- Mustache -->
+                <script src="js/mustache.js"></script>
+                <!-- EN Language -->
+                <script src="js/en_lang.js"></script>
                 <!-- Style -->
                 <style type="text/css">
                     .container {margin:0 auto;}
@@ -20,21 +30,10 @@
                     pre {border-color:#23241F;background-color:#23241F;}
                     legend {margin-bottom:15px;}
                     article {margin:66px 0;}
-                    /*fieldset {border:1px solid #eee;}*/
                     footer {position:fixed;bottom:0px;width:100%;margin-top:52px;}
                         header .navbar, footer .navbar {margin-bottom:0;}
                         footer .copyright-notice {float:right;line-height:52px;font-family:Georgia,sans-serif;font-size:9pt;margin-right:16px;}
                 </style>
-                <!-- jQuery -->
-                <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-                <!-- Latest compiled and minified JavaScript -->
-                <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-                <!-- Highlight -->
-                <script src="js/highlight/highlight.pack.js"></script>
-                <!-- Mustache -->
-                <script src="js/mustache.js"></script>
-                <!-- EN Language -->
-                <script src="js/en_lang.js"></script>
             </head>
             <body>
                 <header>
@@ -82,16 +81,19 @@
                                             <li><a href="#content" data-id="avs" class="trx-type">Address Verification</a></li>
                                             <li class="divider"></li>
                                             <li class="dropdown-header">Charge-Back Information</li>
-                                            <li><a href="#content" data-id="chargeback_by_date" class="trx-type">By Date / Date-Range</a></li>
-                                            <li><a href="#content" data-id="chargeback_by_trx_id" class="trx-type">By Transaction ID</a></li>
+                                            <li><a href="#content" data-id="chargeback_by_date" class="trx-type">by Date / Date-Range</a></li>
+                                            <li><a href="#content" data-id="chargeback_by_trx_id" class="trx-type">by Transaction ID</a></li>
                                             <li class="divider"></li>
                                             <li class="dropdown-header">Reconcile List</li>
-                                            <li><a href="#content" data-id="reconcile_by_date" class="trx-type">By Date / Date-Range</a></li>
-                                            <li><a href="#content" data-id="reconcile_by_trx_id" class="trx-type">By Transaction ID</a></li>
+                                            <li><a href="#content" data-id="reconcile_by_date" class="trx-type">by Date / Date-Range</a></li>
+                                            <li><a href="#content" data-id="reconcile_by_trx_id" class="trx-type">by Transaction ID</a></li>
                                             <li class="divider"></li>
                                             <li class="dropdown-header">Retrieval Information</li>
-                                            <li><a href="#content" data-id="retrieval_by_date" class="trx-type">By Date / Date-Range</a></li>
-                                            <li><a href="#content" data-id="retrieval_by_trx_id" class="trx-type">By Transaction ID</a></li>
+                                            <li><a href="#content" data-id="retrieval_by_date" class="trx-type">by Date / Date-Range</a></li>
+                                            <li><a href="#content" data-id="retrieval_by_trx_id" class="trx-type">by Transaction ID</a></li>
+                                            <li class="divider"></li>
+                                            <li class="dropdown-header">Blacklist</li>
+                                            <li><a href="#content" data-id="blacklist" class="trx-type">Blacklist Check</a></li>
                                         </ul>
                                     </li>
                                     <li class="dropdown">
@@ -136,13 +138,12 @@
 
                 <footer>
                     <div class="navbar navbar-default">
-                        <div class="copyright-notice">Copyright &copy; 2014 eMerchantPay Ltd.</div>
+                        <div class="copyright-notice">Copyright &copy;2014 E-Comprocessing&trade;</div>
                     </div>
                 </footer>
 
                 <script type="text/javascript">
                     $(document).ready(function() {
-                        // Fetch template
                         $('a.trx-type').click(function(i,e) {
                             var tplFile = $(this).attr('data-id');
 
@@ -154,7 +155,6 @@
                                         $('.form .form-fields').html(tplRender);
                                     });
                         });
-                        // Submit Form
                         $('.genesis-api-example').submit(function() {
                             var formObj = $(this);
 
@@ -169,11 +169,11 @@
                                         formObj.find('.request').text(data.request);
                                         formObj.find('.response').text(data.response);
 
-                                        formObj.find('.code-drops').fadeIn(750);
-
                                         formObj.find('input[type="submit"]').removeAttr('disabled');
 
                                         updateHighlight();
+
+                                        formObj.find('.code-drops').fadeIn(750);
 
                                         $('html, body').animate({
                                             scrollTop: $("#content").offset().top

@@ -54,14 +54,15 @@ var mustache_en_strings = {
     risk_params_remote_ip       : "Remote IP Address",
     risk_params_serial_number   : "Serial Number",
     // Dynamic Descriptors
-    dynamic_descriptor_merchant_name : "Merchant Name (Override)",
-    dynamic_descriptor_merchant_city : "Merchant City (Override)",
-
+    dynamic_descriptor_merchant_name: "Merchant Name (Override)",
+    dynamic_descriptor_merchant_city: "Merchant City (Override)",
     // Charge-back / Reconcile
-    start_date                  : "Date/Date-Range Start",
-    end_date                    : "Date-Range End",
-    page                        : "Page Number",
+    start_date                      : "Date/Date-Range Start",
+    end_date                        : "Date-Range End",
+    page                            : "Page Number",
     arn                             : "ARN",
     unique_id                       : "Unique ID",
     original_transaction_unique_id  : "Unique ID of the initial transaction",
+    // Blacklist
+    terminal_token                  : "Terminal Token",
 }
