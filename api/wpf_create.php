@@ -48,6 +48,11 @@ Genesis::Request()->setRiskPhone($_POST['risk_params']['phone']);
 Genesis::Request()->setRiskRemoteIp($_POST['risk_params']['remote_ip']);
 Genesis::Request()->setRiskSerialNumber($_POST['risk_params']['serial_number']);
 
+// Transaction Type
+foreach ($_POST['transaction_type'] as $transaction_type) {
+    Genesis::Request()->addTransactionType($transaction_type);
+}
+
 $output = array(
     'request'   => null,
     'response'  => null,
