@@ -7,22 +7,19 @@ use \Genesis\Configuration as Config;
 Config::loadSettings('/Users/petermanchev/Documents/Workspace/git/github/ldap/genesis_php/legacy/settings.ini');
 
 
-Genesis::loadRequest('Chargeback\DateRange');
+$genesis = new Genesis('Chargeback\DateRange');
 
-Genesis::Request()->setStartDate($_POST['start_date']);
-Genesis::Request()->setEndDate($_POST['end_date']);
-Genesis::Request()->setPage($_POST['page']);
+$genesis->request()->setStartDate($_POST['start_date']);
+$genesis->request()->setEndDate($_POST['end_date']);
+$genesis->request()->setPage($_POST['page']);
 
-$output = array(
-    'request'   => null,
-    'response'  => null,
-);
+$output = null;
 
 try
 {
-    $output['request']  = Genesis::Request()->getDocument();
-    Genesis::Request()->Send();
-    $output['response'] = Genesis::Request()->getGenesisResponse();
+    $genesis->sendRequest();
+    $output['request']  = $genesis->request()->getDocument();
+    $output['response'] = $genesis->response()->getResponseRaw();
 }
 catch (\Exception $e)
 {

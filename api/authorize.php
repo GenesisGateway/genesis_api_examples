@@ -10,6 +10,14 @@ Config::loadSettings('/Users/petermanchev/Documents/Workspace/git/github/ldap/ge
 
 Genesis::loadRequest('Financial\Authorize');
 
+$genesis->Config->loadSettings();
+
+$genesis->Request
+	->setTransaction()
+	->setTest()
+	->setData()
+	->setArae();
+
 // Params
 Genesis::Request()->setTransactionId($_POST['transaction_id']);
 Genesis::Request()->setUsage($_POST['usage']);

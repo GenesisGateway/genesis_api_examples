@@ -7,23 +7,20 @@ use \Genesis\Configuration as Config;
 
 Config::loadSettings('/Users/petermanchev/Documents/Workspace/git/github/ldap/genesis_php/legacy/settings.ini');
 
-Genesis::loadRequest('Financial\Void');
+$genesis = new Genesis('Financial\Void');
 
-Genesis::Request()->setTransactionId($_POST['transaction_id']);
-Genesis::Request()->setUsage($_POST['usage']);
-Genesis::Request()->setRemoteIp($_POST['remote_ip']);
-Genesis::Request()->setReferenceId($_POST['reference_id']);
+$genesis->request()->setTransactionId($_POST['transaction_id']);
+$genesis->request()->setUsage($_POST['usage']);
+$genesis->request()->setRemoteIp($_POST['remote_ip']);
+$genesis->request()->setReferenceId($_POST['reference_id']);
 
-$output = array(
-    'request'   => null,
-    'response'  => null,
-);
+$output = null;
 
 try
 {
-    $output['request']  = Genesis::Request()->getDocument();
-    Genesis::Request()->Send();
-    $output['response'] = Genesis::Request()->getGenesisResponse();
+    $genesis->sendRequest();
+    $output['request']  = $genesis->request()->getDocument();
+    $output['response'] = $genesis->response()->getResponseRaw();
 }
 catch (\Exception $e)
 {

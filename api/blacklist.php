@@ -6,11 +6,10 @@ use \Genesis\Configuration as Config;
 
 Config::loadSettings('/Users/petermanchev/Documents/Workspace/git/github/ldap/genesis_php/legacy/settings.ini');
 
+$genesis = new Genesis('Blacklist');
 
-Genesis::loadRequest('Blacklist');
-
-Genesis::Request()->setCardNumber($_POST['card_number']);
-Genesis::Request()->setTerminalToken($_POST['terminal_token']);
+$genesis->request()->setCardNumber($_POST['card_number']);
+$genesis->request()->setTerminalToken($_POST['terminal_token']);
 
 $output = array(
     'request'   => null,
@@ -19,9 +18,9 @@ $output = array(
 
 try
 {
-    $output['request']  = Genesis::Request()->getDocument();
-    Genesis::Request()->Send();
-    $output['response'] = Genesis::Request()->getGenesisResponse();
+    $genesis->sendRequest();
+    $output['request']  = $genesis->request()->getDocument();
+    $output['response'] = $genesis->response()->getResponseRaw();
 }
 catch (\Exception $e)
 {
