@@ -2,60 +2,62 @@
 require '../lib/vendor/autoload.php';
 
 use \Genesis\Base as Genesis;
-use \Genesis\Configuration as Config;
+use \Genesis\Configuration as GenesisConfig;
 
-Config::loadSettings('/Users/petermanchev/Documents/Workspace/git/github/ldap/genesis_php/legacy/settings.ini');
+GenesisConfig::loadSettings('../config/default.ini');
 
 $genesis = new Genesis('NonFinancial\AV');
 
 // Params
-$genesis->request()->setTransactionId($_POST['transaction_id']);
-$genesis->request()->setUsage($_POST['usage']);
-$genesis->request()->setGaming($_POST['gaming']);
-$genesis->request()->setMoto($_POST['moto']);
-$genesis->request()->setRemoteIp($_POST['remote_ip']);
-$genesis->request()->setCardHolder($_POST['card_holder']);
-$genesis->request()->setCardNumber($_POST['card_number']);
-$genesis->request()->setExpirationMonth($_POST['expiration_month']);
-$genesis->request()->setExpirationYear($_POST['expiration_year']);
-$genesis->request()->setCvv($_POST['cvv']);
-$genesis->request()->setCustomerEmail($_POST['customer_email']);
-$genesis->request()->setCustomerPhone($_POST['customer_phone']);
+$genesis->request()
+            ->setTransactionId($_POST['transaction_id'])
+            ->setUsage($_POST['usage'])
+            ->setGaming($_POST['gaming'])
+            ->setMoto($_POST['moto'])
+            ->setRemoteIp($_POST['remote_ip'])
+            ->setCardHolder($_POST['card_holder'])
+            ->setCardNumber($_POST['card_number'])
+            ->setExpirationMonth($_POST['expiration_month'])
+            ->setExpirationYear($_POST['expiration_year'])
+            ->setCvv($_POST['cvv'])
+            ->setCustomerEmail($_POST['customer_email'])
+            ->setCustomerPhone($_POST['customer_phone']);
 // Billing
-$genesis->request()->setBillingFirstName($_POST['billing_address']['first_name']);
-$genesis->request()->setBillingLastName($_POST['billing_address']['last_name']);
-$genesis->request()->setBillingAddress1($_POST['billing_address']['address1']);
-$genesis->request()->setBillingZipCode($_POST['billing_address']['zip_code']);
-$genesis->request()->setBillingCity($_POST['billing_address']['city']);
-$genesis->request()->setBillingCountry($_POST['billing_address']['country']);
+$genesis->request()
+            ->setBillingFirstName($_POST['billing_address']['first_name'])
+            ->setBillingLastName($_POST['billing_address']['last_name'])
+            ->setBillingAddress1($_POST['billing_address']['address1'])
+            ->setBillingZipCode($_POST['billing_address']['zip_code'])
+            ->setBillingCity($_POST['billing_address']['city'])
+            ->setBillingCountry($_POST['billing_address']['country']);
 // Shipping
-$genesis->request()->setShippingFirstName($_POST['shipping_address']['first_name']);
-$genesis->request()->setShippingLastName($_POST['shipping_address']['last_name']);
-$genesis->request()->setShippingAddress1($_POST['shipping_address']['address1']);
-$genesis->request()->setShippingZipCode($_POST['shipping_address']['zip_code']);
-$genesis->request()->setShippingCity($_POST['shipping_address']['city']);
-$genesis->request()->setShippingCountry($_POST['shipping_address']['country']);
+$genesis->request()
+            ->setShippingFirstName($_POST['shipping_address']['first_name'])
+            ->setShippingLastName($_POST['shipping_address']['last_name'])
+            ->setShippingAddress1($_POST['shipping_address']['address1'])
+            ->setShippingZipCode($_POST['shipping_address']['zip_code'])
+            ->setShippingCity($_POST['shipping_address']['city'])
+            ->setShippingCountry($_POST['shipping_address']['country']);
 // Risk
-$genesis->request()->setRiskSsn($_POST['risk_params']['ssn']);
-$genesis->request()->setRiskMacAddress($_POST['risk_params']['mac_address']);
-$genesis->request()->setRiskSessionId($_POST['risk_params']['session_id']);
-$genesis->request()->setRiskUserId($_POST['risk_params']['user_id']);
-$genesis->request()->setRiskUserLevel($_POST['risk_params']['user_level']);
-$genesis->request()->setRiskEmail($_POST['risk_params']['email']);
-$genesis->request()->setRiskPhone($_POST['risk_params']['phone']);
-$genesis->request()->setRiskRemoteIp($_POST['risk_params']['remote_ip']);
-$genesis->request()->setRiskSerialNumber($_POST['risk_params']['serial_number']);
+$genesis->request()
+            ->setRiskSsn($_POST['risk_params']['ssn'])
+            ->setRiskMacAddress($_POST['risk_params']['mac_address'])
+            ->setRiskSessionId($_POST['risk_params']['session_id'])
+            ->setRiskUserId($_POST['risk_params']['user_id'])
+            ->setRiskUserLevel($_POST['risk_params']['user_level'])
+            ->setRiskEmail($_POST['risk_params']['email'])
+            ->setRiskPhone($_POST['risk_params']['phone'])
+            ->setRiskRemoteIp($_POST['risk_params']['remote_ip'])
+            ->setRiskSerialNumber($_POST['risk_params']['serial_number']);
 
 $output = null;
 
-try
-{
+try {
     $genesis->sendRequest();
     $output['request']  = $genesis->request()->getDocument();
     $output['response'] = $genesis->response()->getResponseRaw();
 }
-catch (\Exception $e)
-{
+catch (\Exception $e) {
     $output['response'] = $e->getMessage();
 }
 

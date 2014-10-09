@@ -2,9 +2,9 @@
 require '../lib/vendor/autoload.php';
 
 use \Genesis\Base as Genesis;
-use \Genesis\Configuration as Config;
+use \Genesis\Configuration as GenesisConfig;
 
-Config::loadSettings('/Users/petermanchev/Documents/Workspace/git/github/ldap/genesis_php/legacy/settings.ini');
+GenesisConfig::loadSettings('../config/default.ini');
 
 $genesis = new Genesis('WPF\Reconcile');
 
@@ -12,14 +12,12 @@ $genesis->request()->setUniqueId($_POST['unique_id']);
 
 $output = null;
 
-try
-{
+try {
     $genesis->sendRequest();
     $output['request']  = $genesis->request()->getDocument();
     $output['response'] = $genesis->response()->getResponseRaw();
 }
-catch (\Exception $e)
-{
+catch (\Exception $e) {
     $output['response'] = $e->getMessage();
 }
 

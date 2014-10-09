@@ -3,27 +3,26 @@
 require '../lib/vendor/autoload.php';
 
 use \Genesis\Base as Genesis;
-use \Genesis\Configuration as Config;
+use \Genesis\Configuration as GenesisConfig;
 
-Config::loadSettings('/Users/petermanchev/Documents/Workspace/git/github/ldap/genesis_php/legacy/settings.ini');
+GenesisConfig::loadSettings('/Users/petermanchev/Documents/Workspace/git/github/ldap/genesis_php/legacy/settings.ini');
 
 $genesis = new Genesis('Financial\Void');
 
-$genesis->request()->setTransactionId($_POST['transaction_id']);
-$genesis->request()->setUsage($_POST['usage']);
-$genesis->request()->setRemoteIp($_POST['remote_ip']);
-$genesis->request()->setReferenceId($_POST['reference_id']);
+$genesis->request()
+                ->setTransactionId(($_POST['transaction_id']))
+                ->setUsage($_POST['usage'])
+                ->setRemoteIp($_POST['remote_ip'])
+                ->setReferenceId($_POST['reference_id']);
 
 $output = null;
 
-try
-{
+try  {
     $genesis->sendRequest();
     $output['request']  = $genesis->request()->getDocument();
     $output['response'] = $genesis->response()->getResponseRaw();
 }
-catch (\Exception $e)
-{
+catch (\Exception $e)  {
     $output['response'] = $e->getMessage();
 }
 

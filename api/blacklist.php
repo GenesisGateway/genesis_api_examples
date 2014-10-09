@@ -2,19 +2,17 @@
 require '../lib/vendor/autoload.php';
 
 use \Genesis\Base as Genesis;
-use \Genesis\Configuration as Config;
+use \Genesis\Configuration as GenesisConfig;
 
-Config::loadSettings('/Users/petermanchev/Documents/Workspace/git/github/ldap/genesis_php/legacy/settings.ini');
+GenesisConfig::loadSettings('../config/default.ini');
 
 $genesis = new Genesis('Blacklist');
 
-$genesis->request()->setCardNumber($_POST['card_number']);
-$genesis->request()->setTerminalToken($_POST['terminal_token']);
+$genesis->request()
+            ->setCardNumber($_POST['card_number'])
+            ->setTerminalToken($_POST['terminal_token']);
 
-$output = array(
-    'request'   => null,
-    'response'  => null,
-);
+$output = null;
 
 try
 {
