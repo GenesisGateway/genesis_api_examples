@@ -6,7 +6,7 @@ use \Genesis\Configuration as GenesisConfig;
 
 GenesisConfig::loadSettings('../config/default.ini');
 
-$genesis = new Genesis('Chargeback\Transaction');
+$genesis = new Genesis('FraudRelated\Chargeback\Transaction');
 
 $genesis->request()
             ->setArn($_POST['arn'])

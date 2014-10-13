@@ -11,8 +11,8 @@ $genesis = new Genesis('WPF\Create');
 // Params
 $genesis->request()
             ->setTransactionId($_POST['transaction_id'])
-            ->setAmount($_POST['amount'])
             ->setCurrency($_POST['currency'])
+            ->setAmount($_POST['amount'])
             ->setUsage($_POST['usage'])
             ->setDescription($_POST['description'])
             ->setCustomerEmail($_POST['customer_email'])

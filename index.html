@@ -55,7 +55,7 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="/">Genesis PHP Client</a>
+                        <a class="navbar-brand" href="/">Genesis API Client</a>
                     </div>
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
@@ -82,19 +82,11 @@
                                 </ul>
                             </li>
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Non-Financial <span class="caret"></span></a>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Fraud-Related <span class="caret"></span></a>
                                 <ul class="dropdown-menu" role="menu">
-                                    <li class="dropdown-header">Verifications</li>
-                                    <li><a href="#content" data-id="av" class="trx-type">Account Verification</a></li>
-                                    <li><a href="#content" data-id="avs" class="trx-type">Address Verification</a></li>
-                                    <li class="divider"></li>
                                     <li class="dropdown-header">Charge-Back Information</li>
                                     <li><a href="#content" data-id="chargeback_by_date" class="trx-type">by Date / Date-Range</a></li>
                                     <li><a href="#content" data-id="chargeback_by_trx_id" class="trx-type">by Transaction ID</a></li>
-                                    <li class="divider"></li>
-                                    <li class="dropdown-header">Reconcile List</li>
-                                    <li><a href="#content" data-id="reconcile_by_date" class="trx-type">by Date / Date-Range</a></li>
-                                    <li><a href="#content" data-id="reconcile_by_trx_id" class="trx-type">by Transaction ID</a></li>
                                     <li class="divider"></li>
                                     <li class="dropdown-header">Retrieval Information</li>
                                     <li><a href="#content" data-id="retrieval_by_date" class="trx-type">by Date / Date-Range</a></li>
@@ -102,6 +94,18 @@
                                     <li class="divider"></li>
                                     <li class="dropdown-header">Blacklist</li>
                                     <li><a href="#content" data-id="blacklist" class="trx-type">Blacklist Check</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Non-Financial <span class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li class="dropdown-header">Verifications</li>
+                                    <li><a href="#content" data-id="av" class="trx-type">Account Verification</a></li>
+                                    <li><a href="#content" data-id="avs" class="trx-type">AVS</a></li>
+                                    <li class="divider"></li>
+                                    <li class="dropdown-header">Reconcile List</li>
+                                    <li><a href="#content" data-id="reconcile_by_date" class="trx-type">by Date / Date-Range</a></li>
+                                    <li><a href="#content" data-id="reconcile_by_trx_id" class="trx-type">by Transaction ID</a></li>
                                 </ul>
                             </li>
                             <li class="dropdown">
@@ -125,9 +129,8 @@
                 <div id="content" class="col-xs-12">
                     <form class="form genesis-api-example form-horizontal" role="form">
                         <div class="row">
-                            <div class="col-xs-6 form-fields">
-
-                            </div>
+                            <div class="init-notification" style="text-align:center;font-size:18pt;">Please select a request type!</div>
+                            <div class="col-xs-6 form-fields"></div>
                             <div class="col-xs-6 code-drops">
                                 <div class="row no-gutter form-group">
                                     <div class="col-xs-12 submit">
@@ -161,6 +164,8 @@
                                 var tplRender = Mustache.render(data, tplData);
 
                                 $('.form .form-fields').html(tplRender);
+
+                                $('.init-notification').remove();
                             });
                 });
                 $('.genesis-api-example').submit(function() {
@@ -184,8 +189,9 @@
                                 formObj.find('.code-drops').fadeIn(750);
 
                                 $('html, body').animate({
-                                    scrollTop: $("#content").offset().top
-                                }, 1250);
+                                    scrollTop: $("body").offset().top - 50
+                                }, 750);
+                                console.log($("body").offset().top - 50);
                             }, 'json');
                     return false;
                 });

@@ -6,7 +6,7 @@ use \Genesis\Configuration as GenesisConfig;
 
 GenesisConfig::loadSettings('../config/default.ini');
 
-$genesis = new Genesis('Retrieval\DateRange');
+$genesis = new Genesis('FraudRelated\Retrieval\DateRange');
 
 $genesis->request()
             ->setStartDate($_POST['start_date'])

@@ -1,5 +1,4 @@
 <?php
-
 require '../lib/vendor/autoload.php';
 
 use \Genesis\Base as Genesis;

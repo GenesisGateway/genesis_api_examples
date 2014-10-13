@@ -1,6 +1,4 @@
 <?php
-error_reporting(0);
-
 require '../lib/vendor/autoload.php';
 
 use \Genesis\Base as Genesis;
@@ -14,11 +12,11 @@ $genesis = new Genesis('Financial\Sale');
 $genesis->request()
             ->setTransactionId($_POST['transaction_id'])
             ->setUsage($_POST['usage'])
-            ->setGaming($_POST['gaming'])
-            ->setMoto($_POST['moto'])
+            ->setGaming(isset($_POST['gaming']) ? $_POST['gaming'] : '')
+            ->setMoto(isset($_POST['moto']) ? $_POST['moto'] : '')
             ->setRemoteIp($_POST['remote_ip'])
-            ->setAmount($_POST['amount'])
             ->setCurrency($_POST['currency'])
+            ->setAmount($_POST['amount'])
             ->setCardHolder($_POST['card_holder'])
             ->setCardNumber($_POST['card_number'])
             ->setExpirationMonth($_POST['expiration_month'])

@@ -6,7 +6,7 @@ use \Genesis\Configuration as GenesisConfig;
 
 GenesisConfig::loadSettings('../config/default.ini');
 
-$genesis = new Genesis('Chargeback\DateRange');
+$genesis = new Genesis('FraudRelated\Chargeback\DateRange');
 
 $genesis->request()
             ->setStartDate($_POST['start_date'])

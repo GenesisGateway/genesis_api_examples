@@ -6,7 +6,7 @@ use \Genesis\Configuration as GenesisConfig;
 
 GenesisConfig::loadSettings('../config/default.ini');
 
-$genesis = new Genesis('Blacklist');
+$genesis = new Genesis('FraudRelated\Blacklist');
 
 $genesis->request()
             ->setCardNumber($_POST['card_number'])

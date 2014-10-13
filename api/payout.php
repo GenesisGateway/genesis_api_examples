@@ -13,8 +13,8 @@ $genesis->request()
             ->setUsage($_POST['usage'])
             ->setRemoteIp($_POST['remote_ip'])
             ->setReferenceId($_POST['reference_id'])
-            ->setAmount($_POST['amount'])
-            ->setCurrency($_POST['currency']);
+            ->setCurrency($_POST['currency'])
+            ->setAmount($_POST['amount']);
 
 $output = null;
 

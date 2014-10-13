@@ -6,14 +6,14 @@ use \Genesis\Configuration as GenesisConfig;
 
 GenesisConfig::loadSettings('../config/default.ini');
 
-$genesis = new Genesis('NonFinancial\AV');
+$genesis = new Genesis('NonFinancial\AccountVerification');
 
 // Params
 $genesis->request()
             ->setTransactionId($_POST['transaction_id'])
             ->setUsage($_POST['usage'])
-            ->setGaming($_POST['gaming'])
-            ->setMoto($_POST['moto'])
+            ->setGaming(isset($_POST['gaming']) ? $_POST['gaming'] : '')
+            ->setMoto(isset($_POST['moto']) ? $_POST['moto'] : '')
             ->setRemoteIp($_POST['remote_ip'])
             ->setCardHolder($_POST['card_holder'])
             ->setCardNumber($_POST['card_number'])
