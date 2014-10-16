@@ -12,9 +12,31 @@ $genesis->request()
             ->setTransactionId($_POST['transaction_id'])
             ->setUsage($_POST['usage'])
             ->setRemoteIp($_POST['remote_ip'])
-            ->setReferenceId($_POST['reference_id'])
-            ->setCurrency($_POST['currency'])
-            ->setAmount($_POST['amount']);
+			->setCurrency($_POST['currency'])
+			->setAmount($_POST['amount'])
+			->setCardHolder($_POST['card_holder'])
+			->setCardNumber($_POST['card_number'])
+			->setExpirationMonth($_POST['expiration_month'])
+			->setExpirationYear($_POST['expiration_year'])
+			->setCvv($_POST['cvv'])
+			->setCustomerEmail($_POST['customer_email'])
+			->setCustomerPhone($_POST['customer_phone']);
+// Billing
+$genesis->request()
+	        ->setBillingFirstName($_POST['billing_address']['first_name'])
+	        ->setBillingLastName($_POST['billing_address']['last_name'])
+	        ->setBillingAddress1($_POST['billing_address']['address1'])
+	        ->setBillingZipCode($_POST['billing_address']['zip_code'])
+	        ->setBillingCity($_POST['billing_address']['city'])
+	        ->setBillingCountry($_POST['billing_address']['country']);
+// Shipping
+$genesis->request()
+	        ->setShippingFirstName($_POST['shipping_address']['first_name'])
+	        ->setShippingLastName($_POST['shipping_address']['last_name'])
+	        ->setShippingAddress1($_POST['shipping_address']['address1'])
+	        ->setShippingZipCode($_POST['shipping_address']['zip_code'])
+	        ->setShippingCity($_POST['shipping_address']['city'])
+	        ->setShippingCountry($_POST['shipping_address']['country']);
 
 $output = null;
 

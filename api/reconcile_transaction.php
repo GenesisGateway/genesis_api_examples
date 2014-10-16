@@ -6,11 +6,9 @@ use \Genesis\Configuration as GenesisConfig;
 
 GenesisConfig::loadSettings('../config/default.ini');
 
-$genesis = new Genesis('Reconcile/Transaction');
+$genesis = new Genesis('Reconcile\Transaction');
 
-$genesis->request()
-            ->setArn($_POST['arn'])
-            ->setOriginalTransactionUniqueId($_POST['original_transaction_unique_id']);
+$genesis->request()->setUniqueId($_POST['unique_id']);
 
 $output = null;
 

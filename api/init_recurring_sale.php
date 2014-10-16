@@ -12,7 +12,7 @@ $genesis = new Genesis('Financial\Recurring\InitRecurringSale');
 $genesis->request()
             ->setTransactionId($_POST['transaction_id'])
             ->setUsage($_POST['usage'])
-            ->setMoto($_POST['moto'])
+            ->setMoto(isset($_POST['moto']) ? $_POST['moto'] : '')
             ->setRemoteIp($_POST['remote_ip'])
             ->setCurrency($_POST['currency'])
             ->setAmount($_POST['amount'])

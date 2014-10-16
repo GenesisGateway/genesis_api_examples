@@ -4,12 +4,12 @@ require '../lib/vendor/autoload.php';
 use \Genesis\Base as Genesis;
 use \Genesis\Configuration as GenesisConfig;
 
-GenesisConfig::loadSettings('/Users/petermanchev/Documents/Workspace/git/github/ldap/genesis_php/legacy/settings.ini');
+GenesisConfig::loadSettings('../config/default.ini');
 
 $genesis = new Genesis('Financial\Void');
 
 $genesis->request()
-                ->setTransactionId(($_POST['transaction_id']))
+                ->setTransactionId($_POST['transaction_id'])
                 ->setUsage($_POST['usage'])
                 ->setRemoteIp($_POST['remote_ip'])
                 ->setReferenceId($_POST['reference_id']);

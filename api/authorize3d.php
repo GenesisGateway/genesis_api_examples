@@ -6,7 +6,7 @@ use \Genesis\Configuration as GenesisConfig;
 
 GenesisConfig::loadSettings('../config/default.ini');
 
-$genesis = new Genesis('Reconcile\DateRange');
+$genesis = new Genesis('Financial\Authorize3D');
 
 // Params
 $genesis->request()
@@ -72,7 +72,6 @@ try {
     $genesis->sendRequest();
     $output['request']  = $genesis->request()->getDocument();
     $output['response'] = $genesis->response()->getResponseRaw();
-    throw new Exception('sheeeeeit');
 }
 catch (\Exception $e) {
     $output['response'] = $e->getMessage();
