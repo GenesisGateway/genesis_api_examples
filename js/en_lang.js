@@ -64,5 +64,5 @@ var mustache_en_strings = {
     unique_id                       : "Unique ID",
     original_transaction_unique_id  : "Unique ID of the initial transaction",
     // Blacklist
-    terminal_token                  : "Terminal Token",
-}
+    terminal_token                  : "Terminal Token"
+};
