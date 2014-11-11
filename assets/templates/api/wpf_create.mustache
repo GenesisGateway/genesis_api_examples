@@ -114,9 +114,11 @@
 </div>
 <div class="row no-gutter form-group">
     <div class="col-xs-12 left-inner-addon">
-        <select id="e2_2" multiple="multiple" name="transaction_type[]" style="width:100%" class="populate placeholder">
-            <option value="sale">Sale</option>
-            <option value="sale3d">Sale3D</option>
+        <select id="trx_types" multiple="multiple" name="transaction_type[]" style="width:100%" class="populate placeholder">
+            <option value="auth">{{auth}}</option>
+            <option value="auth3d">{{auth3d}}</option>
+            <option value="sale">{{sale}}</option>
+            <option value="sale3d">{{sale3d}}</option>
         </select>
     </div>
 </div>
@@ -286,7 +288,7 @@
     </div>
 </div>
 <script type="text/javascript">
-    $("#e2_2").select2({
-        placeholder: "Choose transaction types for the WPF..."
+    $("#trx_types").select2({
+        placeholder: '{{choose_trx_type}}'
     });
 </script>

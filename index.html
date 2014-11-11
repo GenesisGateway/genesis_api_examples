@@ -2,50 +2,34 @@
 <html>
     <head>
         <!-- Latest compiled and minified CSS -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="assets/css/bootstrap/bootstrap.min.css">
         <!-- Optional theme -->
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="assets/css/bootstrap/bootstrap-theme.min.css">
         <!-- Highlight Monokai Style -->
-        <link rel="stylesheet" href="js/highlight/monokai_sublime.css">
+        <link rel="stylesheet" href="assets/css/highlight/monokai_sublime.css">
         <!-- Select2 Style -->
-        <link rel="stylesheet" href="js/select2/select2.css">
-        <!-- jQuery -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-        <!-- Latest compiled and minified JavaScript -->
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
-        <!-- Highlight -->
-        <script src="js/highlight/highlight.pack.js"></script>
-        <!-- Mustache -->
-        <script src="js/mustache.js"></script>
-        <!-- EN Language -->
-        <script src="js/en_lang.js"></script>
-        <!-- Select2 -->
-        <script src="js/select2/select2.min.js"></script>
+        <link rel="stylesheet" href="assets/css/select2/select2.css">
         <!-- Style -->
-        <style type="text/css">
-            .container {margin:0 auto;}
-            .form {/*width:384px;*/margin:0 auto;}
-                .form .icon-group .icon-container {position:absolute;padding:10px;}
-                .form .icon-group input[type="text"] {text-indent:22px;}
-            .no-gutter {margin:15px;}
-            .code-drops {display:none}
-            .dropdown-menu {text-align:center}
-            .dropdown-header {text-decoration:underline;}
-            .select2-choices {border:1px solid #CCC;border-radius:4px;box-shadow:0px 1px 1px rgba(0, 0, 0, 0.075) inset;transition:border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;color:#555;text-indent:6px;}
-                .select2-container-multi .select2-choices .select2-search-choice {padding:5px 5px 5px 18px;}
-                .select2-container-multi .select2-search-choice-close {left:4px;}
-            .select2-search-choice-close {top:5px;}
-            pre {border-color:#23241F;background-color:#23241F;}
-            legend {margin-bottom:15px;}
-            article {margin:66px 0;}
-            footer {position:fixed;bottom:0px;width:100%;margin-top:52px;}
-                header .navbar, footer .navbar {margin-bottom:0;}
-                footer .copyright-notice {float:right;line-height:52px;font-family:Tahoma,sans-serif;font-size:9pt;margin-right:16px;}
-        </style>
+        <link rel="stylesheet" href="assets/css/style/style.css">
+        <!-- Mfizz -->
+        <link rel="stylesheet" href="assets/css/fonts/mfizz/font-mfizz.css">
+        <!-- jQuery -->
+        <script src="assets/js/jquery.min.js"></script>
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="assets/js/bootstrap/bootstrap.min.js"></script>
+        <!-- Highlight -->
+        <script src="assets/js/highlight/highlight.pack.js"></script>
+        <!-- Mustache -->
+        <script src="assets/js/mustache/mustache.js"></script>
+        <!-- EN Language -->
+        <script src="assets/js/translation/translation.js"></script>
+        <!-- EN Language -->
+        <script src="assets/js/translation/languages/en/en-US.js"></script>
+        <!-- Select2 -->
+        <script src="assets/js/select2/select2.min.js"></script>
     </head>
     <body>
         <header>
-
             <div class="navbar navbar-default navbar-fixed-top" role="navigation">
                 <div class="container">
                     <div class="navbar-header">
@@ -117,19 +101,18 @@
                                 </ul>
                             </li>
                         </ul>
-                    </div><!--/.nav-collapse -->
+                    </div>
                 </div>
             </div>
 
         </header>
 
         <article>
-            <!-- Capture -->
             <div class="row container">
                 <div id="content" class="col-xs-12">
                     <form class="form genesis-api-example form-horizontal" role="form">
                         <div class="row">
-                            <div class="init-notification" style="text-align:center;font-size:18pt;">Please select a request type!</div>
+                            <div class="init-notification" style="text-align:center;font-size:18pt;">Please select a transaction type from the top menu.</div>
                             <div class="col-xs-6 form-fields"></div>
                             <div class="col-xs-6 code-drops">
                                 <div class="row no-gutter form-group">
@@ -149,7 +132,24 @@
 
         <footer>
             <div class="navbar navbar-default">
-                <div class="copyright-notice">Copyright &copy;2014 E-Comprocessing&trade;</div>
+                <div class="row">
+                    <div class="col-xs-1"></div>
+                    <div class="col-xs-2">
+                        <div class="supported-languages">
+                            <span class="icon-csharp"></span>
+                            <span class="icon-java"></span>
+                            <span class="icon-nodejs"></span>
+                            <span class="icon-perl"></span>
+                            <span class="icon-php"></span>
+                            <span class="icon-ruby"></span>
+                            <span class="icon-python"></span>
+                        </div>
+                    </div>
+                    <div class="col-xs-8">
+                        <div class="copyright-notice">Copyright &copy;2014 E-Comprocessing&trade;</div>
+                    </div>
+                    <div class="col-xs-1"></div>
+                </div>
             </div>
         </footer>
 
@@ -158,15 +158,15 @@
                 $('a.trx-type').click(function(i,e) {
                     var tplFile = $(this).attr('data-id');
 
-                    $.get('templates/api/' + tplFile + '.mustache')
-                            .done(function(data) {
-                                var tplData = mustache_en_strings;
-                                var tplRender = Mustache.render(data, tplData);
+                    $.get('assets/templates/api/' + tplFile + '.mustache')
+                        .done(function(data) {
+                            var tplRender = Mustache.render(data, translation.getLocalizedStrings());
 
-                                $('.form .form-fields').html(tplRender);
+                            $('.form .form-fields').html(tplRender);
 
-                                $('.init-notification').remove();
-                            });
+                            $('.init-notification').remove();
+                        }
+                    );
                 });
                 $('.genesis-api-example').submit(function() {
                     var formObj = $(this);
@@ -176,23 +176,23 @@
                     formObj.find('input[type="submit"]').attr('disabled','disabled');
 
                     $.post(finalUrl, formObj.serialize())
-                            .done(function(data) {
-                                data = jQuery.parseJSON(data);
+                        .done(function(data) {
+                            data = jQuery.parseJSON(data);
 
-                                formObj.find('.request').text(data.request);
-                                formObj.find('.response').text(data.response);
+                            formObj.find('.request').text(data.request);
+                            formObj.find('.response').text(data.response);
 
-                                formObj.find('input[type="submit"]').removeAttr('disabled');
+                            updateHighlight();
 
-                                updateHighlight();
+                            formObj.find('.code-drops').fadeIn(750);
 
-                                formObj.find('.code-drops').fadeIn(750);
+                            $('html, body').animate({
+                                scrollTop: $("body").offset().top - 50
+                            }, 750);
+                        }, 'json'
+                    );
 
-                                $('html, body').animate({
-                                    scrollTop: $("body").offset().top - 50
-                                }, 750);
-                                console.log($("body").offset().top - 50);
-                            }, 'json');
+                    formObj.find('input[type="submit"]').removeAttr('disabled');
                     return false;
                 });
             });

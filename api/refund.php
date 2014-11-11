@@ -1,25 +1,26 @@
 <?php
 require '../lib/vendor/autoload.php';
 
-use \Genesis\Base as Genesis;
-use \Genesis\Configuration as GenesisConfig;
+use \Genesis\Genesis as Genesis;
+use \Genesis\GenesisConfig as GenesisConfig;
 
 GenesisConfig::loadSettings('../config/default.ini');
 
 $genesis = new Genesis('Financial\Refund');
 
-$genesis->request()
-            ->setTransactionId($_POST['transaction_id'])
-            ->setUsage($_POST['usage'])
-            ->setRemoteIp($_POST['remote_ip'])
-            ->setReferenceId($_POST['reference_id'])
-			->setCurrency($_POST['currency'])
-            ->setAmount($_POST['amount']);
+$genesis
+	->request()
+        ->setTransactionId($_POST['transaction_id'])
+        ->setUsage($_POST['usage'])
+        ->setRemoteIp($_POST['remote_ip'])
+        ->setReferenceId($_POST['reference_id'])
+		->setCurrency($_POST['currency'])
+        ->setAmount($_POST['amount']);
 
 $output = null;
 
 try {
-    $genesis->sendRequest();
+    $genesis->execute();
     $output['request']  = $genesis->request()->getDocument();
     $output['response'] = $genesis->response()->getResponseRaw();
 }

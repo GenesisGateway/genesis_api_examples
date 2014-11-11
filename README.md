@@ -2,7 +2,7 @@
 
 This is collection of examples demonstrating the different transaction types of Genesis Payment Gateway
 
-**DO NOT PUT THESE FILES ON PUBLIC SERVER**
+**DO NOT PUT THESE FILES ON A PUBLIC SERVER**
 
 ## Installation
 
