@@ -1,3 +1,0 @@
-[submodule "lib"]
-	path = lib
-	url = git@emp-sof-github01.emp.internal.com:eMerchantPay/genesis_php.git
