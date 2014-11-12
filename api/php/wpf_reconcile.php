@@ -1,10 +1,10 @@
 <?php
-require '../lib/vendor/autoload.php';
+require '../../lib/php/vendor/autoload.php';
 
 use \Genesis\Genesis as Genesis;
 use \Genesis\GenesisConfig as GenesisConfig;
 
-GenesisConfig::loadSettings('../config/default.ini');
+GenesisConfig::loadSettings('../../config/default.ini');
 
 $genesis = new Genesis('WPF\Reconcile');
 
