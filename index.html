@@ -1,0 +1,286 @@
+<!DOCTYPE>
+<html>
+    <head>
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="assets/css/bootstrap/bootstrap.min.css">
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="assets/css/bootstrap/bootstrap-theme.min.css">
+        <!-- Highlight Monokai Style -->
+        <link rel="stylesheet" href="assets/css/highlight/monokai_sublime.css">
+        <!-- Select2 Style -->
+        <link rel="stylesheet" href="assets/css/select2/select2.css">
+        <!-- Style -->
+        <link rel="stylesheet" href="assets/css/style/style.css">
+        <!-- Mfizz -->
+        <link rel="stylesheet" href="assets/css/fonts/mfizz/font-mfizz.css">
+        <!-- jQuery -->
+        <script src="assets/js/jquery.min.js"></script>
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="assets/js/bootstrap/bootstrap.min.js"></script>
+        <!-- Highlight -->
+        <script src="assets/js/highlight/highlight.pack.js"></script>
+        <!-- Mustache -->
+        <script src="assets/js/mustache/mustache.js"></script>
+        <!-- EN Language -->
+        <script src="assets/js/translation/translation.js"></script>
+        <!-- EN Language -->
+        <script src="assets/js/translation/languages/en/en-US.js"></script>
+        <!-- Select2 -->
+        <script src="assets/js/select2/select2.min.js"></script>
+    </head>
+    <body>
+        <header>
+            <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="/">Genesis API Client</a>
+                    </div>
+                    <div class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Financial <span class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li class="dropdown-header">Generic</li>
+                                    <li><a href="#content" data-id="authorize" class="trx-type">Authorize</a></li>
+                                    <li><a href="#content" data-id="capture" class="trx-type">Capture</a></li>
+                                    <li><a href="#content" data-id="credit" class="trx-type">Credit</a></li>
+                                    <li><a href="#content" data-id="payout" class="trx-type">Payout</a></li>
+                                    <li><a href="#content" data-id="refund" class="trx-type">Refund</a></li>
+                                    <li><a href="#content" data-id="sale" class="trx-type">Sale</a></li>
+                                    <li><a href="#content" data-id="void" class="trx-type">Void</a></li>
+                                    <li class="divider"></li>
+                                    <li class="dropdown-header">Recurring</li>
+                                    <li><a href="#content" data-id="init_recurring_sale" class="trx-type">Init Recurring Sale</a></li>
+                                    <li><a href="#content" data-id="recurring_sale" class="trx-type">Recurring Sale</a></li>
+                                    <li class="divider"></li>
+                                    <li class="dropdown-header">3D Transactions</li>
+                                    <li><a href="#content" data-id="authorize3d" class="trx-type">3D Authorize</a></li>
+                                    <li><a href="#content" data-id="init_recurring_sale3d" class="trx-type">3D InitRecurring</a></li>
+                                    <li><a href="#content" data-id="sale3d" class="trx-type">3D Sale</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Fraud-Related <span class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li class="dropdown-header">Charge-Back Information</li>
+                                    <li><a href="#content" data-id="chargeback_by_date" class="trx-type">by Date / Date-Range</a></li>
+                                    <li><a href="#content" data-id="chargeback_by_trx_id" class="trx-type">by Transaction ID</a></li>
+                                    <li class="divider"></li>
+                                    <li class="dropdown-header">Retrieval Information</li>
+                                    <li><a href="#content" data-id="retrieval_by_date" class="trx-type">by Date / Date-Range</a></li>
+                                    <li><a href="#content" data-id="retrieval_by_trx_id" class="trx-type">by Transaction ID</a></li>
+                                    <li class="divider"></li>
+                                    <li class="dropdown-header">Blacklist</li>
+                                    <li><a href="#content" data-id="blacklist" class="trx-type">Blacklist Check</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Non-Financial <span class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li class="dropdown-header">Verifications</li>
+                                    <li><a href="#content" data-id="av" class="trx-type">Account Verification</a></li>
+                                    <li><a href="#content" data-id="avs" class="trx-type">AVS</a></li>
+                                    <li class="divider"></li>
+                                    <li class="dropdown-header">Reconcile List</li>
+                                    <li><a href="#content" data-id="reconcile_by_date" class="trx-type">by Date / Date-Range</a></li>
+                                    <li><a href="#content" data-id="reconcile_by_trx_id" class="trx-type">by Transaction ID</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">WPF <span class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li class="dropdown-header">Web Payment Form</li>
+                                    <li><a href="#content" data-id="wpf_create" class="trx-type">Create</a></li>
+                                    <li><a href="#content" data-id="wpf_reconcile" class="trx-type">Reconcile</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </header>
+
+        <article>
+            <div class="row container">
+                <div id="content" class="col-xs-12">
+                    <form class="form genesis-api-example form-horizontal" role="form">
+                        <div class="row">
+                            <div class="init-notification" style="text-align:center;font-size:18pt;">Please select a transaction type from the top menu.</div>
+                            <div class="col-xs-6 form-fields"></div>
+                            <div class="col-xs-6 code-drops">
+                                <div class="row no-gutter form-group">
+                                    <div class="col-xs-12 submit">
+                                        <pre><code class="request xml"></code></pre>
+                                    </div>
+                                    <div class="col-xs-12 submit">
+                                        <pre><code class="response xml"></code></pre>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </article>
+
+        <footer>
+            <div class="navbar navbar-default">
+                <div class="row">
+                    <div class="col-xs-1"></div>
+                    <div class="col-xs-4">
+                        <div class="supported-languages">
+                            <!---->
+                            <a class="lang lang-net" href="javascript:setCodeLang('net');">
+                                <span class="icon-csharp"></span>
+                            </a>
+                            <a class="lang lang-java" href="javascript:setCodeLang('java');">
+                                <span class="icon-java"></span>
+                            </a>
+                            <a class="lang lang-nodejs" href="javascript:setCodeLang('nodejs');">
+                                <span class="icon-nodejs"></span>
+                            </a>
+                            <a class="lang lang-perl" href="javascript:setCodeLang('perl');">
+                                <span class="icon-perl"></span>
+                            </a>
+
+                            <a class="lang lang-php" href="javascript:setCodeLang('php');">
+                                <span class="icon-php"></span>
+                            </a>
+                            <!---->
+                            <a class="lang lang-ruby" href="javascript:setCodeLang('ruby');">
+                                <span class="icon-ruby"></span>
+                            </a>
+                            <a class="lang lang-python" href="javascript:setCodeLang('python');">
+                                <span class="icon-python"></span>
+                            </a>
+
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="copyright-notice">
+                            <a href="http://www.e-comprocessing.com" taret="_blank">
+                                Copyright &copy;2014 E-ComProcessing&trade;
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-xs-1"></div>
+                </div>
+            </div>
+        </footer>
+
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $('a.trx-type').click(function(i,e) {
+                    var tplFile = $(this).attr('data-id');
+
+                    $.get('assets/templates/api/' + tplFile + '.mustache')
+                        .done(function(data) {
+                            var tplRender = Mustache.render(data, translation.getLocalizedStrings());
+
+                            $('.form .form-fields').html(tplRender);
+
+                            $('.init-notification').remove();
+                        }
+                    );
+                });
+                $('.genesis-api-example').submit(function() {
+                    var formObj = $(this);
+
+                    var currTemplate = formObj.find('input[name="target"]').val();
+
+                    var finalUrl = 'api/' + window.codeLang.dir + '/' + currTemplate + '.' + window.codeLang.ext;
+
+                    formObj.find('input[type="submit"]').attr('disabled','disabled');
+
+                    $.post(finalUrl, formObj.serialize())
+                        .done(function(data) {
+                            data = jQuery.parseJSON(data);
+
+                            formObj.find('.request').text(data.request);
+                            formObj.find('.response').text(data.response);
+
+                            updateHighlight();
+
+                            formObj.find('.code-drops').fadeIn(750);
+
+                            $('html, body').animate({
+                                scrollTop: $("body").offset().top - 50
+                            }, 750);
+                        }, 'json'
+                    );
+
+                    formObj.find('input[type="submit"]').removeAttr('disabled');
+                    return false;
+                });
+                setCodeLang();
+            });
+            function setCodeLang(selectedLang) {
+                window.codeLang = {};
+
+                if (!selectedLang && getCookie('codeLang')) {
+                    selectedLang = getCookie('codeLang');
+                }
+
+                switch (selectedLang) {
+                    default:
+                    case 'php':
+                        window.codeLang.dir = 'php';
+                        window.codeLang.ext = 'php';
+                        break;
+                    case 'python':
+                        window.codeLang.dir = 'python';
+                        window.codeLang.ext = 'py';
+                        break;
+                    case 'perl':
+                        window.codeLang.dir = 'perl';
+                        window.codeLang.ext = 'pl';
+                        break;
+                    case 'ruby':
+                        window.codeLang.dir = 'ruby';
+                        window.codeLang.ext = 'rb';
+                        break;
+                    case 'net':
+                        window.codeLang.dir = '.net';
+                        window.codeLang.ext = 'asp';
+                        break;
+                    case 'java':
+                        window.codeLang.dir = 'java';
+                        window.codeLang.ext = 'jsp';
+                        break;
+                    case 'node':
+                        window.codeLang.dir = 'node.js';
+                        window.codeLang.ext = 'js';
+                        break;
+                }
+
+                $('.lang').each(function() { $(this).removeClass('active');});
+                $('.lang-' + selectedLang).toggleClass('active');
+
+                setCookie('codeLang', selectedLang);
+            }
+            function getCookie(name) {
+                var value = "; " + document.cookie;
+                var parts = value.split("; " + name + "=");
+                if (parts.length == 2) return parts.pop().split(";").shift();
+            }
+            function setCookie(c_name, value, exdays) {
+                var exdate = new Date();
+                exdate.setDate(exdate.getDate() + exdays);
+                var c_value = escape(value) + ((exdays == null) ? "" : "; expires=" + exdate.toUTCString());
+                document.cookie = c_name + "=" + c_value;
+            }
+            function updateHighlight() {
+                $('pre code').each(function(i, block) {
+                    hljs.highlightBlock(block);
+                });
+            }
+        </script>
+    </body>
+</html>

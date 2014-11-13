@@ -1,0 +1,27 @@
+.container {margin:0 auto;}
+.form {margin:0 auto;}
+    .form .icon-group .icon-container {position:absolute;padding:10px;}
+    .form .icon-group input[type="text"] {text-indent:22px;}
+.no-gutter {margin:15px;}
+.code-drops {display:none}
+.dropdown-menu {text-align:center}
+.dropdown-header {text-decoration:underline;}
+.select2-choices {border:1px solid #CCC;border-radius:4px;box-shadow:0px 1px 1px rgba(0, 0, 0, 0.075) inset;transition:border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;color:#555;text-indent:6px;}
+.select2-container-multi .select2-choices .select2-search-choice {padding:5px 5px 5px 18px;}
+.select2-container-multi .select2-search-choice-close {left:4px;}
+.select2-search-choice-close {top:5px;}
+pre {border-color:#23241F;background-color:#23241F;}
+legend {margin-bottom:15px;}
+article {margin:66px 0;}
+footer {position:fixed;bottom:0px;width:100%;margin-top:52px;}
+header .navbar, footer .navbar {margin-bottom:0;}
+footer .supported-languages {font-size:28pt;}
+    footer .supported-languages a {color:#000;outline:none;text-decoration:none;}
+        footer .supported-languages a .icon-csharp:hover,   footer .supported-languages a.active .icon-csharp {color:#68217A;}
+        footer .supported-languages a .icon-java:hover,     footer .supported-languages a.active .icon-java {color:#E76F00;}
+        footer .supported-languages a .icon-nodejs:hover,   footer .supported-languages a.active .icon-nodejs {color:#82CD28;}
+        footer .supported-languages a .icon-perl:hover,     footer .supported-languages a.active .icon-perl {color:#8FB7E5;}
+        footer .supported-languages a .icon-php:hover,      footer .supported-languages a.active .icon-php {color:#4F5B93;}
+        footer .supported-languages a .icon-ruby:hover,     footer .supported-languages a.active .icon-ruby {color:#B21301;}
+        footer .supported-languages a .icon-python:hover,   footer .supported-languages a.active .icon-python {color:#FFDA5F;}
+footer .copyright-notice {float:right;line-height:52px;font-family:Tahoma,sans-serif;font-size:9pt;margin-right:16px;}
