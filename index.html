@@ -289,34 +289,16 @@
                 }
 
                 switch (selectedLang) {
-                    default:
                     case 'php':
+                    case 'python':
+                    case 'perl':
+                    case 'ruby':
+                    case 'csharp':
+                    case 'java':
+                    case 'node':
+                    default:
                         window.codeLang.dir = 'php';
                         window.codeLang.ext = 'php';
-                        break;
-                    case 'python':
-                        window.codeLang.dir = 'python';
-                        window.codeLang.ext = 'py';
-                        break;
-                    case 'perl':
-                        window.codeLang.dir = 'perl';
-                        window.codeLang.ext = 'pl';
-                        break;
-                    case 'ruby':
-                        window.codeLang.dir = 'ruby';
-                        window.codeLang.ext = 'rb';
-                        break;
-                    case 'csharp':
-                        window.codeLang.dir = 'csharp';
-                        window.codeLang.ext = 'asp';
-                        break;
-                    case 'java':
-                        window.codeLang.dir = 'java';
-                        window.codeLang.ext = 'jsp';
-                        break;
-                    case 'node':
-                        window.codeLang.dir = 'node.js';
-                        window.codeLang.ext = 'js';
                         break;
                 }
 
