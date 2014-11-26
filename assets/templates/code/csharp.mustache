@@ -1,0 +1,13 @@
+var configuration = new Configuration(terminalToken: "{{terminal_token}}",
+    apiLogin: "{{api_login}}",
+    apiPassword:"{{api_password}}");
+genesis = GenesisClientFactory.CreateGenesisClient(configuration);
+
+var request = new {{request_class_name}}()
+{
+{{#properties}}
+    {{property_name}} = {{property_value}},
+{{/properties}}
+};
+
+var response = genesis.Execute(request);

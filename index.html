@@ -118,6 +118,9 @@
                             <div class="col-xs-6 form-fields"></div>
                             <div class="col-xs-6 code-drops">
                                 <div class="row no-gutter form-group">
+                                    <div class="col-xs-12 code">
+                                        <pre><code></code></pre>
+                                    </div>
                                     <div class="col-xs-12 submit">
                                         <pre><code class="request xml"></code></pre>
                                     </div>
@@ -139,7 +142,7 @@
                     <div class="col-xs-4">
                         <div class="supported-languages">
                             <!---->
-                            <a class="lang lang-net" href="javascript:setCodeLang('net');">
+                            <a class="lang lang-csharp" href="javascript:setCodeLang('csharp');">
                                 <span class="icon-csharp"></span>
                             </a>
                             <a class="lang lang-java" href="javascript:setCodeLang('java');">
@@ -212,6 +215,7 @@
                         .done(function(data) {
                             data = jQuery.parseJSON(data);
 
+                            setCode(formObj, data.request);
                             formObj.find('.request').text(data.request);
                             formObj.find('.response').text(data.response);
 
@@ -279,8 +283,9 @@
             function setCodeLang(selectedLang) {
                 window.codeLang = {};
 
-                if (!selectedLang && getCookie('codeLang')) {
-                    selectedLang = getCookie('codeLang');
+                var currentlySelectedCodeLang = getSelectedCodeLang();
+                if (!selectedLang && currentlySelectedCodeLang) {
+                    selectedLang = currentlySelectedCodeLang;
                 }
 
                 switch (selectedLang) {
@@ -301,8 +306,8 @@
                         window.codeLang.dir = 'ruby';
                         window.codeLang.ext = 'rb';
                         break;
-                    case 'net':
-                        window.codeLang.dir = '.net';
+                    case 'csharp':
+                        window.codeLang.dir = 'csharp';
                         window.codeLang.ext = 'asp';
                         break;
                     case 'java':
@@ -320,6 +325,9 @@
 
                 setCookie('codeLang', selectedLang);
             }
+            function getSelectedCodeLang() {
+                return getCookie('codeLang');
+            }
             function getCookie(name) {
                 var value = "; " + document.cookie;
                 var parts = value.split("; " + name + "=");
@@ -335,6 +343,27 @@
                 $('pre code').each(function(i, block) {
                     hljs.highlightBlock(block);
                 });
+            }
+            function setCode(formObj, xmlRequest) {
+                var selectedCodeLang = getSelectedCodeLang();
+
+                if (selectedCodeLang != "undefined" && !!selectedCodeLang) {
+                    var transactionCodeElement = formObj.find('.code pre code');
+                    transactionCodeElement.addClass(selectedCodeLang);
+                    transactionCodeElement.text(getTransactionCode(xmlRequest));
+                }
+            }
+            function getTransactionCode(xmlRequest) {
+                var testCodeContent =
+                "var configuration = new Configuration(terminalToken: \"{{terminal_token}}\","+
+                    "apiLogin: \"{{api_login}}\","+
+                    "apiPassword:\"{{api_password}}\");"+
+                "var genesis = GenesisClientFactory.CreateGenesisClient(configuration);";
+                return testCodeContent;
+
+                var mustacheTemplate;
+                var mustacheContext;
+                return Mustache.render(mustacheTemplate, mustacheContext);
             }
         </script>
     </body>
