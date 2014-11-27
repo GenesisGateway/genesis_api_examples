@@ -1,0 +1,11 @@
+{{^value.is_entity}}
+{{indentation}}{{#name}}{{name}} = {{/name}}"{{value.value}}"{{^value.is_last}},{{/value.is_last}}
+{{/value.is_entity}}
+{{#value.is_entity}}
+{{indentation}}{{#name}}{{name}} = {{/name}}new {{value.class}}()
+{{indentation}}{
+{{#value.object}}
+{{> initialization}}
+{{/value.object}}
+{{indentation}}}{{^value.is_last}},{{/value.is_last}}{{#value.is_root}};{{/value.is_root}}
+{{/value.is_entity}}
