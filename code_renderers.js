@@ -23,11 +23,8 @@ RequestCodeRenderer = {
         var that = this;
         return that.getMustacheTemplate()
             .then(function(template) {
-                var context = that.getMustacheContext(config,
-                    request);
-                var content = Mustache.render(template.main,
-                    context,
-                    template.partials);
+                var context = that.getMustacheContext(config, request);
+                var content = Mustache.render(template.main, context, template.partials);
                 return content;
             });
     },
@@ -41,29 +38,38 @@ function CsRequestCodeRenderer() {
     this.getMockJsonRequest = getMockJsonRequest = function() {
         return {
             "wpf_payment": {
-                "transaction_id": "wev238f328nc",
-                "usage": "Order ID 500, Shoes",
+                "transaction_id": "10000",
+                "amount": "10000",
+                "currency": "USD",
+                "usage": "jhljlkj",
+                "description": "kljlkjlkjk",
+                "customer_email": "hello@test.com",
+                "customer_phone": "0888888888",
+                "notification_url": "http://example.com",
+                "return_success_url": "http://example.com/success",
+                "return_failure_url": "http://example.com/fail",
+                "return_cancel_url": "http://example.com/cancel",
                 "billing_address": {
-                    "first_name": "John",
-                    "last_name": "Doe"
+                    "first_name": "Test",
+                    "last_name": "Test",
+                    "address1": "Testing street",
+                    "zip_code": "1000",
+                    "city": "Testing town",
+                    "country": "Tesing land"
                 },
                 "transaction_types": {
-                    "transaction_type": [{
-                        "item1": "value 1",
-                        "item2": "value 2"
-                    }, {
-                        "item1": "value 1",
-                        "item2": "value 2"
-                    }]
-                },
-                "risk_params": {
-                    "user_id": "123456"
+                    "transaction_type": [
+                    "auth",
+                    "auth3d",
+                    "sale",
+                    "sale3d"
+                    ]
                 }
             }
         };
     };
 
-    this.convertToPascalCase = function(snakeCase) {
+    this.convertSnakeToPascalCase = function(snakeCase) {
         var pascalCase = snakeCase.replace(
             /(\_\w)/g,
             function(matches) {
@@ -78,7 +84,7 @@ function CsRequestCodeRenderer() {
     };
 
     this.getCsPropertyName = function(fieldName) {
-        return this.convertToPascalCase(fieldName);
+        return this.convertSnakeToPascalCase(fieldName);
     };
 
     this.getCsClassName = function(valueType) {
@@ -86,8 +92,11 @@ function CsRequestCodeRenderer() {
             case "shipping_address":
             case "billing_address":
                 return "Address";
+            case "transaction_type":
+            case "type":
+                return "TransactionTypes";
             default:
-                return this.convertToPascalCase(valueType);
+                return this.convertSnakeToPascalCase(valueType);
         }
     };
 
@@ -130,17 +139,26 @@ function CsRequestCodeRenderer() {
                 case "authorize":
                     return "Authorize";
                 case "authorize3d":
-                    return "Authorize3D";
+                    if (rootValue.mpi_params != undefined)
+                        return "Authorize3DSync";
+                    else
+                        return "Authorize3DAsync";
                 case "capture":
                     return "Capture";
                 case "sale":
                     return "Sale";
                 case "sale3d":
-                    return "Sale3D";
+                    if (rootValue.mpi_params != undefined)
+                        return "Sale3DSync";
+                    else
+                        return "Sale3DAsync";
                 case "init_recurring_sale":
                     return "InitRecuringSale";
                 case "init_recurring_sale3d":
-                    return "InitRecurringSale3D";
+                    if (rootValue.mpi_params != undefined)
+                        return "InitRecurringSale3DSync";
+                    else
+                        return "InitRecurringSale3DAsync";
                 case "recurring_sale":
                     return "RecurringSale";
                 case "refund":
@@ -154,6 +172,29 @@ function CsRequestCodeRenderer() {
                 case "avs":
                     return "Avs";
             }
+
+        return null;
+    }
+
+    this.getCsValue = function(type, value) {
+        switch(type) {
+            case "transaction_type":
+            case "type":
+                return "TransactionTypes." + this.convertSnakeToPascalCase(value);
+            case "start_date":
+            case "end_date":
+            case "post_date":
+            case "time":
+                return "DateTime.Parse(\"" + value + "\")";
+            case "amount":
+                return value;
+            case "currency":
+                return "Iso4217CurrencyCodes." + value;
+            case "country":
+                return "Iso3166CountryCodes." + value;
+            default:
+                return '"' + value + '"';
+        }
     }
 }
 
@@ -161,7 +202,8 @@ CsRequestCodeRenderer.prototype = RequestCodeRenderer;
 
 CsRequestCodeRenderer.prototype.getMustacheContext = function(config, request) {
     var that = this;
-    jsonRequest = that.getMockJsonRequest();
+
+    request = getMockJsonRequest();
 
     function isEntity(value) {
         return typeof value === "object";
@@ -178,7 +220,7 @@ CsRequestCodeRenderer.prototype.getMustacheContext = function(config, request) {
         }
 
         var childValue = value[keys[0]];
-        if (childValue instanceof Array) {
+        if (Array.isArray(childValue)) {
             return true;
         }
         return false;
@@ -215,12 +257,11 @@ CsRequestCodeRenderer.prototype.getMustacheContext = function(config, request) {
         nodeValue.is_array = Array.isArray(value);
 
         if (!nodeValue.is_entity) {
-            nodeValue.value = value;
+            nodeValue.value = that.getCsValue(valueType, value);
         } else {
             nodeValue.class = that.getCsClassName(valueType);
             nodeValue.object = [];
 
-            // Count the number of items to determine whether the curent is the last
             var childrenCount = itemsCount(value);
             var childNumber = 0;
             $.each(value, function(index, childValue) {
@@ -229,17 +270,13 @@ CsRequestCodeRenderer.prototype.getMustacheContext = function(config, request) {
 
                 var childNode = {};
                 if (isNumber(index)) {
-                    build(childNode, isLast, level + 1, false,
-                        valueType, childValue);
+                    build(childNode, isLast, level + 1, false, valueType, childValue);
                 } else {
-                    if (isEntity(childValue) &&
-                        isItsSingleElementAnArray(childValue)) {
+                    if (isEntity(childValue) && isItsSingleElementAnArray(childValue)) {
                         var subChild = getLastChild(childValue);
-                        build(childNode, isLast, level + 1, index,
-                            subChild.index, subChild.value);
+                        build(childNode, isLast, level + 1, index, subChild.index, subChild.value);
                     } else {
-                        build(childNode, isLast, level + 1, index,
-                            index, childValue);
+                        build(childNode, isLast, level + 1, index, index, childValue);
                     }
                 }
                 nodeValue.object.push(childNode);
@@ -250,7 +287,7 @@ CsRequestCodeRenderer.prototype.getMustacheContext = function(config, request) {
     };
 
     var root = {};
-    $.each(jsonRequest, function(name, value) {
+    $.each(request, function(name, value) {
         var className = that.getCsRequestClassName(name, value);
         build(root, true, 1, name, className, value);
     });
@@ -259,8 +296,7 @@ CsRequestCodeRenderer.prototype.getMustacheContext = function(config, request) {
     return root;
 }
 CsRequestCodeRenderer.prototype.getMustacheTemplate = function() {
-    return $.when(this.getCodeTemplate("cs", "request"), this.getCodeTemplate(
-            "cs", "initialization"))
+    return $.when(this.getCodeTemplate("cs", "request"), this.getCodeTemplate("cs", "initialization"))
         .then(function(request, initialization) {
             return {
                 main: request[0],
