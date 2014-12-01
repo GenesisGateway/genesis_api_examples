@@ -221,7 +221,7 @@
                             formObj.find('.request').text(data.request);
                             formObj.find('.response').text(data.response);
 
-                            if (hasSelectedCodeLang() /*&& !!data.request*/) {
+                            if (hasSelectedCodeLang() && !!data.request) {
                                 getTransactionCode(getSelectedCodeLang(), data.request)
                                     .done(function(code) {
                                         formObj.find('.code pre code').text(code);

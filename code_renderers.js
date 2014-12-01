@@ -50,7 +50,12 @@ function CsRequestCodeRenderer() {
     };
 
     this.getCsPropertyName = function(fieldName) {
-        return this.convertSnakeToPascalCase(fieldName);
+        switch(fieldName) {
+            case "transaction_id":
+                return "Id";
+            default:
+                return this.convertSnakeToPascalCase(fieldName);
+        }
     };
 
     this.getCsClassName = function(valueType) {
@@ -67,79 +72,46 @@ function CsRequestCodeRenderer() {
     };
 
     this.getCsRequestClassName = function(rootKey, rootValue) {
-        if (rootKey === "chargeback_request")
-            if (rootValue.start_date != undefined)
-                return "MultiChargeback";
-            else
-                return "SingleChargeback";
-
-        if (rootKey === "retrieval_request_request")
-            if (rootValue.start_date != undefined)
-                return "MultiRetrievalRequest";
-            else
-                return "SingleRetrievalRequest";
-
-        if (rootKey === "reconcile")
-            if (rootValue.start_date != undefined)
-                return "MultiReconcile";
-            else
-                return "SingleReconcile";
-
-        if (rootKey === "blacklist_request")
-            return "Blacklist";
-
-        if (rootKey === "chargeback_request")
-            if (rootValue.start_date != undefined)
-                return "MultiChargeback";
-            else
-                return "SingleChargeback";
-
-        if (rootKey === "wpf_payment")
-            return "WpfCreate";
-
-        if (rootKey === "wpf_reconcile")
-            return "WpfReconcile";
-
-        if (rootKey === "payment_transaction")
-            switch (rootValue.transaction_type) {
-                case "authorize":
-                    return "Authorize";
-                case "authorize3d":
-                    if (rootValue.mpi_params != undefined)
-                        return "Authorize3DSync";
-                    else
-                        return "Authorize3DAsync";
-                case "capture":
-                    return "Capture";
-                case "sale":
-                    return "Sale";
-                case "sale3d":
-                    if (rootValue.mpi_params != undefined)
-                        return "Sale3DSync";
-                    else
-                        return "Sale3DAsync";
-                case "init_recurring_sale":
-                    return "InitRecuringSale";
-                case "init_recurring_sale3d":
-                    if (rootValue.mpi_params != undefined)
-                        return "InitRecurringSale3DSync";
-                    else
-                        return "InitRecurringSale3DAsync";
-                case "recurring_sale":
-                    return "RecurringSale";
-                case "refund":
-                    return "Refund";
-                case "void":
-                    return "Void";
-                case "credit":
-                    return "Credit";
-                case "account_verification":
-                    return "AccountVeriication";
-                case "avs":
-                    return "Avs";
+        function toQueryTransactionName(value, partialTransactionName) {
+            if (value.start_date !== undefined) {
+                return "Multi" + partialTransactionName;
             }
+            return "Single" + partialTransactionName;
+        }
 
-        return null;
+        switch(rootKey) {
+            case "chargeback_request":
+                return toQueryTransactionName(rootValue, "Chargeback");
+            case "retrieval_request_request":
+                return toQueryTransactionName(rootValue, "RetrievalRequest");
+                return toQueryTransactionName(rootValue, "Reconcile");
+            case "blacklist_request":
+                return "Blacklist";
+            case "chargeback_request":
+                return toQueryTransactionName(rootValue, "Chargeback");
+            case "wpf_payment":
+                return "WpfCreate";
+            case "wpf_reconcile":
+            case "reconcile":
+                return this.convertSnakeToPascalCase(rootKey);
+        }
+
+        function to3dTransactionName(value, partialTransactionName) {
+            if (rootValue.mpi_params !== undefined) {
+                return partialTransactionName + "Sync";
+            }
+            return partialTransactionName + "Async";
+        }
+
+        switch(rootValue.transaction_type) {
+            case "authorize3d":
+            case "sale3d":
+            case "init_recurring_sale3d":
+                return to3dTransactionName(rootValue.transaction_type,
+                    this.convertSnakeToPascalCase(rootValue.transaction_type));
+            default:
+                return this.convertSnakeToPascalCase(rootValue.transaction_type);
+        }
     }
 
     this.getCsValue = function(type, value) {
@@ -153,6 +125,8 @@ function CsRequestCodeRenderer() {
             case "time":
                 return "DateTime.Parse(\"" + value + "\")";
             case "amount":
+            case "gaming":
+            case "moto":
                 return value;
             case "currency":
                 return "Iso4217CurrencyCodes." + value;
@@ -168,6 +142,10 @@ CsRequestCodeRenderer.prototype = RequestCodeRenderer;
 
 CsRequestCodeRenderer.prototype.getMustacheContext = function(config, request) {
     var that = this;
+
+    function shouldSkip(propertyName) {
+        return propertyName === "transaction_type";
+    }
 
     function isEntity(value) {
         return typeof value === "object";
@@ -206,8 +184,39 @@ CsRequestCodeRenderer.prototype.getMustacheContext = function(config, request) {
         return Object.keys(object).length;
     }
 
-    function build(node, isLastChild, level, key, valueType, value) {
-        if (!!key && key.length > 0) {
+    function isNonEmptyString(value) {
+        return !!value && value.length > 0;
+    }
+
+    function buildEntityChild(level, nodeValue, valueType, value) {
+        nodeValue.class = that.getCsClassName(valueType);
+        nodeValue.object = [];
+
+        var childrenCount = itemsCount(value);
+        var childNumber = 0;
+        $.each(value, function(index, childValue) {
+            childNumber++;
+            if (shouldSkip(index)) {
+                return;
+            }
+
+            var isLast = childNumber === childrenCount;
+
+            var childNode = {};
+            if (isNumber(index)) {
+                buildRequest(childNode, isLast, level + 1, false, valueType, childValue);
+            } else if (isEntity(childValue) && isItsSingleElementAnArray(childValue)) {
+                var subChild = getLastChild(childValue);
+                buildRequest(childNode, isLast, level + 1, index, subChild.index, subChild.value);
+            } else {
+                buildRequest(childNode, isLast, level + 1, index, index, childValue);
+            }
+            nodeValue.object.push(childNode);
+        });
+    }
+
+    function buildRequest(node, isLastChild, level, key, valueType, value) {
+        if (isNonEmptyString(key)) {
             node.name = that.getCsPropertyName(key);
         } else {
             node.name = key;
@@ -223,28 +232,7 @@ CsRequestCodeRenderer.prototype.getMustacheContext = function(config, request) {
         if (!nodeValue.is_entity) {
             nodeValue.value = that.getCsValue(valueType, value);
         } else {
-            nodeValue.class = that.getCsClassName(valueType);
-            nodeValue.object = [];
-
-            var childrenCount = itemsCount(value);
-            var childNumber = 0;
-            $.each(value, function(index, childValue) {
-                childNumber++;
-                var isLast = childNumber === childrenCount;
-
-                var childNode = {};
-                if (isNumber(index)) {
-                    build(childNode, isLast, level + 1, false, valueType, childValue);
-                } else {
-                    if (isEntity(childValue) && isItsSingleElementAnArray(childValue)) {
-                        var subChild = getLastChild(childValue);
-                        build(childNode, isLast, level + 1, index, subChild.index, subChild.value);
-                    } else {
-                        build(childNode, isLast, level + 1, index, index, childValue);
-                    }
-                }
-                nodeValue.object.push(childNode);
-            });
+            buildEntityChild(level, nodeValue, valueType, value);
         }
 
         node.value = nodeValue;
@@ -252,14 +240,15 @@ CsRequestCodeRenderer.prototype.getMustacheContext = function(config, request) {
 
     var root = {};
     root.config = config;
-    $.each(request, function(name, value) {
-        var className = that.getCsRequestClassName(name, value);
-        build(root, true, 1, name, className, value);
-    });
+
+    var requestName = Object.keys(request)[0];
+    var className = that.getCsRequestClassName(requestName, request[requestName]);
+    buildRequest(root, true, 1, requestName, className, request[requestName]);
     root.name = "var request";
 
     return root;
 }
+
 CsRequestCodeRenderer.prototype.getMustacheTemplate = function() {
     return $.when(this.getCodeTemplate("cs", "request"), this.getCodeTemplate("cs", "initialization"))
         .then(function(request, initialization) {

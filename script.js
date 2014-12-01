@@ -57,17 +57,24 @@ function updateHighlight() {
 
 function getTransactionCode(selectedCodeLang, xmlRequest) {
     var jsonRequest = new X2JS().xml_str2json(xmlRequest);
+    return getConfig()
+        .then(function(config) {
+            return requestCodeRenderer.render({
+                lang: selectedCodeLang,
+                config: config,
+                request: jsonRequest
+            });
+        });
+}
+
+function getConfig() {
     return $.get("config/default.ini")
         .then(function(content) {
             token = /token = (\w*)/.exec(content)[1];
             username = /username = (\w*)/.exec(content)[1];
             password = /password = (\w*)/.exec(content)[1];
 
-            return requestCodeRenderer.render({
-                lang: selectedCodeLang,
-                config: { terminal_token: token, api_login: username, api_password: password },
-                request: jsonRequest
-            });
+            return { terminal_token: token, api_login: username, api_password: password };
         });
 }
 
