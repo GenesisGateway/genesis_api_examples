@@ -35,40 +35,6 @@ RequestCodeRenderer = {
 }
 
 function CsRequestCodeRenderer() {
-    this.getMockJsonRequest = getMockJsonRequest = function() {
-        return {
-            "wpf_payment": {
-                "transaction_id": "10000",
-                "amount": "10000",
-                "currency": "USD",
-                "usage": "jhljlkj",
-                "description": "kljlkjlkjk",
-                "customer_email": "hello@test.com",
-                "customer_phone": "0888888888",
-                "notification_url": "http://example.com",
-                "return_success_url": "http://example.com/success",
-                "return_failure_url": "http://example.com/fail",
-                "return_cancel_url": "http://example.com/cancel",
-                "billing_address": {
-                    "first_name": "Test",
-                    "last_name": "Test",
-                    "address1": "Testing street",
-                    "zip_code": "1000",
-                    "city": "Testing town",
-                    "country": "Tesing land"
-                },
-                "transaction_types": {
-                    "transaction_type": [
-                    "auth",
-                    "auth3d",
-                    "sale",
-                    "sale3d"
-                    ]
-                }
-            }
-        };
-    };
-
     this.convertSnakeToPascalCase = function(snakeCase) {
         var pascalCase = snakeCase.replace(
             /(\_\w)/g,
@@ -203,8 +169,6 @@ CsRequestCodeRenderer.prototype = RequestCodeRenderer;
 CsRequestCodeRenderer.prototype.getMustacheContext = function(config, request) {
     var that = this;
 
-    request = getMockJsonRequest();
-
     function isEntity(value) {
         return typeof value === "object";
     }
@@ -287,6 +251,7 @@ CsRequestCodeRenderer.prototype.getMustacheContext = function(config, request) {
     };
 
     var root = {};
+    root.config = config;
     $.each(request, function(name, value) {
         var className = that.getCsRequestClassName(name, value);
         build(root, true, 1, name, className, value);

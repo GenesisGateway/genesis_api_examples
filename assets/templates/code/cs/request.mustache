@@ -1,6 +1,6 @@
-var configuration = new Configuration(terminalToken: "{{terminal_token}}",
-    apiLogin: "{{api_login}}",
-    apiPassword:"{{api_password}}");
+var configuration = new Configuration(terminalToken: "{{config.terminal_token}}",
+    apiLogin: "{{config.api_login}}",
+    apiPassword: "{{config.api_password}}");
 genesis = GenesisClientFactory.CreateGenesisClient(configuration);
 
 {{> initialization}}
