@@ -57,7 +57,11 @@ function updateHighlight() {
 
 function getTransactionCode(selectedCodeLang, xmlRequest) {
     var jsonRequest = new X2JS().xml_str2json(xmlRequest);
-    return requestCodeRenderer.render({ lang: selectedCodeLang, config: null, request: jsonRequest});
+    return requestCodeRenderer.render({
+        lang: selectedCodeLang,
+        config: null,
+        request: jsonRequest
+    });
 }
 
 var requestCodeRenderer = (function() {
@@ -221,4 +225,3 @@ function getFakeData() {
         start_date:faker.internet.password()
     }
 }
-

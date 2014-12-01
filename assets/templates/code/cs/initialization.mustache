@@ -2,7 +2,7 @@
 {{indentation}}{{#name}}{{name}} = {{/name}}"{{value.value}}"{{^value.is_last}},{{/value.is_last}}
 {{/value.is_entity}}
 {{#value.is_entity}}
-{{indentation}}{{#name}}{{name}} = {{/name}}new {{value.class}}()
+{{indentation}}{{#name}}{{name}} = {{/name}}new {{value.class}}{{#value.is_array}}[]{{/value.is_array}}{{^value.is_array}}(){{/value.is_array}}
 {{indentation}}{
 {{#value.object}}
 {{> initialization}}

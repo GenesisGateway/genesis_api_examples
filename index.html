@@ -30,6 +30,7 @@
 
         <script src="assets/js/faker/faker.min.js"></script>
         <script src="assets/js/xml2json.min.js"></script>
+        <script src="code_renderers.js"></script>
         <script src="script.js"></script>
     </head>
     <body>
@@ -220,7 +221,7 @@
                             formObj.find('.request').text(data.request);
                             formObj.find('.response').text(data.response);
 
-                            if (hasSelectedCodeLang() && !!data.request) {
+                            if (hasSelectedCodeLang() /*&& !!data.request*/) {
                                 getTransactionCode(getSelectedCodeLang(), data.request)
                                     .done(function(code) {
                                         formObj.find('.code pre code').text(code);
