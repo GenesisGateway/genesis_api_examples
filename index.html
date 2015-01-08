@@ -29,6 +29,11 @@
         <script src="assets/js/select2/select2.min.js"></script>
         <!-- Faker -->
         <script src="assets/js/faker/faker.min.js"></script>
+        <!-- Xml to Json converter -->
+        <script src="assets/js/xml2json.min.js"></script>
+
+        <script src="code_renderers.js"></script>
+        <script src="script.js"></script>
     </head>
     <body>
         <header>
@@ -118,6 +123,9 @@
                             <div class="col-xs-6 form-fields"></div>
                             <div class="col-xs-6 code-drops">
                                 <div class="row no-gutter form-group">
+                                    <div class="col-xs-12 code">
+                                        <pre><code></code></pre>
+                                    </div>
                                     <div class="col-xs-12 submit">
                                         <pre><code class="request xml"></code></pre>
                                     </div>
@@ -139,8 +147,8 @@
                     <div class="col-xs-4">
                         <div class="supported-languages">
                             <!---->
-                            <a class="lang lang-net" href="javascript:setCodeLang('net');">
-                                <span class="icon-csharp"></span>
+                            <a class="lang lang-cs" href="javascript:setCodeLang('cs');">
+                                <span class="icon-cs"></span>
                             </a>
                             <a class="lang lang-java" href="javascript:setCodeLang('java');">
                                 <span class="icon-java"></span>
@@ -204,7 +212,7 @@
 
                     var currTemplate = formObj.find('input[name="target"]').val();
 
-                    var finalUrl = 'api/' + window.codeLang.dir + '/' + currTemplate + '.' + window.codeLang.ext;
+                    var finalUrl = 'api/php/' + currTemplate + '.php';
 
                     formObj.find('input[type="submit"]').attr('disabled','disabled');
 
@@ -215,127 +223,22 @@
                             formObj.find('.request').text(data.request);
                             formObj.find('.response').text(data.response);
 
-                            updateHighlight();
-
-                            formObj.find('.code-drops').fadeIn(750);
-
-                            $('html, body').animate({
-                                scrollTop: $("body").offset().top - 50
-                            }, 750);
-                        }, 'json'
-                    );
+                            if (hasSelectedCodeLang() && !!data.request) {
+                                getTransactionCode(getSelectedCodeLang(), data.request)
+                                    .done(function(code) {
+                                        formObj.find('.code pre code').text(code);
+                                        showExample(formObj);
+                                    });
+                            } else {
+                                showExample(formObj);
+                            }
+                        }, 'json');
 
                     formObj.find('input[type="submit"]').removeAttr('disabled');
                     return false;
                 });
                 setCodeLang();
             });
-            function getFakeData() {
-                future_date = faker.date.future();
-                return {
-                    transaction_id: faker.internet.password(),
-                    usage: faker.hacker.phrase(),
-                    description: faker.lorem.sentence(),
-                    remote_ip: faker.internet.ip(),
-                    amount: randomFromInterval(1337, 2048),
-                    currency: 'USD',
-                    card_holder: faker.name.findName(),
-                    card_number: '4200000000000000',
-                    cvv: randomFromInterval(100,999),
-                    expiration_month: future_date.getMonth(),
-                    expiration_year: future_date.getFullYear(),
-                    customer_email: faker.internet.email(),
-                    customer_phone: faker.phone.phoneNumberFormat(),
-                    billing: {
-                        first_name: faker.name.firstName(),
-                        last_name: faker.name.lastName(),
-                        address1: faker.address.streetAddress(),
-                        address2: faker.address.secondaryAddress(),
-                        zip_code: faker.address.zipCode(),
-                        city: faker.address.city(),
-                        state: faker.address.stateAbbr(),
-                        country: 'US',
-                    },
-                    shipping: {
-                        first_name: faker.name.firstName(),
-                        last_name: faker.name.lastName(),
-                        address1: faker.address.streetAddress(),
-                        address2: faker.address.secondaryAddress(),
-                        zip_code: faker.address.zipCode(),
-                        city: faker.address.city(),
-                        state: faker.address.stateAbbr(),
-                        country: 'US',
-                    },
-                    notification_url: 'http://www.dummy.com/notification_url',
-                    return_success_url: 'http://www.dummy.com/success',
-                    return_failure_url: 'http://www.dummy.com/failure',
-                    return_cancel_url: 'http://www.dummy.com/cancel',
-                    start_date:faker.internet.password()
-                }
-            }
-            function randomFromInterval(min,max) {
-                return Math.floor(Math.random()*(max-min+1)+min);
-            }
-            function setCodeLang(selectedLang) {
-                window.codeLang = {};
-
-                if (!selectedLang && getCookie('codeLang')) {
-                    selectedLang = getCookie('codeLang');
-                }
-
-                switch (selectedLang) {
-                    default:
-                    case 'php':
-                        window.codeLang.dir = 'php';
-                        window.codeLang.ext = 'php';
-                        break;
-                    case 'python':
-                        window.codeLang.dir = 'python';
-                        window.codeLang.ext = 'py';
-                        break;
-                    case 'perl':
-                        window.codeLang.dir = 'perl';
-                        window.codeLang.ext = 'pl';
-                        break;
-                    case 'ruby':
-                        window.codeLang.dir = 'ruby';
-                        window.codeLang.ext = 'rb';
-                        break;
-                    case 'net':
-                        window.codeLang.dir = '.net';
-                        window.codeLang.ext = 'asp';
-                        break;
-                    case 'java':
-                        window.codeLang.dir = 'java';
-                        window.codeLang.ext = 'jsp';
-                        break;
-                    case 'node':
-                        window.codeLang.dir = 'node.js';
-                        window.codeLang.ext = 'js';
-                        break;
-                }
-
-                $('.lang').each(function() { $(this).removeClass('active');});
-                $('.lang-' + selectedLang).toggleClass('active');
-
-                setCookie('codeLang', selectedLang);
-            }
-            function getCookie(name) {
-                var value = "; " + document.cookie;
-                var parts = value.split("; " + name + "=");
-                if (parts.length == 2) return parts.pop().split(";").shift();
-            }
-            function setCookie(c_name, value, exdays) {
-                var exdate = new Date();
-                exdate.setDate(exdate.getDate() + exdays);
-                var c_value = escape(value) + ((exdays == null) ? "" : "; expires=" + exdate.toUTCString());
-                document.cookie = c_name + "=" + c_value;
-            }
-            function updateHighlight() {
-                $('pre code').each(function(i, block) {
-                    hljs.highlightBlock(block);
-                });
-            }
         </script>
     </body>
 </html>

@@ -17,7 +17,7 @@ footer {position:fixed;bottom:0px;width:100%;margin-top:52px;}
 header .navbar, footer .navbar {margin-bottom:0;}
 footer .supported-languages {font-size:28pt;}
     footer .supported-languages a {color:#000;outline:none;text-decoration:none;}
-        footer .supported-languages a .icon-csharp:hover,   footer .supported-languages a.active .icon-csharp {color:#68217A;}
+        footer .supported-languages a .icon-cs:hover,   footer .supported-languages a.active .icon-cs {color:#68217A;}
         footer .supported-languages a .icon-java:hover,     footer .supported-languages a.active .icon-java {color:#E76F00;}
         footer .supported-languages a .icon-nodejs:hover,   footer .supported-languages a.active .icon-nodejs {color:#82CD28;}
         footer .supported-languages a .icon-perl:hover,     footer .supported-languages a.active .icon-perl {color:#8FB7E5;}

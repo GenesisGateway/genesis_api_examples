@@ -80,7 +80,7 @@
 .icon-mariadb:before,
 .icon-phone-retro:before,
 .icon-phone-alt:before,
-.icon-csharp:before,
+.icon-cs:before,
 .icon-php:before,
 .icon-postgres-alt:before,
 .icon-html:before,
@@ -182,7 +182,7 @@
 .icon-mariadb:before { content: "\f131"; }
 .icon-phone-retro:before { content: "\f132"; }
 .icon-phone-alt:before { content: "\f133"; }
-.icon-csharp:before { content: "\f134"; }
+.icon-cs:before { content: "\f134"; }
 .icon-php:before { content: "\f135"; }
 .icon-postgres-alt:before { content: "\f136"; }
 .icon-html:before { content: "\f137"; }
@@ -248,7 +248,7 @@
 .icon-google,
 .icon-centos,
 .icon-kde,
-.icon-csharp,
+.icon-cs,
 .icon-scala,
 .icon-redis,
 .icon-looking,
