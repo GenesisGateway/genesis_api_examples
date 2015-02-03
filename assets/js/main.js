@@ -58,7 +58,7 @@ function showExample(formObj) {
     jQuery('.code-result, .request-result, .response-result').fadeIn(750);
 
     $('html, body').animate({
-        scrollTop: $("body").offset().top - 50
+        scrollTop: 33
     }, 750);
 }
 

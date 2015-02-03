@@ -15,13 +15,16 @@ try {
 		->request()
 			{{> initialization}}
 
+	$genesis->execute();
+
 	if ($genesis->response()->isSuccessful()) {
-		$response = $genesis->response()->getResponseObj();
+		return $genesis->response()->getResponseObject();
 	}
 	else {
-		$response = false;
+		throw new Exception($genesis->response()->getResponseObject()->technical_message);
 	}
 }
 catch (Exception $e) {
 	error_log($e->getMessage());
+	return false;
 }
