@@ -1,6 +1,7 @@
 <!DOCTYPE>
 <html>
     <head>
+        <title>Genesis API Sandbox</title>
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="assets/css/bootstrap/bootstrap.min.css">
         <!-- Optional theme -->
@@ -14,7 +15,7 @@
         <!-- Mfizz -->
         <link rel="stylesheet" href="assets/css/fonts/mfizz/font-mfizz.css">
         <!-- jQuery -->
-        <script src="assets/js/jquery.min.js"></script>
+        <script src="assets/js/jquery/jquery.min.js"></script>
         <!-- Latest compiled and minified JavaScript -->
         <script src="assets/js/bootstrap/bootstrap.min.js"></script>
         <!-- Highlight -->
@@ -30,10 +31,15 @@
         <!-- Faker -->
         <script src="assets/js/faker/faker.min.js"></script>
         <!-- Xml to Json converter -->
-        <script src="assets/js/xml2json.min.js"></script>
-
-        <script src="code_renderers.js"></script>
-        <script src="script.js"></script>
+        <script src="assets/js/xml2json/xml2json.min.js"></script>
+        <!-- Renders -->
+        <script src="assets/js/renders.js"></script>
+        <!-- C# Render -->
+        <script src="assets/js/renders/cs.js"></script>
+        <!-- PHP Render -->
+        <script src="assets/js/renders/php.js"></script>
+        <!-- Main -->
+        <script src="assets/js/main.js"></script>
     </head>
     <body>
         <header>
@@ -46,7 +52,7 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="/">Genesis API Client</a>
+                        <a class="navbar-brand" href="/">Genesis API Sandbox</a>
                     </div>
                     <div class="navbar-collapse collapse">
                         <ul class="nav navbar-nav">
@@ -115,27 +121,33 @@
         </header>
 
         <article>
-            <div class="row container">
+            <div class="row">
                 <div id="content" class="col-xs-12">
-                    <form class="form genesis-api-example form-horizontal" role="form">
-                        <div class="row">
-                            <div class="init-notification" style="text-align:center;font-size:18pt;">Please select a transaction type from the top menu.</div>
-                            <div class="col-xs-6 form-fields"></div>
-                            <div class="col-xs-6 code-drops">
-                                <div class="row no-gutter form-group">
-                                    <div class="col-xs-12 code">
-                                        <pre><code></code></pre>
-                                    </div>
-                                    <div class="col-xs-12 submit">
-                                        <pre><code class="request xml"></code></pre>
-                                    </div>
-                                    <div class="col-xs-12 submit">
-                                        <pre><code class="response xml"></code></pre>
-                                    </div>
-                                </div>
+                     <div class="col-xs-12 col-lg-3 data">
+                         <form class="form genesis-api-example form-horizontal" role="form">
+                            <div class="">Input data:</div>
+                            <div class="row">
+                                <div class="init-notification" style="text-align:center;font-style:italic;">Please select a transaction type from the top menu.</div>
+                                <fieldset class="scheduler-border">
+                                    <div class="form-fields"></div>
+                                </fieldset>
                             </div>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
+                    <div class="col-xs-12 col-lg-6 code-result">
+                        <div class="">Sample code:</div>
+                        <pre><code class="lang-example"></code></pre>
+                    </div>
+                    <div class="col-xs-12 col-lg-3">
+                            <div class="request-result">
+                                <div class="">XML Request:</div>
+                                <pre><code class="xml"></code></pre>
+                            </div>
+                            <div class="response-result">
+                                 <div class="">XML Response:</div>
+                                <pre><code class="xml"></code></pre>
+                            </div>
+                    </div>
                 </div>
             </div>
         </article>
@@ -146,37 +158,35 @@
                     <div class="col-xs-1"></div>
                     <div class="col-xs-4">
                         <div class="supported-languages">
-                            <!---->
+                            <a class="lang lang-php" href="javascript:setCodeLang('php');">
+                                <span class="icon-php"></span>
+                            </a>
                             <a class="lang lang-cs" href="javascript:setCodeLang('cs');">
                                 <span class="icon-cs"></span>
-                            </a>
-                            <a class="lang lang-java" href="javascript:setCodeLang('java');">
-                                <span class="icon-java"></span>
                             </a>
                             <a class="lang lang-nodejs" href="javascript:setCodeLang('nodejs');">
                                 <span class="icon-nodejs"></span>
                             </a>
-                            <a class="lang lang-perl" href="javascript:setCodeLang('perl');">
-                                <span class="icon-perl"></span>
-                            </a>
-
-                            <a class="lang lang-php" href="javascript:setCodeLang('php');">
-                                <span class="icon-php"></span>
-                            </a>
-                            <!---->
                             <a class="lang lang-ruby" href="javascript:setCodeLang('ruby');">
                                 <span class="icon-ruby"></span>
+                            </a>
+                            <!--
+                            <a class="lang lang-java" href="javascript:setCodeLang('java');">
+                                <span class="icon-java"></span>
+                            </a>
+                            <a class="lang lang-perl" href="javascript:setCodeLang('perl');">
+                                <span class="icon-perl"></span>
                             </a>
                             <a class="lang lang-python" href="javascript:setCodeLang('python');">
                                 <span class="icon-python"></span>
                             </a>
-
+                            -->
                         </div>
                     </div>
                     <div class="col-xs-6">
                         <div class="copyright-notice">
                             <a href="http://www.e-comprocessing.com" taret="_blank">
-                                Copyright &copy;2014 E-ComProcessing&trade;
+                                Copyright &copy;2014 - <script>document.write(new Date().getFullYear())</script> E-ComProcessing&trade;
                             </a>
                         </div>
                     </div>
@@ -208,33 +218,34 @@
                     );
                 });
                 $('.genesis-api-example').submit(function() {
+
+                    $('code').text('');
+
                     var formObj = $(this);
 
-                    var currTemplate = formObj.find('input[name="target"]').val();
-
-                    var finalUrl = 'api/php/' + currTemplate + '.php';
+                    var finalUrl = 'api/php/' + formObj.find('input[name="target"]').val() + '.php';
 
                     formObj.find('input[type="submit"]').attr('disabled','disabled');
 
-                    $.post(finalUrl, formObj.serialize())
-                        .done(function(data) {
+                    $.post(finalUrl, formObj.serialize()).done(function(data) {
                             data = jQuery.parseJSON(data);
 
-                            formObj.find('.request').text(data.request);
-                            formObj.find('.response').text(data.response);
+                            jQuery('.request-result code.xml').text(data.request);
+                            jQuery('.response-result code.xml').text(data.response);
 
                             if (hasSelectedCodeLang() && !!data.request) {
                                 getTransactionCode(getSelectedCodeLang(), data.request)
                                     .done(function(code) {
-                                        formObj.find('.code pre code').text(code);
-                                        showExample(formObj);
+                                        jQuery('.code-result code').text(code);
+                                        showExample();
                                     });
                             } else {
-                                showExample(formObj);
+                                showExample();
                             }
                         }, 'json');
 
                     formObj.find('input[type="submit"]').removeAttr('disabled');
+
                     return false;
                 });
                 setCodeLang();

@@ -1,3 +1,4 @@
+#content {width:100%;padding:33px;margin:0 auto;}
 .container {margin:0 auto;}
 .form {margin:0 auto;}
     .form .icon-group .icon-container {position:absolute;padding:10px;}
@@ -15,7 +16,7 @@ legend {margin-bottom:15px;}
 article {margin:66px 0;}
 footer {position:fixed;bottom:0px;width:100%;margin-top:52px;}
 header .navbar, footer .navbar {margin-bottom:0;}
-footer .supported-languages {font-size:28pt;}
+footer .supported-languages {font-size:22pt;}
     footer .supported-languages a {color:#000;outline:none;text-decoration:none;}
         footer .supported-languages a .icon-cs:hover,   footer .supported-languages a.active .icon-cs {color:#68217A;}
         footer .supported-languages a .icon-java:hover,     footer .supported-languages a.active .icon-java {color:#E76F00;}

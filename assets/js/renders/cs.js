@@ -1,39 +1,3 @@
-var requestCodeRenderer = (function() {
-    return {
-        render: function(data) {
-            switch (data.lang) {
-                case 'cs':
-                    return new CsRequestCodeRenderer().renderRequest(
-                        data.config, data.request);
-                case 'php':
-                case 'python':
-                case 'perl':
-                case 'ruby':
-                case 'java':
-                case 'node':
-                default:
-                    break;
-            }
-        }
-    };
-})();
-
-RequestCodeRenderer = {
-    renderRequest: function(config, request) {
-        var that = this;
-        return that.getMustacheTemplate()
-            .then(function(template) {
-                var context = that.getMustacheContext(config, request);
-                var content = Mustache.render(template.main, context, template.partials);
-                return content;
-            });
-    },
-    getCodeTemplate: function(lang, name) {
-        var path = 'assets/templates/code/' + lang + '/' + name + '.mustache';
-        return $.get(path);
-    }
-}
-
 function CsRequestCodeRenderer() {
     this.convertSnakeToPascalCase = function(snakeCase) {
         var pascalCase = snakeCase.replace(
@@ -138,7 +102,7 @@ function CsRequestCodeRenderer() {
     }
 }
 
-CsRequestCodeRenderer.prototype = RequestCodeRenderer;
+CsRequestCodeRenderer.prototype = new RequestCodeRenderer();
 
 CsRequestCodeRenderer.prototype.getMustacheContext = function(config, request) {
     var that = this;
@@ -250,7 +214,7 @@ CsRequestCodeRenderer.prototype.getMustacheContext = function(config, request) {
 }
 
 CsRequestCodeRenderer.prototype.getMustacheTemplate = function() {
-    return $.when(this.getCodeTemplate("cs", "request"), this.getCodeTemplate("cs", "initialization"))
+    return $.when(this.getCodeTemplate("cs", "stub"), this.getCodeTemplate("cs", "vars"))
         .then(function(request, initialization) {
             return {
                 main: request[0],

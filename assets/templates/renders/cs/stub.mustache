@@ -1,0 +1,18 @@
+var configuration = new Configuration(
+	apiLogin:	"{{config.api_login}}",
+	apiPassword: 	"{{config.api_password}}",
+	terminalToken: 	"{{config.terminal_token}}",
+	environment: 	Environments.Staging,
+	certificate: 	X509Certificate.CreateFromCertFile("C:\\example\\certificate.crt")
+);
+
+genesisClient = GenesisClientFactory.Create(configuration);
+
+{{> initialization}}
+
+try
+{
+	var response = genesisClient.Execute(request);
+}
+catch (ValidationException) { }
+catch (WebException) { }
