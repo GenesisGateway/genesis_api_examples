@@ -219,32 +219,34 @@
                 });
                 $('.genesis-api-example').submit(function() {
 
+                    // Clear the code fields
                     $('code').text('');
+
+                    // Disable re-submitting
+                    $('button[type=submit], input[type=submit]').attr('disabled',true);
 
                     var formObj = $(this);
 
-                    var finalUrl = 'api/php/' + formObj.find('input[name="target"]').val() + '.php';
+                    var apiTarget = 'api/php/' + formObj.find('input[name="target"]').val() + '.php';
 
-                    formObj.find('input[type="submit"]').attr('disabled','disabled');
+                    $.post(apiTarget, formObj.serialize()).done(function(data) {
+                        data = jQuery.parseJSON(data);
 
-                    $.post(finalUrl, formObj.serialize()).done(function(data) {
-                            data = jQuery.parseJSON(data);
+                        jQuery('.request-result code.xml').text(data.request);
+                        jQuery('.response-result code.xml').text(data.response);
 
-                            jQuery('.request-result code.xml').text(data.request);
-                            jQuery('.response-result code.xml').text(data.response);
+                        if (hasSelectedCodeLang() && !!data.request) {
+                            getTransactionCode(getSelectedCodeLang(), data.request)
+                                .done(function(code) {
+                                    jQuery('.code-result code').text(code);
+                                    showExample();
+                                });
+                        } else {
+                            showExample();
+                        }
 
-                            if (hasSelectedCodeLang() && !!data.request) {
-                                getTransactionCode(getSelectedCodeLang(), data.request)
-                                    .done(function(code) {
-                                        jQuery('.code-result code').text(code);
-                                        showExample();
-                                    });
-                            } else {
-                                showExample();
-                            }
-                        }, 'json');
-
-                    formObj.find('input[type="submit"]').removeAttr('disabled');
+                        $('button[type=submit], input[type=submit]').attr('disabled',false);
+                    }, 'json');
 
                     return false;
                 });
