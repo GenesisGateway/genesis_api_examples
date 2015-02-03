@@ -1,0 +1,27 @@
+require 'lib/vendor/autoload.php';
+
+use \Genesis\Genesis as Genesis;
+use \Genesis\GenesisConfig as GenesisConfig;
+
+GenesisConfig::setUsername('{{config.api_login}}');
+GenesisConfig::setPassword('{{config.api_password}}');
+GenesisConfig::setToken('{{config.terminal_token}}');
+GenesisConfig::setEnvironment('sandbox');
+
+try {
+	$genesis = new Genesis('{{klass}}');
+
+	$genesis
+		->request()
+			{{> initialization}}
+
+	if ($genesis->response()->isSuccessful()) {
+		$response = $genesis->response()->getResponseObj();
+	}
+	else {
+		$response = false;
+	}
+}
+catch (Exception $e) {
+	error_log($e->getMessage());
+}
