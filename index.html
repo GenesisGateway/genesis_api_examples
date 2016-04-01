@@ -1,0 +1,257 @@
+<!DOCTYPE>
+<html>
+    <head>
+        <title>Genesis API Sandbox</title>
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="assets/css/bootstrap/bootstrap.min.css">
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="assets/css/bootstrap/bootstrap-theme.min.css">
+        <!-- Highlight Monokai Style -->
+        <link rel="stylesheet" href="assets/css/highlight/monokai_sublime.css">
+        <!-- Select2 Style -->
+        <link rel="stylesheet" href="assets/css/select2/select2.css">
+        <!-- Style -->
+        <link rel="stylesheet" href="assets/css/style/style.css">
+        <!-- Mfizz -->
+        <link rel="stylesheet" href="assets/css/fonts/mfizz/font-mfizz.css">
+        <!-- jQuery -->
+        <script src="assets/js/jquery/jquery.min.js"></script>
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="assets/js/bootstrap/bootstrap.min.js"></script>
+        <!-- Highlight -->
+        <script src="assets/js/highlight/highlight.pack.js"></script>
+        <!-- Mustache -->
+        <script src="assets/js/mustache/mustache.js"></script>
+        <!-- EN Language -->
+        <script src="assets/js/translation/translation.js"></script>
+        <!-- EN Language -->
+        <script src="assets/js/translation/languages/en/en-US.js"></script>
+        <!-- Select2 -->
+        <script src="assets/js/select2/select2.min.js"></script>
+        <!-- Faker -->
+        <script src="assets/js/faker/faker.min.js"></script>
+        <!-- Xml to Json converter -->
+        <script src="assets/js/xml2json/xml2json.min.js"></script>
+        <!-- Renders -->
+        <script src="assets/js/renders.js"></script>
+        <!-- C# Render -->
+        <script src="assets/js/renders/cs.js"></script>
+        <!-- PHP Render -->
+        <script src="assets/js/renders/php.js"></script>
+        <!-- Main -->
+        <script src="assets/js/main.js"></script>
+    </head>
+    <body>
+        <header>
+            <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="/">Genesis API Sandbox</a>
+                    </div>
+                    <div class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav">
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Financial <span class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li class="dropdown-header">Generic</li>
+                                    <li><a data-id="authorize" class="trx-type">Authorize</a></li>
+                                    <li><a data-id="capture" class="trx-type">Capture</a></li>
+                                    <li><a data-id="credit" class="trx-type">Credit</a></li>
+                                    <li><a data-id="payout" class="trx-type">Payout</a></li>
+                                    <li><a data-id="refund" class="trx-type">Refund</a></li>
+                                    <li><a data-id="sale" class="trx-type">Sale</a></li>
+                                    <li><a data-id="void" class="trx-type">Void</a></li>
+                                    <li class="divider"></li>
+                                    <li class="dropdown-header">Recurring</li>
+                                    <li><a data-id="init_recurring_sale" class="trx-type">Init Recurring Sale</a></li>
+                                    <li><a href="#body" data-id="recurring_sale" class="trx-type">Recurring Sale</a></li>
+                                    <li class="divider"></li>
+                                    <li class="dropdown-header">3D Transactions</li>
+                                    <li><a data-id="authorize3d" class="trx-type">3D Authorize</a></li>
+                                    <li><a data-id="init_recurring_sale3d" class="trx-type">3D InitRecurring</a></li>
+                                    <li><a data-id="sale3d" class="trx-type">3D Sale</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Fraud-Related <span class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li class="dropdown-header">Charge-Back Information</li>
+                                    <li><a data-id="chargeback_by_date" class="trx-type">by Date / Date-Range</a></li>
+                                    <li><a data-id="chargeback_by_trx_id" class="trx-type">by Transaction ID</a></li>
+                                    <li class="divider"></li>
+                                    <li class="dropdown-header">Retrieval Information</li>
+                                    <li><a data-id="retrieval_by_date" class="trx-type">by Date / Date-Range</a></li>
+                                    <li><a data-id="retrieval_by_trx_id" class="trx-type">by Transaction ID</a></li>
+                                    <li class="divider"></li>
+                                    <li class="dropdown-header">Blacklist</li>
+                                    <li><a data-id="blacklist" class="trx-type">Blacklist Check</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Non-Financial <span class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li class="dropdown-header">Verifications</li>
+                                    <li><a data-id="av" class="trx-type">Account Verification</a></li>
+                                    <li><a data-id="avs" class="trx-type">AVS</a></li>
+                                    <li class="divider"></li>
+                                    <li class="dropdown-header">Reconcile List</li>
+                                    <li><a data-id="reconcile_by_date" class="trx-type">by Date / Date-Range</a></li>
+                                    <li><a data-id="reconcile_by_trx_id" class="trx-type">by Transaction ID</a></li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">WPF <span class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li class="dropdown-header">Web Payment Form</li>
+                                    <li><a data-id="wpf_create" class="trx-type">Create</a></li>
+                                    <li><a data-id="wpf_reconcile" class="trx-type">Reconcile</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </header>
+
+        <article>
+            <div class="row">
+                <div id="content" class="col-xs-12">
+                     <div class="col-xs-12 col-lg-3 data">
+                         <form class="form genesis-api-example form-horizontal" role="form">
+                            <div class="">Input data:</div>
+                            <div class="row">
+                                <div class="init-notification" style="text-align:center;font-style:italic;">Please select a transaction type from the top menu.</div>
+                                <fieldset class="scheduler-border">
+                                    <div class="form-fields"></div>
+                                </fieldset>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="col-xs-12 col-lg-6 code-result">
+                        <div class="">Sample code:</div>
+                        <pre><code class="lang-example"></code></pre>
+                    </div>
+                    <div class="col-xs-12 col-lg-3">
+                            <div class="request-result">
+                                <div class="">XML Request:</div>
+                                <pre><code class="xml"></code></pre>
+                            </div>
+                            <div class="response-result">
+                                 <div class="">XML Response:</div>
+                                <pre><code class="xml"></code></pre>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </article>
+
+        <footer>
+            <div class="navbar navbar-default">
+                <div class="row">
+                    <div class="col-xs-1"></div>
+                    <div class="col-xs-4">
+                        <div class="supported-languages">
+                            <a class="lang lang-php" href="javascript:setCodeLang('php');">
+                                <span class="icon-php"></span>
+                            </a>
+                            <a class="lang lang-cs" href="javascript:setCodeLang('cs');">
+                                <span class="icon-cs"></span>
+                            </a>
+                            <a class="lang lang-nodejs" href="javascript:setCodeLang('nodejs');">
+                                <span class="icon-nodejs"></span>
+                            </a>
+                            <a class="lang lang-ruby" href="javascript:setCodeLang('ruby');">
+                                <span class="icon-ruby"></span>
+                            </a>
+                            <!--
+                            <a class="lang lang-java" href="javascript:setCodeLang('java');">
+                                <span class="icon-java"></span>
+                            </a>
+                            <a class="lang lang-perl" href="javascript:setCodeLang('perl');">
+                                <span class="icon-perl"></span>
+                            </a>
+                            <a class="lang lang-python" href="javascript:setCodeLang('python');">
+                                <span class="icon-python"></span>
+                            </a>
+                            -->
+                        </div>
+                    </div>
+                    <div class="col-xs-6">
+                        <div class="copyright-notice">
+                            <a href="http://www.e-comprocessing.com" taret="_blank">
+                                Copyright &copy;2014 - <script>document.write(new Date().getFullYear())</script> E-ComProcessing&trade;
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-xs-1"></div>
+                </div>
+            </div>
+        </footer>
+
+        <script type="text/javascript">
+            $(document).ready(function() {
+                $('a.trx-type').click(function(i,e) {
+                    var tplFile = $(this).attr('data-id');
+
+                    $.get('assets/templates/api/' + tplFile + '.mustache')
+                        .done(function(template) {
+                            templateVar = {
+                                'faker': getFakeData(),
+                                'locale': translation.getLocalizedStrings()
+                            }
+
+                            Mustache.parse(template);
+
+                            tplRender = Mustache.render(template, templateVar);
+
+                            $('.form .form-fields').html(tplRender);
+
+                            $('.init-notification').remove();
+                        }
+                    );
+                });
+                $('.genesis-api-example').submit(function() {
+
+                    // Clear the code fields
+                    $('code').text('');
+
+                    // Disable re-submitting
+                    $('button[type=submit], input[type=submit]').attr('disabled',true);
+
+                    var formObj = $(this);
+
+                    var apiTarget = 'api/php/' + formObj.find('input[name="target"]').val() + '.php';
+
+                    $.post(apiTarget, formObj.serialize()).done(function(data) {
+                        data = jQuery.parseJSON(data);
+
+                        jQuery('.request-result code.xml').text(data.request);
+                        jQuery('.response-result code.xml').text(data.response);
+
+                        if (hasSelectedCodeLang() && !!data.request) {
+                            getTransactionCode(getSelectedCodeLang(), data.request)
+                                .done(function(code) {
+                                    jQuery('.code-result code').text(code);
+                                    showExample();
+                                });
+                        } else {
+                            showExample();
+                        }
+
+                        $('button[type=submit], input[type=submit]').attr('disabled',false);
+                    }, 'json');
+
+                    return false;
+                });
+                setCodeLang();
+            });
+        </script>
+    </body>
+</html>

@@ -1,0 +1,294 @@
+<div class="row no-gutter control-group">
+    <div class="col-xs-12 left-inner-addon">
+        <div class="icon-group">
+            <div class="icon-container">
+                <i class="glyphicon glyphicon-asterisk"></i>
+            </div>
+            <input class="form-control" type="text" name="transaction_id" placeholder="{{locale.transaction_id}}" value="{{faker.transaction_id}}" />
+        </div>
+    </div>
+</div>
+<div class="row no-gutter control-group">
+    <div class="col-xs-12 left-inner-addon">
+        <div class="icon-group">
+            <div class="icon-container">
+                <i class="glyphicon glyphicon-asterisk"></i>
+            </div>
+            <input class="form-control" type="text" name="amount" placeholder="{{locale.amount}}" value="{{faker.amount}}" />
+        </div>
+    </div>
+</div>
+<div class="row no-gutter control-group">
+    <div class="col-xs-12 left-inner-addon">
+        <div class="icon-group">
+            <div class="icon-container">
+                <i class="glyphicon glyphicon-asterisk"></i>
+            </div>
+            <input class="form-control" type="text" name="currency" placeholder="{{locale.currency}}" value="{{faker.currency}}" />
+        </div>
+    </div>
+</div>
+
+<div class="row no-gutter control-group">
+    <div class="col-xs-12 left-inner-addon">
+        <div class="icon-group">
+            <div class="icon-container">
+                <i class="glyphicon glyphicon-asterisk"></i>
+            </div>
+           <input class="form-control" type="text" name="usage" placeholder="{{locale.usage}}" value="{{faker.usage}}" />
+        </div>
+    </div>
+</div>
+
+<div class="row no-gutter control-group">
+    <div class="col-xs-12 left-inner-addon">
+        <div class="icon-group">
+            <div class="icon-container">
+                <i class="glyphicon glyphicon-asterisk"></i>
+            </div>
+            <input class="form-control" type="text" name="description" placeholder="{{locale.description}}" value="{{faker.description}}" />
+        </div>
+    </div>
+</div>
+
+<div class="row no-gutter control-group">
+    <div class="col-xs-12 left-inner-addon">
+        <div class="icon-group">
+            <div class="icon-container">
+                <i class="glyphicon glyphicon-asterisk"></i>
+            </div>
+            <input class="form-control" type="text" name="notification_url" placeholder="{{locale.notification_url}}" value="{{faker.notification_url}}" />
+        </div>
+    </div>
+</div>
+<div class="row no-gutter control-group">
+    <div class="col-xs-12 left-inner-addon">
+        <div class="icon-group">
+            <div class="icon-container">
+                <i class="glyphicon glyphicon-asterisk"></i>
+            </div>
+            <input class="form-control" type="text" name="return_success_url" placeholder="{{locale.return_success_url}}" value="{{faker.return_success_url}}" />
+        </div>
+    </div>
+</div>
+<div class="row no-gutter control-group">
+    <div class="col-xs-12 left-inner-addon">
+        <div class="icon-group">
+            <div class="icon-container">
+                <i class="glyphicon glyphicon-asterisk"></i>
+            </div>
+            <input class="form-control" type="text" name="return_failure_url" placeholder="{{locale.return_failure_url}}" value="{{faker.return_failure_url}}" />
+        </div>
+    </div>
+</div>
+<div class="row no-gutter control-group">
+    <div class="col-xs-12 left-inner-addon">
+        <div class="icon-group">
+            <div class="icon-container">
+                <i class="glyphicon glyphicon-asterisk"></i>
+            </div>
+            <input class="form-control" type="text" name="return_cancel_url" placeholder="{{locale.return_cancel_url}}" value="{{faker.return_cancel_url}}" />
+        </div>
+    </div>
+</div>
+
+<div class="row no-gutter control-group">
+    <div class="col-xs-12 left-inner-addon">
+        <div class="icon-group">
+            <div class="icon-container">
+                <i class="glyphicon glyphicon-asterisk"></i>
+            </div>
+            <input class="form-control" type="text" name="customer_email" placeholder="{{locale.customer_email}}" value="{{faker.customer_email}}" />
+        </div>
+    </div>
+</div>
+<div class="row no-gutter control-group">
+    <div class="col-xs-12 left-inner-addon">
+        <div class="icon-group">
+            <div class="icon-container">
+                <i class="glyphicon glyphicon-asterisk"></i>
+            </div>
+            <input class="form-control" type="text" name="customer_phone" placeholder="{{locale.customer_phone}}" value="{{faker.customer_phone}}" />
+        </div>
+    </div>
+</div>
+<div class="row no-gutter control-group">
+    <div class="col-xs-12 left-inner-addon">
+        <select id="trx_types" multiple="multiple" name="transaction_type[]" style="width:100%" class="populate placeholder">
+            <option value="authorize" selected="selected">{{locale.auth}}</option>
+            <option value="authorize3d">{{locale.auth3d}}</option>
+            <option value="sale" selected="selected">{{locale.sale}}</option>
+            <option value="sale3d">{{locale.sale3d}}</option>
+        </select>
+    </div>
+</div>
+<fieldset>
+    <legend>Billing</legend>
+    <div class="row no-gutter control-group">
+        <div class="col-xs-12 left-inner-addon">
+            <div class="icon-group">
+                <div class="icon-container">
+                    <i class="glyphicon glyphicon-asterisk"></i>
+                </div>
+                <input class="form-control" type="text" name="billing_address[first_name]" placeholder="{{locale.billing_first_name}}" value="{{faker.billing.first_name}}" />
+            </div>
+        </div>
+    </div>
+    <div class="row no-gutter control-group">
+        <div class="col-xs-12 left-inner-addon">
+            <div class="icon-group">
+                <div class="icon-container">
+                    <i class="glyphicon glyphicon-asterisk"></i>
+                </div>
+                <input class="form-control" type="text" name="billing_address[last_name]" placeholder="{{locale.billing_last_name}}" value="{{faker.billing.last_name}}" />
+            </div>
+        </div>
+    </div>
+    <div class="row no-gutter control-group">
+        <div class="col-xs-12 left-inner-addon">
+            <div class="icon-group">
+                <div class="icon-container">
+                    <i class="glyphicon glyphicon-asterisk"></i>
+                </div>
+                <input class="form-control" type="text" name="billing_address[address1]" placeholder="{{locale.billing_address}}" value="{{faker.billing.address1}}" />
+            </div>
+        </div>
+    </div>
+    <div class="row no-gutter control-group">
+        <div class="col-xs-12 left-inner-addon">
+            <div class="icon-group">
+                <div class="icon-container">
+                    <i class="glyphicon glyphicon-asterisk"></i>
+                </div>
+                <input class="form-control" type="text" name="billing_address[address2]" placeholder="{{locale.billing_address_2}}" value="{{faker.billing.address2}}" />
+            </div>
+        </div>
+    </div>
+    <div class="row no-gutter control-group">
+        <div class="col-xs-12 left-inner-addon">
+            <div class="icon-group">
+                <div class="icon-container">
+                    <i class="glyphicon glyphicon-asterisk"></i>
+                </div>
+                <input class="form-control" type="text" name="billing_address[zip_code]" placeholder="{{locale.billing_zip}}" value="{{faker.billing.zip_code}}" />
+            </div>
+        </div>
+    </div>
+    <div class="row no-gutter control-group">
+        <div class="col-xs-12 left-inner-addon">
+            <div class="icon-group">
+                <div class="icon-container">
+                    <i class="glyphicon glyphicon-asterisk"></i>
+                </div>
+                <input class="form-control" type="text" name="billing_address[city]" placeholder="{{locale.billing_city}}" value="{{faker.billing.city}}" />
+            </div>
+        </div>
+    </div>
+    <div class="row no-gutter control-group">
+        <div class="col-xs-12 left-inner-addon">
+            <div class="icon-group">
+                <div class="icon-container">
+                    <i class="glyphicon glyphicon-asterisk"></i>
+                </div>
+                <input class="form-control" type="text" name="billing_address[country]" placeholder="{{locale.billing_country}}" value="{{faker.billing.country}}" />
+            </div>
+        </div>
+    </div>
+</fieldset>
+<fieldset>
+    <legend>Shipping (Optional)</legend>
+    <div class="row no-gutter control-group">
+        <div class="col-xs-12 left-inner-addon">
+            <input class="form-control" type="text" name="shipping_address[first_name]" placeholder="{{locale.shipping_first_name}}" />
+        </div>
+    </div>
+    <div class="row no-gutter control-group">
+        <div class="col-xs-12 left-inner-addon">
+            <input class="form-control" type="text" name="shipping_address[last_name]" placeholder="{{locale.shipping_last_name}}" />
+        </div>
+    </div>
+    <div class="row no-gutter control-group">
+        <div class="col-xs-12 left-inner-addon">
+            <input class="form-control" type="text" name="shipping_address[address1]" placeholder="{{locale.shipping_address}}" />
+        </div>
+    </div>
+    <div class="row no-gutter control-group">
+        <div class="col-xs-12 left-inner-addon">
+            <input class="form-control" type="text" name="shipping_address[address2]" placeholder="{{locale.shipping_address_2}}" />
+        </div>
+    </div>
+    <div class="row no-gutter control-group">
+        <div class="col-xs-12 left-inner-addon">
+            <input class="form-control" type="text" name="shipping_address[zip_code]" placeholder="{{locale.shipping_zip}}" />
+        </div>
+    </div>
+    <div class="row no-gutter control-group">
+        <div class="col-xs-12 left-inner-addon">
+            <input class="form-control" type="text" name="shipping_address[city]" placeholder="{{locale.shipping_city}}" />
+        </div>
+    </div>
+    <div class="row no-gutter control-group">
+        <div class="col-xs-12 left-inner-addon">
+            <input class="form-control" type="text" name="shipping_address[country]" placeholder="{{locale.shipping_country}}" />
+        </div>
+    </div>
+</fieldset>
+<fieldset>
+    <legend>Risk Parameters (Optional)</legend>
+    <div class="row no-gutter control-group">
+        <div class="col-xs-12 left-inner-addon">
+            <input class="form-control" type="text" name="risk_params[ssn]" placeholder="{{locale.risk_params_ssn}}" />
+        </div>
+    </div>
+    <div class="row no-gutter control-group">
+        <div class="col-xs-12 left-inner-addon">
+            <input class="form-control" type="text" name="risk_params[mac_address]" placeholder="{{locale.risk_params_mac_address}}" />
+        </div>
+    </div>
+    <div class="row no-gutter control-group">
+        <div class="col-xs-12 left-inner-addon">
+            <input class="form-control" type="text" name="risk_params[session_id]" placeholder="{{locale.risk_params_session_id}}" />
+        </div>
+    </div>
+    <div class="row no-gutter control-group">
+        <div class="col-xs-12 left-inner-addon">
+            <input class="form-control" type="text" name="risk_params[user_id]" placeholder="{{locale.risk_params_user_id}}" />
+        </div>
+    </div>
+    <div class="row no-gutter control-group">
+        <div class="col-xs-12 left-inner-addon">
+            <input class="form-control" type="text" name="risk_params[user_level]" placeholder="{{locale.risk_params_user_level}}" />
+        </div>
+    </div>
+    <div class="row no-gutter control-group">
+        <div class="col-xs-12 left-inner-addon">
+            <input class="form-control" type="text" name="risk_params[email]" placeholder="{{locale.risk_params_email}}" />
+        </div>
+    </div>
+    <div class="row no-gutter control-group">
+        <div class="col-xs-12 left-inner-addon">
+            <input class="form-control" type="text" name="risk_params[phone]" placeholder="{{locale.risk_params_phone}}" />
+        </div>
+    </div>
+    <div class="row no-gutter control-group">
+        <div class="col-xs-12 left-inner-addon">
+            <input class="form-control" type="text" name="risk_params[remote_ip]" placeholder="{{locale.risk_params_remote_ip}}" />
+        </div>
+    </div>
+    <div class="row no-gutter control-group">
+        <div class="col-xs-12 left-inner-addon">
+            <input class="form-control" type="text" name="risk_params[serial_number]" placeholder="{{locale.risk_params_serial_number}}" />
+        </div>
+    </div>
+</fieldset>
+<div class="row no-gutter control-group">
+    <div class="col-xs-12 submit">
+        <input name="target" type="hidden" value="wpf_create" />
+        <input class="form-control" class="submit" type="submit" />
+    </div>
+</div>
+<script type="text/javascript">
+    $("#trx_types").select2({
+        placeholder: '{{choose_trx_type}}'
+    });
+</script>

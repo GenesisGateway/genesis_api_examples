@@ -1,0 +1,71 @@
+<div class="row no-gutter control-group">
+    <div class="col-xs-12 left-inner-addon">
+        <div class="icon-group">
+            <div class="icon-container">
+                <i class="glyphicon glyphicon-lock"></i>
+            </div>
+            <input class="form-control" type="text" name="transaction_type" value="recurring_sale (Request Type)" disabled="disabled" readonly="readonly" />
+        </div>
+    </div>
+</div>
+<div class="row no-gutter control-group">
+    <div class="col-xs-12 left-inner-addon">
+        <div class="icon-group">
+            <div class="icon-container">
+                <i class="glyphicon glyphicon-asterisk"></i>
+            </div>
+            <input class="form-control" type="text" name="transaction_id" placeholder="{{locale.transaction_id}}" value="{{faker.transaction_id}}" />
+        </div>
+    </div>
+</div>
+<div class="row no-gutter control-group">
+    <div class="col-xs-12 left-inner-addon">
+        <input class="form-control" type="text" name="usage" placeholder="{{locale.usage}}" value="{{faker.usage}}" />
+    </div>
+</div>
+<div class="row no-gutter control-group">
+    <div class="col-xs-12 left-inner-addon">
+        <div class="icon-group">
+            <div class="icon-container">
+                <i class="glyphicon glyphicon-asterisk"></i>
+            </div>
+            <input class="form-control" type="text" name="remote_ip" placeholder="{{locale.remote_ip}}" value="{{faker.remote_ip}}" />
+        </div>
+    </div>
+</div>
+<div class="row no-gutter control-group">
+    <div class="col-xs-12 left-inner-addon">
+        <div class="icon-group">
+            <div class="icon-container">
+                <i class="glyphicon glyphicon-asterisk"></i>
+            </div>
+            <input class="form-control" type="text" name="reference_id" placeholder="{{locale.reference_id}}" />
+        </div>
+    </div>
+</div>
+<div class="row no-gutter control-group">
+    <div class="col-xs-12 left-inner-addon">
+        <div class="icon-group">
+            <div class="icon-container">
+                <i class="glyphicon glyphicon-asterisk"></i>
+            </div>
+            <input class="form-control" type="text" name="amount" placeholder="{{locale.amount}}" value="{{faker.amount}}" />
+        </div>
+    </div>
+</div>
+<div class="row no-gutter control-group">
+    <div class="col-xs-12 left-inner-addon">
+        <div class="icon-group">
+            <div class="icon-container">
+                <i class="glyphicon glyphicon-asterisk"></i>
+            </div>
+            <input class="form-control" type="text" name="currency" placeholder="{{locale.currency}}" value="{{faker.currency}}" />
+        </div>
+    </div>
+</div>
+<div class="row no-gutter control-group">
+    <div class="col-xs-12 submit">
+        <input name="target" type="hidden" value="recurring_sale" />
+        <input class="form-control" class="submit" type="submit" />
+    </div>
+</div>
