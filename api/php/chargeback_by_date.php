@@ -1,12 +1,12 @@
 <?php
-require '../../lib/php/vendor/autoload.php';
+require '../../vendor/autoload.php';
 
 use \Genesis\Genesis as Genesis;
-use \Genesis\GenesisConfig as GenesisConfig;
+use \Genesis\Config as GenesisConfig;
 
 GenesisConfig::loadSettings('../../config/default.ini');
 
-$genesis = new Genesis('FraudRelated\Chargeback\DateRange');
+$genesis = new Genesis('NonFinancial\Fraud\Chargeback\DateRange');
 
 $genesis
 	->request()

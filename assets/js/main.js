@@ -91,22 +91,23 @@ function getConfig() {
         });
 }
 
-function getFakeData() {
+function getFakeData(trx_type) {
     future_date = faker.date.future();
+
     return {
         transaction_id:     faker.internet.password(),
         usage:              faker.hacker.phrase(),
         description:        faker.lorem.sentence(),
         remote_ip:          faker.internet.ip(),
         amount:             randomFromInterval(1337, 2048),
-        currency:           'USD',
+        currency:           getTrxCurrency(trx_type),
         card_holder:        faker.name.findName(),
-        card_number:        '4200000000000000',
+        card_number:        getTrxCardNumber(trx_type),
         cvv:                randomFromInterval(100,999),
         expiration_month:   future_date.getMonth(),
-        expiration_year:    future_date.getFullYear(),
+        expiration_year:    future_date.getFullYear() + 1,
         customer_email:     faker.internet.email(),
-        customer_phone:     faker.phone.phoneNumberFormat(),
+        customer_phone:     getTrxBillCustPhone(),
 
         billing: {
             first_name: faker.name.firstName(),
@@ -116,7 +117,7 @@ function getFakeData() {
             zip_code:   faker.address.zipCode(),
             city:       faker.address.city(),
             state:      faker.address.stateAbbr(),
-            country:    'US',
+            country:    getTrxCountryCode(trx_type),
         },
 
         shipping: {
@@ -127,7 +128,7 @@ function getFakeData() {
             zip_code:   faker.address.zipCode(),
             city:       faker.address.city(),
             state:      faker.address.stateAbbr(),
-            country:    'US',
+            country:    getTrxCountryCode(trx_type),
         },
 
         start_date:      faker.internet.password(),
@@ -137,6 +138,51 @@ function getFakeData() {
         return_failure_url: 'http://www.dummy.com/url/failure',
         return_cancel_url:  'http://www.dummy.com/url/cancel'
     }
+}
+
+function getTrxBillCustPhone() {
+    return faker.phone.phoneNumberFormat().replace(new RegExp('-', 'g'), '');
+}
+
+function getTrxCountryCode(trx_type) {
+    var trx_country = {
+        poli:   'AU',
+        sofort: 'DE'
+    };
+
+    if (trx_type in trx_country) {
+        return trx_country[trx_type];
+    }
+
+    return 'US';
+}
+
+function getTrxCurrency(trx_type) {
+    var trx_currency = {
+        p24:    'PLN',
+        poli:   'AUD',
+        sofort: 'EUR'
+    };
+
+    if (trx_type in trx_currency) {
+        return trx_currency[trx_type];
+    }
+
+    return 'USD';
+}
+
+function getTrxCardNumber(trx_type) {
+    return isThreeDTransaction(trx_type) ? '4711100000000000' : '4200000000000000';
+}
+
+function isThreeDTransaction(trx_type) {
+    var threeDTransactions = [
+        'authorize3d',
+        'sale3d',
+        'init_recurring_sale3d'
+    ];
+    
+    return $.inArray(trx_type, threeDTransactions) > -1;
 }
 
 // Get the last element in Array

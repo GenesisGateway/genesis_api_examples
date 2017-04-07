@@ -67,11 +67,42 @@ translation.lang['en_US'] = {
     terminal_token                  : "Terminal Token",
 
     // Transaction Types
+    abn_ideal                       : "ABN iDEAL",
     auth                            : "Authorize",
-    auth3d                          : "Authorize 3D",
-    capture                         : "Capture",
+    auth3d                          : "Authorize (3D-Secure)",
+    cashu                           : "CashU",
+    neteller                        : "Neteller",
+    paybyvoucher_sale               : "PayByVoucher (Sale)",
+    paybyvoucher_yeepay             : "PayByVoucher (oBeP)",
+    poli                            : "POLi",
+    paysafecard                     : "PaySafeCard",
+    sofort                          : "SOFORT",
+    webmoney                        : "WebMoney",
     sale                            : "Sale",
-    sale3d                          : "Sale 3D",
+    sale3d                          : "Sale (3D-Secure)",
+    capture                         : "Capture",
+    inpay                           : "INPay",
+    p24                             : "P24",
+    sdd_sale                        : "SDD Sale",
+    //Payment Methods
+    eps                             : "eps",
+    giropay                         : "Giropay",
+    przelewy24                      : "Przelewy24",
+    qiwi                            : "Qiwi",
+    safetypay                       : "SafetyPay",
+    teleingreso                     : "TeleIngreso",
+    trustpay                        : "TrustPay",
+
+
     // Select2 Placeholder
-    choose_trx_type                 : "Choose transaction types for the WPF..."
+    choose_trx_type                 : "Choose transaction types for the WPF...",
+
+    bank_iban                       : "Bank IBAN Account",
+    bank_bic                        : "Bank BIC",
+    bank_code                       : "Bank Code",
+    bank_account_number             : "Account Number",
+    account_phone                   : "Account Phone",
+    customer_bank_id                : "Customer Bank ID",
+
+    payment_type                    : "Select Payment Type"
 };

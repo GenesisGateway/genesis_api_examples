@@ -1,8 +1,8 @@
 <?php
-require '../../lib/php/vendor/autoload.php';
+require '../../vendor/autoload.php';
 
 use \Genesis\Genesis as Genesis;
-use \Genesis\GenesisConfig as GenesisConfig;
+use \Genesis\Config as GenesisConfig;
 
 GenesisConfig::loadSettings('../../config/default.ini');
 
@@ -56,9 +56,69 @@ $genesis
         ->setRiskRemoteIp($_POST['risk_params']['remote_ip'])
         ->setRiskSerialNumber($_POST['risk_params']['serial_number']);
 
-// Transaction Type
-foreach ($_POST['transaction_type'] as $transaction_type) {
-    $genesis->request()->addTransactionType($transaction_type);
+// Descriptor
+$genesis
+	->request()
+		->setDynamicMerchantName($_POST['dynamic_descriptor']['merchant_name'])
+		->setDynamicMerchantCity($_POST['dynamic_descriptor']['merchant_city']);
+
+$paymentMethods = array(
+	\Genesis\API\Constants\Payment\Methods::EPS         =>
+		\Genesis\API\Constants\Transaction\Types::PPRO,
+	\Genesis\API\Constants\Payment\Methods::GIRO_PAY    =>
+		\Genesis\API\Constants\Transaction\Types::PPRO,
+	\Genesis\API\Constants\Payment\Methods::PRZELEWY24  =>
+		\Genesis\API\Constants\Transaction\Types::PPRO,
+	\Genesis\API\Constants\Payment\Methods::QIWI        =>
+		\Genesis\API\Constants\Transaction\Types::PPRO,
+	\Genesis\API\Constants\Payment\Methods::SAFETY_PAY  =>
+		\Genesis\API\Constants\Transaction\Types::PPRO,
+	\Genesis\API\Constants\Payment\Methods::TELEINGRESO =>
+		\Genesis\API\Constants\Transaction\Types::PPRO,
+	\Genesis\API\Constants\Payment\Methods::TRUST_PAY   =>
+		\Genesis\API\Constants\Transaction\Types::PPRO,
+);
+
+$transactionTypesList = array();
+
+// Transaction Types
+foreach ($_POST['transaction_type'] as $selected_type) {
+	if (array_key_exists($selected_type, $paymentMethods)) {
+		$transaction_type = $paymentMethods[$selected_type];
+
+		$transactionTypesList[$transaction_type]['name'] = $transaction_type;
+
+		$transactionTypesList[$transaction_type]['parameters'][] = array(
+			'payment_method' => $selected_type
+		);
+	} else {
+		$transactionTypesList[] = $selected_type;
+	}
+}
+
+foreach ($transactionTypesList as $transaction_type) {
+	if (is_array($transaction_type)) {
+		$genesis->request()->addTransactionType(
+			$transaction_type['name'],
+			$transaction_type['parameters']
+		);
+	} else {
+		if (\Genesis\API\Constants\Transaction\Types::isPayByVoucher($transaction_type)) {
+			$parameters = [
+				'card_type' =>
+					\Genesis\API\Constants\Transaction\Parameters\PayByVouchers\CardTypes::VIRTUAL,
+				'redeem_type' =>
+					\Genesis\API\Constants\Transaction\Parameters\PayByVouchers\RedeemTypes::INSTANT
+			];
+			$genesis
+				->request()
+					->addTransactionType($transaction_type, $parameters);
+		} else {
+			$genesis
+				->request()
+					->addTransactionType($transaction_type);
+		}
+	}
 }
 
 $output = null;

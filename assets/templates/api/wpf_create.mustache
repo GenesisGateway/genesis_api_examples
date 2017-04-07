@@ -115,10 +115,33 @@
 <div class="row no-gutter control-group">
     <div class="col-xs-12 left-inner-addon">
         <select id="trx_types" multiple="multiple" name="transaction_type[]" style="width:100%" class="populate placeholder">
-            <option value="authorize" selected="selected">{{locale.auth}}</option>
-            <option value="authorize3d">{{locale.auth3d}}</option>
-            <option value="sale" selected="selected">{{locale.sale}}</option>
-            <option value="sale3d">{{locale.sale3d}}</option>
+            <optgroup label="Transaction Types">
+                <option value="authorize" selected="selected">{{locale.auth}}</option>
+                <option value="authorize3d">{{locale.auth3d}}</option>
+                <option value="sale" selected="selected">{{locale.sale}}</option>
+                <option value="sale3d">{{locale.sale3d}}</option>
+                <option value="abn_ideal">{{locale.abn_ideal}}</option>
+                <option value="cashu">{{locale.cashu}}</option>
+                <option value="neteller">{{locale.neteller}}</option>
+                <option value="paybyvoucher_sale">{{locale.paybyvoucher_sale}}</option>
+                <option value="paybyvoucher_yeepay">{{locale.paybyvoucher_yeepay}}</option>
+                <option value="poli">{{locale.poli}}</option>
+                <option value="paysafecard">{{locale.paysafecard}}</option>
+                <option value="sofort">{{locale.sofort}}</option>
+                <option value="webmoney">{{locale.webmoney}}</option>
+                <option value="inpay">{{locale.inpay}}</option>
+                <option value="p24">{{locale.p24}}</option>
+                <option value="sdd_sale">{{locale.sdd_sale}}</option>
+            </optgroup>
+            <optgroup label="Payment Methods">
+                <option value="eps">{{locale.eps}}</option>
+                <option value="giropay">{{locale.giropay}}</option>
+                <option value="przelewy24">{{locale.przelewy24}}</option>
+                <option value="qiwi">{{locale.qiwi}}</option>
+                <option value="safetypay">{{locale.safetypay}}</option>
+                <option value="trustpay">{{locale.trustpay}}</option>
+                <option value="teleingreso">{{locale.teleingreso}}</option>
+            </optgroup>
         </select>
     </div>
 </div>
@@ -278,6 +301,19 @@
     <div class="row no-gutter control-group">
         <div class="col-xs-12 left-inner-addon">
             <input class="form-control" type="text" name="risk_params[serial_number]" placeholder="{{locale.risk_params_serial_number}}" />
+        </div>
+    </div>
+</fieldset>
+<fieldset>
+    <legend>Dynamic Descriptors (Optional)</legend>
+    <div class="row no-gutter control-group">
+        <div class="col-xs-12 left-inner-addon">
+            <input class="form-control" type="text" name="dynamic_descriptor[merchant_name]" placeholder="{{locale.dynamic_descriptor_merchant_name}}" />
+        </div>
+    </div>
+    <div class="row no-gutter control-group">
+        <div class="col-xs-12 left-inner-addon">
+            <input class="form-control" type="text" name="dynamic_descriptor[merchant_city]" placeholder="{{locale.dynamic_descriptor_merchant_city}}" />
         </div>
     </div>
 </fieldset>

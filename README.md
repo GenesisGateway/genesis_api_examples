@@ -6,11 +6,7 @@ This is collection of examples demonstrating the different transaction types of 
 
 ## Installation
 
-* ```git clone```
-* ```git submodule init```
-* ```git submodule update```
-* ```cd lib```
-* ```composer install```
+* ```composer update```
 * modify the ```config/default.ini``` according to your credentials
 
 ## Quick-Start Guide

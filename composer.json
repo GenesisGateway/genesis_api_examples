@@ -1,0 +1,10 @@
+{
+    "require": {
+        "genesisgateway/genesis_php": "^1.5"
+    },
+    "require-dev": {
+        "squizlabs/php_codesniffer": "^2.6",
+        "fzaninotto/faker": "^1.6",
+        "phpspec/phpspec": "^3.0"
+    }
+}
