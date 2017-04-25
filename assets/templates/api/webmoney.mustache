@@ -4,7 +4,7 @@
             <div class="icon-container">
                 <i class="glyphicon glyphicon-lock"></i>
             </div>
-            <input class="form-control" type="text" name="transaction_type" value="p24 (Request Type)" disabled="disabled" readonly="readonly" />
+            <input class="form-control" type="text" name="transaction_type" value="neteller (Request Type)" disabled="disabled" readonly="readonly" />
         </div>
     </div>
 </div>
@@ -70,6 +70,26 @@
                 <i class="glyphicon glyphicon-asterisk"></i>
             </div>
             <input class="form-control" type="text" name="customer_phone" placeholder="{{locale.customer_phone}}" value="{{faker.customer_phone}}" />
+        </div>
+    </div>
+</div>
+<div class="row no-gutter control-group">
+    <div class="col-xs-12 left-inner-addon">
+        <div class="input-group">
+            <span class="input-group-addon">
+                <input type="checkbox" name="is_payout" value="true" />
+            </span>
+            <input type="text" class="form-control" placeholder="{{locale.is_payout}}" readonly="readonly" />
+        </div>
+    </div>
+</div>
+<div class="row no-gutter control-group">
+    <div class="col-xs-12 left-inner-addon">
+        <div class="icon-group">
+            <div class="icon-container">
+                <i class="glyphicon glyphicon-asterisk"></i>
+            </div>
+            <input class="form-control" type="text" name="customer_account_id" placeholder="{{locale.customer_account}}" value="" />
         </div>
     </div>
 </div>
@@ -209,7 +229,7 @@
 </fieldset>
 <div class="row no-gutter control-group">
     <div class="col-xs-12 submit">
-        <input name="target" type="hidden" value="p24" />
+        <input name="target" type="hidden" value="webmoney" />
         <input class="form-control submit" type="submit" />
     </div>
 </div>

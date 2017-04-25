@@ -6,23 +6,27 @@ use \Genesis\Config as GenesisConfig;
 
 GenesisConfig::loadSettings('../../config/default.ini');
 
-$genesis = new Genesis('Financial\Void');
+$genesis = new Genesis('Financial\Cancel');
 
-$genesis
-	->request()
-        ->setTransactionId($_POST['transaction_id'])
-        ->setUsage($_POST['usage'])
-        ->setRemoteIp($_POST['remote_ip'])
-        ->setReferenceId($_POST['reference_id']);
+/**
+ * @var \Genesis\API\Request\Financial\Cancel $voidRequest
+ */
+$voidRequest = $genesis->request();
+
+$voidRequest
+    ->setTransactionId($_POST['transaction_id'])
+    ->setUsage($_POST['usage'])
+    ->setRemoteIp($_POST['remote_ip'])
+    ->setReferenceId($_POST['reference_id']);
 
 $output = null;
 
-try  {
+try {
     $genesis->execute();
     $output['request']  = $genesis->request()->getDocument();
     $output['response'] = $genesis->response()->getResponseRaw();
 }
-catch (\Exception $e)  {
+catch (\Exception $e) {
     $output['response'] = $e->getMessage();
 }
 

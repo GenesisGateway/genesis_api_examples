@@ -4,7 +4,7 @@
             <div class="icon-container">
                 <i class="glyphicon glyphicon-lock"></i>
             </div>
-            <input class="form-control" type="text" name="transaction_type" value="sdd_sale (Request Type)" disabled="disabled" readonly="readonly" />
+            <input class="form-control" type="text" name="transaction_type" value="ezeewallet (Request Type)" disabled="disabled" readonly="readonly" />
         </div>
     </div>
 </div>
@@ -23,6 +23,7 @@
         <input class="form-control" type="text" name="usage" placeholder="{{locale.usage}}" value="{{faker.usage}}" />
     </div>
 </div>
+
 <div class="row no-gutter control-group">
     <div class="col-xs-12 left-inner-addon">
         <div class="icon-group">
@@ -53,14 +54,13 @@
         </div>
     </div>
 </div>
-
 <div class="row no-gutter control-group">
     <div class="col-xs-12 left-inner-addon">
         <div class="icon-group">
             <div class="icon-container">
                 <i class="glyphicon glyphicon-asterisk"></i>
             </div>
-            <input class="form-control" type="text" name="billing_address[first_name]" placeholder="{{locale.billing_first_name}}" value="{{faker.billing.first_name}}" />
+            <input class="form-control" type="text" name="source_wallet_id" placeholder="{{locale.source_wallet_id}}" value="" />
         </div>
     </div>
 </div>
@@ -70,45 +70,47 @@
             <div class="icon-container">
                 <i class="glyphicon glyphicon-asterisk"></i>
             </div>
-            <input class="form-control" type="text" name="billing_address[last_name]" placeholder="{{locale.billing_last_name}}" value="{{faker.billing.last_name}}" />
-        </div>
-    </div>
-</div>
-<div class="row no-gutter control-group">
-    <div class="col-xs-12 left-inner-addon">
-        <div class="icon-group">
-            <div class="icon-container">
-                <i class="glyphicon glyphicon-asterisk"></i>
-            </div>
-            <input class="form-control" type="text" name="billing_address[country]" placeholder="{{locale.billing_country}}" value="{{faker.billing.country}}" />
+            <input class="form-control" type="password" name="source_wallet_pwd" placeholder="{{locale.source_wallet_pwd}}" value="" />
         </div>
     </div>
 </div>
 
-<div class="row no-gutter control-group">
-    <div class="col-xs-12 left-inner-addon">
-        <div class="icon-group">
-            <div class="icon-container">
-                <i class="glyphicon glyphicon-asterisk"></i>
+<fieldset>
+    <legend>Asynchronous Parameters</legend>
+    <div class="row no-gutter control-group">
+        <div class="col-xs-12 left-inner-addon">
+            <div class="icon-group">
+                <div class="icon-container">
+                    <i class="glyphicon glyphicon-exclamation-sign"></i>
+                </div>
+                <input class="form-control" type="text" name="notification_url" placeholder="{{locale.notification_url}}" value="{{faker.notification_url}}" />
             </div>
-            <input class="form-control" type="text" name="bank[iban]" placeholder="{{locale.bank_iban}}" value="" />
         </div>
     </div>
-</div>
-<div class="row no-gutter control-group">
-    <div class="col-xs-12 left-inner-addon">
-        <div class="icon-group">
-            <div class="icon-container">
-                <i class="glyphicon glyphicon-asterisk"></i>
+    <div class="row no-gutter control-group">
+        <div class="col-xs-12 left-inner-addon">
+            <div class="icon-group">
+                <div class="icon-container">
+                    <i class="glyphicon glyphicon-exclamation-sign"></i>
+                </div>
+                <input class="form-control" type="text" name="return_success_url" placeholder="{{locale.return_success_url}}" value="{{faker.return_success_url}}" />
             </div>
-            <input class="form-control" type="text" name="bank[bic]" placeholder="{{locale.bank_bic}}" value="" />
         </div>
     </div>
-</div>
-
+    <div class="row no-gutter control-group">
+        <div class="col-xs-12 left-inner-addon">
+            <div class="icon-group">
+                <div class="icon-container">
+                    <i class="glyphicon glyphicon-exclamation-sign"></i>
+                </div>
+                <input class="form-control" type="text" name="return_failure_url" placeholder="{{locale.return_failure_url}}" value="{{faker.return_failure_url}}" />
+            </div>
+        </div>
+    </div>
+</fieldset>
 <div class="row no-gutter control-group">
     <div class="col-xs-12 submit">
-        <input name="target" type="hidden" value="sdd_sale" />
-        <input class="form-control submit" type="submit" />
+        <input name="target" type="hidden" value="ezeewallet" />
+        <input class="form-control" class="submit" type="submit" />
     </div>
 </div>

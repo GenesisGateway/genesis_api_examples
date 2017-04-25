@@ -74,6 +74,16 @@
         </div>
     </div>
 </div>
+<div class="row no-gutter control-group">
+    <div class="col-xs-12 left-inner-addon">
+        <div class="icon-group">
+            <div class="icon-container">
+                <i class="glyphicon glyphicon-asterisk"></i>
+            </div>
+            <input class="form-control" type="text" name="billing_address[country]" placeholder="{{locale.billing_country}}" value="{{faker.billing.country}}" />
+        </div>
+    </div>
+</div>
 
 <div class="row no-gutter control-group">
     <div class="col-xs-12 left-inner-addon">
@@ -96,39 +106,6 @@
     </div>
 </div>
 
-<fieldset>
-    <legend>Asynchronous Parameters</legend>
-    <div class="row no-gutter control-group">
-        <div class="col-xs-12 left-inner-addon">
-            <div class="icon-group">
-                <div class="icon-container">
-                    <i class="glyphicon glyphicon-exclamation-sign"></i>
-                </div>
-                <input class="form-control" type="text" name="notification_url" placeholder="{{locale.notification_url}}" value="{{faker.notification_url}}" />
-            </div>
-        </div>
-    </div>
-    <div class="row no-gutter control-group">
-        <div class="col-xs-12 left-inner-addon">
-            <div class="icon-group">
-                <div class="icon-container">
-                    <i class="glyphicon glyphicon-exclamation-sign"></i>
-                </div>
-                <input class="form-control" type="text" name="return_success_url" placeholder="{{locale.return_success_url}}" value="{{faker.return_success_url}}" />
-            </div>
-        </div>
-    </div>
-    <div class="row no-gutter control-group">
-        <div class="col-xs-12 left-inner-addon">
-            <div class="icon-group">
-                <div class="icon-container">
-                    <i class="glyphicon glyphicon-exclamation-sign"></i>
-                </div>
-                <input class="form-control" type="text" name="return_failure_url" placeholder="{{locale.return_failure_url}}" value="{{faker.return_failure_url}}" />
-            </div>
-        </div>
-    </div>
-</fieldset>
 <div class="row no-gutter control-group">
     <div class="col-xs-12 submit">
         <input name="target" type="hidden" value="sdd_init_recurring_sale" />

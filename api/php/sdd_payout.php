@@ -6,12 +6,12 @@ use \Genesis\Config as GenesisConfig;
 
 GenesisConfig::loadSettings('../../config/default.ini');
 
-$genesis = new Genesis('Financial\SDD\Sale');
+$genesis = new Genesis('Financial\SDD\Payout');
 
-/** @var \Genesis\API\Request\Financial\SDD\Sale $sddSaleRequest */
-$sddSaleRequest = $genesis->request();
+/** @var \Genesis\API\Request\Financial\SDD\Payout $sddPayoutRequest */
+$sddPayoutRequest = $genesis->request();
 
-$sddSaleRequest
+$sddPayoutRequest
     ->setTransactionId($_POST['transaction_id'])
     ->setUsage($_POST['usage'])
     ->setRemoteIp($_POST['remote_ip'])

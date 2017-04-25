@@ -95,7 +95,7 @@ function getFakeData(trx_type) {
     future_date = faker.date.future();
 
     return {
-        transaction_id:     faker.internet.password(),
+        transaction_id:     generateTransactionId(),
         usage:              faker.hacker.phrase(),
         description:        faker.lorem.sentence(),
         remote_ip:          faker.internet.ip(),
@@ -107,7 +107,7 @@ function getFakeData(trx_type) {
         expiration_month:   future_date.getMonth(),
         expiration_year:    future_date.getFullYear() + 1,
         customer_email:     faker.internet.email(),
-        customer_phone:     getTrxBillCustPhone(),
+        customer_phone:     getTrxBillCustomerPhone(),
 
         billing: {
             first_name: faker.name.firstName(),
@@ -140,14 +140,28 @@ function getFakeData(trx_type) {
     }
 }
 
-function getTrxBillCustPhone() {
+function generateTransactionId() {
+    var params = {
+        length: 25,
+        pool: 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'
+    }
+
+    return chance.string(params);
+}
+
+function getTrxBillCustomerPhone() {
     return faker.phone.phoneNumberFormat().replace(new RegExp('-', 'g'), '');
 }
 
 function getTrxCountryCode(trx_type) {
     var trx_country = {
-        poli:   'AU',
-        sofort: 'DE'
+        abn_ideal:               'NL',
+        inpay:                   'DE',
+        poli:                    'AU',
+        sdd_init_recurring_sale: 'DE',
+        sdd_sale:                'DE',
+        sdd_payout:              'DE',
+        sofort:                  'DE'
     };
 
     if (trx_type in trx_country) {
@@ -159,9 +173,17 @@ function getTrxCountryCode(trx_type) {
 
 function getTrxCurrency(trx_type) {
     var trx_currency = {
-        p24:    'PLN',
-        poli:   'AUD',
-        sofort: 'EUR'
+        abn_ideal:               'EUR',
+        ezeewallet:              'EUR',
+        inpay:                   'EUR',
+        p24:                     'PLN',
+        paybyvoucher_sale:       'EUR',
+        poli:                    'AUD',
+        ppro:                    'EUR',
+        sdd_init_recurring_sale: 'EUR',
+        sdd_sale:                'EUR',
+        sdd_payout:              'EUR',
+        sofort:                  'EUR'
     };
 
     if (trx_type in trx_currency) {
@@ -181,7 +203,7 @@ function isThreeDTransaction(trx_type) {
         'sale3d',
         'init_recurring_sale3d'
     ];
-    
+
     return $.inArray(trx_type, threeDTransactions) > -1;
 }
 

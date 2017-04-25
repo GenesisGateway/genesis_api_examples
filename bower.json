@@ -1,0 +1,17 @@
+{
+  "name": "genesisgateway/genesis_api_examples",
+  "description": "Collection of examples demonstrating the different transaction types of Genesis Payment Gateway",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "./assets/js",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "chance": "^1.0.6"
+  }
+}

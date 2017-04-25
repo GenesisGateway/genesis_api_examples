@@ -1,6 +1,6 @@
 {
     "require": {
-        "genesisgateway/genesis_php": "^1.5"
+        "genesisgateway/genesis_php": "^1.6"
     },
     "require-dev": {
         "squizlabs/php_codesniffer": "^2.6",

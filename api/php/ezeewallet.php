@@ -6,22 +6,22 @@ use \Genesis\Config as GenesisConfig;
 
 GenesisConfig::loadSettings('../../config/default.ini');
 
-$genesis = new Genesis('Financial\SDD\Sale');
+$genesis = new Genesis('Financial\Wallets\eZeeWallet');
 
-/** @var \Genesis\API\Request\Financial\SDD\Sale $sddSaleRequest */
-$sddSaleRequest = $genesis->request();
+/** @var \Genesis\API\Request\Financial\Wallets\eZeeWallet $ezwRequest */
+$ezwRequest = $genesis->request();
 
-$sddSaleRequest
+$ezwRequest
     ->setTransactionId($_POST['transaction_id'])
     ->setUsage($_POST['usage'])
     ->setRemoteIp($_POST['remote_ip'])
     ->setCurrency($_POST['currency'])
     ->setAmount($_POST['amount'])
-    ->setIban($_POST['bank']['iban'])
-    ->setBic($_POST['bank']['bic'])
-    ->setBillingFirstName($_POST['billing_address']['first_name'])
-    ->setBillingLastName($_POST['billing_address']['last_name'])
-    ->setBillingCountry($_POST['billing_address']['country']);
+    ->setReturnSuccessUrl($_POST['return_success_url'])
+    ->setReturnFailureUrl($_POST['return_failure_url'])
+    ->setNotificationUrl($_POST['notification_url'])
+    ->setSourceWalletId($_POST['source_wallet_id'])
+    ->setSourceWalletPwd($_POST['source_wallet_pwd']);
 
 $output = null;
 

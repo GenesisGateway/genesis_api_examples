@@ -4,9 +4,16 @@ This is collection of examples demonstrating the different transaction types of 
 
 **DO NOT PUT THESE FILES ON A PUBLIC SERVER**
 
+##Requirements
+
+* PHP 5.5.9 + 
+* Composer
+* Bower
+
 ## Installation
 
 * ```composer update```
+* ```bower install```
 * modify the ```config/default.ini``` according to your credentials
 
 ## Quick-Start Guide

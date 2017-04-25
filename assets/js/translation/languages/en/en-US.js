@@ -6,7 +6,7 @@ translation.lang['en_US'] = {
     gaming              : "Gaming",
     moto                : "Mail Order / Telephone Order",
     remote_ip           : "IPv4 Customer Address",
-    amount              : "Transcation Amount",
+    amount              : "Transaction Amount",
     currency            : "ISO-4217 Currency Code",
     reference_id        : "Unique ID (reference a Genesis record)",
     // CC Data
@@ -104,5 +104,24 @@ translation.lang['en_US'] = {
     account_phone                   : "Account Phone",
     customer_bank_id                : "Customer Bank ID",
 
-    payment_type                    : "Select Payment Type"
+    payment_type                    : "Select Payment Type",
+
+    //Wallets
+    source_wallet_id                : "Source Wallet Email",
+    source_wallet_pwd               : "Source Wallet Password",
+    customer_account                : "Customer Account",
+    account_password                : "Account Password",
+    is_payout                       : "Payout",
+
+    //APMs
+    birth_date                      : "Birth Date (dd-mm-yyyy)",
+    order_description               : "Short Order Description",
+    payout_order_id                 : "Related Order ID",
+    payout_bank_country             : "Payout Refund Country Code",
+    payout_bank_name                : "Refund Bank Name",
+    payout_swift                    : "SWIFT/BIC Code for Payout",
+    payout_acc_number               : "Account number or IBAN",
+    payout_bank_address             : "Bank Address",
+    payout_owner_name               : "Bank account owner name",
+    payout_owner_address            : "Bank account owner address"
 };
