@@ -4,7 +4,7 @@
             <div class="icon-container">
                 <i class="glyphicon glyphicon-lock"></i>
             </div>
-            <input class="form-control" type="text" name="transaction_type" value="ppro (Request Type)" disabled="disabled" readonly="readonly" />
+            <input class="form-control" type="text" name="transaction_type" value="citadel_payout (Request Type)" disabled="disabled" readonly="readonly" />
         </div>
     </div>
 </div>
@@ -63,81 +63,6 @@
         </div>
     </div>
 </div>
-
-<div class="row no-gutter control-group">
-    <div class="col-xs-12 left-inner-addon">
-        <div class="icon-group">
-            <div class="icon-container">
-                <i class="glyphicon glyphicon-asterisk"></i>
-            </div>
-            <select class="form-control" name="payment_type" style="padding-left: 20pt">
-                <option value="">{{locale.payment_type}}</option>
-                <option value="eps">EPS</option>
-                <option value="teleingreso">TeleIngreso</option>
-                <option value="safetypay">SafetyPay</option>
-                <option value="trustpay">TrustPay</option>
-                <option value="przelewy24">Przelewy24</option>
-                <option value="ideal">iDEAL</option>
-                <option value="qiwi">QIWI</option>
-                <option value="giropay">Giropay</option>
-                <option value="bcmc">Mr.Cash</option>
-                <option value="mybank">MyBank</option>
-            </select>
-        </div>
-    </div>
-</div>
-
-<div class="row no-gutter control-group">
-    <div class="col-xs-12 left-inner-addon">
-        <div class="icon-group">
-            <div class="icon-container">
-                <i class="glyphicon glyphicon-asterisk"></i>
-            </div>
-            <input class="form-control" type="text" name="bank[iban]" placeholder="{{locale.bank_iban}}" value="" />
-        </div>
-    </div>
-</div>
-<div class="row no-gutter control-group">
-    <div class="col-xs-12 left-inner-addon">
-        <div class="icon-group">
-            <div class="icon-container">
-                <i class="glyphicon glyphicon-asterisk"></i>
-            </div>
-            <input class="form-control" type="text" name="bank[bic]" placeholder="{{locale.bank_bic}}" value="" />
-        </div>
-    </div>
-</div>
-<div class="row no-gutter control-group">
-    <div class="col-xs-12 left-inner-addon">
-        <div class="icon-group">
-            <div class="icon-container">
-                <i class="glyphicon glyphicon-asterisk"></i>
-            </div>
-            <input class="form-control" type="text" name="bank[account_number]" placeholder="{{locale.bank_account_number}}" value="" />
-        </div>
-    </div>
-</div>
-<div class="row no-gutter control-group">
-    <div class="col-xs-12 left-inner-addon">
-        <div class="icon-group">
-            <div class="icon-container">
-                <i class="glyphicon glyphicon-asterisk"></i>
-            </div>
-            <input class="form-control" type="text" name="bank[code]" placeholder="{{locale.bank_code}}" value="" />
-        </div>
-    </div>
-</div>
-<div class="row no-gutter control-group">
-    <div class="col-xs-12 left-inner-addon">
-        <div class="icon-group">
-            <div class="icon-container">
-                <i class="glyphicon glyphicon-asterisk"></i>
-            </div>
-            <input class="form-control" type="text" name="account_phone" placeholder="{{locale.account_phone}}" value="" />
-        </div>
-    </div>
-</div>
-
 <div class="row no-gutter control-group">
     <div class="col-xs-12 left-inner-addon">
         <div class="icon-group">
@@ -145,6 +70,96 @@
                 <i class="glyphicon glyphicon-asterisk"></i>
             </div>
             <input class="form-control" type="text" name="customer_phone" placeholder="{{locale.customer_phone}}" value="{{faker.customer_phone}}" />
+        </div>
+    </div>
+</div>
+<div class="row no-gutter control-group">
+    <div class="col-xs-12 left-inner-addon">
+        <div class="icon-group">
+            <div class="icon-container">
+                <i class="glyphicon glyphicon-asterisk"></i>
+            </div>
+            <input class="form-control" type="text" name="holder_name" placeholder="{{locale.payout_owner_name}}" value="" />
+        </div>
+    </div>
+</div>
+<div class="row no-gutter control-group">
+    <div class="col-xs-12 left-inner-addon">
+        <div class="icon-group">
+            <div class="icon-container">
+                <i class="glyphicon glyphicon-asterisk"></i>
+            </div>
+            <input class="form-control" type="text" name="iban" placeholder="{{locale.bank_iban}}" value="" />
+        </div>
+    </div>
+</div>
+<div class="row no-gutter control-group">
+    <div class="col-xs-12 left-inner-addon">
+        <div class="icon-group">
+            <div class="icon-container">
+                <i class="glyphicon glyphicon-asterisk"></i>
+            </div>
+            <input class="form-control" type="text" name="swift_code" placeholder="{{locale.payout_swift}}" value="" />
+        </div>
+    </div>
+</div>
+<div class="row no-gutter control-group">
+    <div class="col-xs-12 left-inner-addon">
+        <div class="icon-group">
+            <div class="icon-container">
+                <i class="glyphicon glyphicon-asterisk"></i>
+            </div>
+            <input class="form-control" type="text" name="account_number" placeholder="{{locale.bank_account_number}}" value="" />
+        </div>
+    </div>
+</div>
+<div class="row no-gutter control-group">
+    <div class="col-xs-12 left-inner-addon">
+        <div class="icon-group">
+            <div class="icon-container">
+                <i class="glyphicon glyphicon-asterisk"></i>
+            </div>
+            <input class="form-control" type="text" name="bank_name" placeholder="{{locale.payout_bank_name}}" value="" />
+        </div>
+    </div>
+</div>
+<div class="row no-gutter control-group">
+    <div class="col-xs-12 left-inner-addon">
+        <div class="icon-group">
+            <div class="icon-container">
+                <i class="glyphicon glyphicon-asterisk"></i>
+            </div>
+            <input class="form-control" type="text" name="bank_city" placeholder="{{locale.payout_bank_city}}" value="" />
+        </div>
+    </div>
+</div>
+<div class="row no-gutter control-group">
+    <div class="col-xs-12 left-inner-addon">
+        <div class="icon-group">
+            <div class="icon-container">
+                <i class="glyphicon glyphicon-asterisk"></i>
+            </div>
+            <input class="form-control" type="text" name="bank_code" placeholder="{{locale.bank_code}}" value="" />
+        </div>
+    </div>
+</div>
+<div class="row no-gutter control-group">
+    <div class="col-xs-12 left-inner-addon">
+        <div class="icon-group">
+            <div class="icon-container">
+                <i class="glyphicon glyphicon-asterisk"></i>
+            </div>
+            <input class="form-control" type="text" name="branch_code" placeholder="{{locale.payout_branch_code}}" value="" />
+        </div>
+    </div>
+</div>
+<div class="row no-gutter control-group">
+    <div class="col-xs-12 left-inner-addon">
+        <div class="icon-group">
+            <div class="icon-container">
+                <i class="glyphicon glyphicon-asterisk"></i>
+            </div>
+            <input class="form-control" type="text" name="branch_check_digit" placeholder="{{locale.payout_branch_check_digit}}" value="" />
         </div>
     </div>
 </div>
@@ -259,32 +274,9 @@
         </div>
     </div>
 </fieldset>
-<fieldset>
-    <legend>Asynchronous Parameters</legend>
-    <div class="row no-gutter control-group">
-        <div class="col-xs-12 left-inner-addon">
-            <div class="icon-group">
-                <div class="icon-container">
-                    <i class="glyphicon glyphicon-exclamation-sign"></i>
-                </div>
-                <input class="form-control" type="text" name="return_success_url" placeholder="{{locale.return_success_url}}" value="{{faker.return_success_url}}" />
-            </div>
-        </div>
-    </div>
-    <div class="row no-gutter control-group">
-        <div class="col-xs-12 left-inner-addon">
-            <div class="icon-group">
-                <div class="icon-container">
-                    <i class="glyphicon glyphicon-exclamation-sign"></i>
-                </div>
-                <input class="form-control" type="text" name="return_failure_url" placeholder="{{locale.return_failure_url}}" value="{{faker.return_failure_url}}" />
-            </div>
-        </div>
-    </div>
-</fieldset>
 <div class="row no-gutter control-group">
     <div class="col-xs-12 submit">
-        <input name="target" type="hidden" value="ppro" />
+        <input name="target" type="hidden" value="citadel_payout" />
         <input class="form-control submit" type="submit" />
     </div>
 </div>

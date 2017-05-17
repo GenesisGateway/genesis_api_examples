@@ -4,7 +4,7 @@ This is collection of examples demonstrating the different transaction types of 
 
 **DO NOT PUT THESE FILES ON A PUBLIC SERVER**
 
-##Requirements
+## Requirements
 
 * PHP 5.5.9 + 
 * Composer

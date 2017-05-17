@@ -117,7 +117,7 @@ function getFakeData(trx_type) {
             zip_code:   faker.address.zipCode(),
             city:       faker.address.city(),
             state:      faker.address.stateAbbr(),
-            country:    getTrxCountryCode(trx_type),
+            country:    getTrxCountryCode(trx_type)
         },
 
         shipping: {
@@ -128,7 +128,7 @@ function getFakeData(trx_type) {
             zip_code:   faker.address.zipCode(),
             city:       faker.address.city(),
             state:      faker.address.stateAbbr(),
-            country:    getTrxCountryCode(trx_type),
+            country:    getTrxCountryCode(trx_type)
         },
 
         start_date:      faker.internet.password(),
@@ -136,7 +136,8 @@ function getFakeData(trx_type) {
         notification_url:   'http://www.dummy.com/url/notification',
         return_success_url: 'http://www.dummy.com/url/success',
         return_failure_url: 'http://www.dummy.com/url/failure',
-        return_cancel_url:  'http://www.dummy.com/url/cancel'
+        return_cancel_url:  'http://www.dummy.com/url/cancel',
+        return_url:         'http://www.dummy.com/url/return'
     }
 }
 
@@ -156,6 +157,8 @@ function getTrxBillCustomerPhone() {
 function getTrxCountryCode(trx_type) {
     var trx_country = {
         abn_ideal:               'NL',
+        idebit_payin:            'CA',
+        insta_debit_payin:       'CA',
         inpay:                   'DE',
         poli:                    'AU',
         sdd_init_recurring_sale: 'DE',
@@ -175,6 +178,10 @@ function getTrxCurrency(trx_type) {
     var trx_currency = {
         abn_ideal:               'EUR',
         ezeewallet:              'EUR',
+        idebit_payin:            'CAD',
+        idebit_payout:           'CAD',
+        insta_debit_payin:       'CAD',
+        insta_debit_payout:      'CAD',
         inpay:                   'EUR',
         p24:                     'PLN',
         paybyvoucher_sale:       'EUR',

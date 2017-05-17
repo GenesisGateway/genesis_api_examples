@@ -22,6 +22,7 @@ translation.lang['en_US'] = {
     notification_url    : "Notification URL",
     return_success_url  : "Target URL for successful completion",
     return_failure_url  : "Target URL for unsuccessful completion",
+    return_url          : "Target URL for completion",
     return_cancel_url   : "Target URL for cancelled WPF Session",
     // 3D Sync
     mpi_params_cavv     : "MPI's CAVV (Cardholder Authentication Verification Value)",
@@ -122,6 +123,10 @@ translation.lang['en_US'] = {
     payout_swift                    : "SWIFT/BIC Code for Payout",
     payout_acc_number               : "Account number or IBAN",
     payout_bank_address             : "Bank Address",
+    payout_bank_city                : "Bank City",
     payout_owner_name               : "Bank account owner name",
-    payout_owner_address            : "Bank account owner address"
+    payout_owner_address            : "Bank account owner address",
+    payout_branch_code              : "Bank Branch Code",
+    payout_branch_check_digit       : "Bank Check Digit",
+    merchant_customer_id            : "Merchant Customer ID"
 };
