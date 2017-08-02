@@ -36,6 +36,7 @@ translation.lang['en_US'] = {
     billing_zip         : "ZIP Code",
     billing_city        : "City",
     billing_country     : "Country",
+    billing_state       : "State",
     // Shipping (Optional)
     shipping_first_name  : "First Name",
     shipping_last_name   : "Last Name",
@@ -85,6 +86,8 @@ translation.lang['en_US'] = {
     inpay                           : "INPay",
     p24                             : "P24",
     sdd_sale                        : "SDD Sale",
+    earthport                       : "Earthport",
+
     //Payment Methods
     eps                             : "eps",
     giropay                         : "Giropay",
@@ -98,10 +101,17 @@ translation.lang['en_US'] = {
     // Select2 Placeholder
     choose_trx_type                 : "Choose transaction types for the WPF...",
 
+    bank_name                       : "Bank Name",
+    bank_account_name               : "Bank Account Name",
     bank_iban                       : "Bank IBAN Account",
     bank_bic                        : "Bank BIC",
     bank_code                       : "Bank Code",
+    bank_branch_code                : "Bank Branch Code",
+    bank_branch                     : "Bank Branch",
+    bank_sort_code                  : "Bank Sort Code",
     bank_account_number             : "Account Number",
+    bank_account_number_suffix      : "Account Number Suffix",
+    bank_aba_routing_number         : "ABA Routing Number",
     account_phone                   : "Account Phone",
     customer_bank_id                : "Customer Bank ID",
 
@@ -128,5 +138,9 @@ translation.lang['en_US'] = {
     payout_owner_address            : "Bank account owner address",
     payout_branch_code              : "Bank Branch Code",
     payout_branch_check_digit       : "Bank Check Digit",
-    merchant_customer_id            : "Merchant Customer ID"
+    merchant_customer_id            : "Merchant Customer ID",
+
+    product_code                    : "Product Code",
+    product_num                     : "Product Number",
+    product_desc                    : "Product Description"
 };

@@ -241,7 +241,7 @@ PhpRequestCodeRenderer.prototype.getMustacheContext = function(config, request) 
     // Set the last_child "is_last" flag
     lastBranch = root.value.object.last();
 
-    if (undefined != lastBranch.value.object)
+    if (undefined !== lastBranch.value.object && undefined !== lastBranch.value.object.last())
         lastBranch.value.object.last().value.is_last = true;
     else
         lastBranch.value.is_last = true;

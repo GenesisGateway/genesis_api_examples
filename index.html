@@ -212,6 +212,9 @@
                                             <li class="menu-item">
                                                 <a href="#" data-id="paypal_express" class="trx-type">PayPal Express</a>
                                             </li>
+                                            <li class="menu-item">
+                                                <a href="#" data-id="earthport" class="trx-type">Earthport</a>
+                                            </li>
                                         </ul>
                                     </li>
 
@@ -298,6 +301,23 @@
                                                     </li>
                                                     <li class="menu-item">
                                                         <a href="#" data-id="insta_debit_payout" class="trx-type">Payout</a>
+                                                    </li>
+                                                </ul>
+                                            </li>
+                                            <li class="menu-item">
+                                                <a href="#" data-id="alipay" class="trx-type">Alipay</a>
+                                            </li>
+                                            <li class="menu-item">
+                                                <a href="#" data-id="wechat" class="trx-type">WeChat</a>
+                                            </li>
+                                            <li class="menu-item dropdown dropdown-submenu">
+                                                <a class="dropdown-toggle" data-toggle="dropdown">PaySec</a>
+                                                <ul class="dropdown-menu">
+                                                    <li class="menu-item">
+                                                        <a href="#" data-id="paysec_payin" class="trx-type">Payin</a>
+                                                    </li>
+                                                    <li class="menu-item">
+                                                        <a href="#" data-id="paysec_payout" class="trx-type">Payout</a>
                                                     </li>
                                                 </ul>
                                             </li>
@@ -503,7 +523,14 @@
                     var apiTarget = 'api/php/' + formObj.find('input[name="target"]').val() + '.php';
 
                     $.post(apiTarget, formObj.serialize()).done(function(data) {
-                        data = jQuery.parseJSON(data);
+                        try {
+                            data = jQuery.parseJSON(data);
+                        } catch (e) {
+                            data = {response: "Server error has occurred"};
+                            if (window.console) {
+                                console.error(e);
+                            }
+                        }
 
                         jQuery('.request-result code.xml').text(data.request);
                         jQuery('.response-result code.xml').text(data.response);

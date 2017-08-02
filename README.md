@@ -14,7 +14,7 @@ This is collection of examples demonstrating the different transaction types of 
 
 * ```composer update```
 * ```bower install```
-* modify the ```config/default.ini``` according to your credentials
+* copy ```config/default.ini.sample``` to ```config/default.ini``` and modify it according to your credentials
 
 ## Quick-Start Guide
 
