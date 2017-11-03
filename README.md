@@ -1,3 +1,6 @@
+## Genesis API Examples
+[![Software License](https://img.shields.io/badge/license-MIT-green.svg?style=flat)](LICENSE)
+
 ## Summary
 
 This is collection of examples demonstrating the different transaction types of Genesis Payment Gateway
