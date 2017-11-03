@@ -3,4 +3,4 @@
 .DS_Store
 vendor
 assets/packages/*/*
-/config/default.ini
+config/default.ini
