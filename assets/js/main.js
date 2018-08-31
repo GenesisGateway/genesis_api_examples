@@ -164,7 +164,10 @@ function getTrxCountryCode(trx_type) {
         sdd_init_recurring_sale: 'DE',
         sdd_sale:                'DE',
         sdd_payout:              'DE',
-        sofort:                  'DE'
+        sofort:                  'DE',
+        klarna_authorize:        'DE',
+        klarna_capture:          'DE',
+        klarna_refund:           'DE'
     };
 
     if (trx_type in trx_country) {
@@ -190,7 +193,10 @@ function getTrxCurrency(trx_type) {
         sdd_init_recurring_sale: 'EUR',
         sdd_sale:                'EUR',
         sdd_payout:              'EUR',
-        sofort:                  'EUR'
+        sofort:                  'EUR',
+        klarna_authorize:        'EUR',
+        klarna_capture:          'EUR',
+        klarna_refund:           'EUR'
     };
 
     if (trx_type in trx_currency) {
@@ -212,6 +218,32 @@ function isThreeDTransaction(trx_type) {
     ];
 
     return $.inArray(trx_type, threeDTransactions) > -1;
+}
+
+function addUrlParam(name, value) {
+    var params = getUrlParams();
+    params[name] = value;
+
+    var hash = [];
+    for (var name in params) {
+        hash.push(name + '=' + params[name]);
+    }
+
+    window.location.hash = hash.join('&');
+}
+
+function getUrlParams() {
+    var parts = window.location.hash
+                    .replace('#', '')
+                    .split("&");
+
+    var params = {};
+    parts.forEach(function (part) {
+        param = part.split('=');
+        params[param[0]] = param[1];
+    });
+
+    return params;
 }
 
 // Get the last element in Array

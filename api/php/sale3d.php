@@ -70,6 +70,9 @@ $saleThreeDRequest
 $saleThreeDRequest
     ->setDynamicMerchantName($_POST['dynamic_descriptor']['merchant_name'])
     ->setDynamicMerchantCity($_POST['dynamic_descriptor']['merchant_city']);
+// Reference id for split payments
+$saleThreeDRequest
+    ->setReferenceId($_POST['reference_id']);
 
 $output = null;
 

@@ -215,6 +215,20 @@
                                             <li class="menu-item">
                                                 <a href="#" data-id="earthport" class="trx-type">Earthport</a>
                                             </li>
+                                            <li class="menu-item dropdown dropdown-submenu">
+                                                <a class="dropdown-toggle" data-toggle="dropdown">Klarna</a>
+                                                <ul class="dropdown-menu">
+                                                    <li class="menu-item">
+                                                        <a href="#" data-id="klarna_authorize" class="trx-type">Authorize</a>
+                                                    </li>
+                                                    <li class="menu-item">
+                                                        <a href="#" data-id="klarna_capture" class="trx-type">Capture</a>
+                                                    </li>
+                                                    <li class="menu-item">
+                                                        <a href="#" data-id="klarna_refund" class="trx-type">Refund</a>
+                                                    </li>
+                                                </ul>
+                                            </li>
                                         </ul>
                                     </li>
 
@@ -504,12 +518,10 @@
         </footer>
 
         <script type="text/javascript">
-            $(document).ready(function() {
-                $('a.trx-type').click(function(i,e) {
-                    var tplFile = $(this).attr('data-id');
 
-                    $.get('assets/templates/api/' + tplFile + '.mustache')
-                        .done(function(template) {
+            function loadTemplate(tplFile) {
+                $.get('assets/templates/api/' + tplFile + '.mustache')
+                    .done(function(template) {
                             templateVar = {
                                 'faker': getFakeData(tplFile),
                                 'locale': translation.getLocalizedStrings()
@@ -524,6 +536,24 @@
                             $('.init-notification').remove();
                         }
                     );
+            }
+
+            $(document).ready(function() {
+
+                var params = getUrlParams();
+
+                // load template if type is set in url
+                if (params.type) {
+                    loadTemplate(params.type);
+                }
+
+                $('a.trx-type').click(function(e) {
+                    e.preventDefault();
+
+                    var tplFile = $(this).attr('data-id');
+
+                    addUrlParam('type', tplFile);
+                    loadTemplate(tplFile);
                 });
                 $('.genesis-api-example').submit(function() {
 
@@ -561,6 +591,9 @@
                         }
 
                         $('button[type=submit], input[type=submit]').attr('disabled',false);
+
+                        //generate new transaction_id
+                        $('[name=transaction_id]').val(generateTransactionId());
                     }, 'json');
 
                     return false;

@@ -1,0 +1,206 @@
+<div class="row no-gutter control-group">
+    <div class="col-xs-12 submit">
+        <input name="target" type="hidden" value="klarna_capture" />
+        <input class="form-control" class="submit" type="submit" />
+    </div>
+</div>
+<div class="row no-gutter control-group">
+    <div class="col-xs-12 left-inner-addon">
+        <div class="icon-group">
+            <div class="icon-container">
+                <i class="glyphicon glyphicon-lock"></i>
+            </div>
+            <input class="form-control" type="text" name="transaction_type" value="klarna_capture (Request Type)" disabled="disabled" readonly="readonly" />
+        </div>
+    </div>
+</div>
+<div class="row no-gutter control-group">
+    <div class="col-xs-12 left-inner-addon">
+        <div class="icon-group">
+            <div class="icon-container">
+                <i class="glyphicon glyphicon-asterisk"></i>
+            </div>
+            <input class="form-control" type="text" name="transaction_id" placeholder="{{locale.transaction_id}}" value="{{faker.transaction_id}}" />
+        </div>
+    </div>
+</div>
+<div class="row no-gutter control-group">
+    <div class="col-xs-12 left-inner-addon">
+        <div class="icon-group">
+            <div class="icon-container">
+                <i class="glyphicon glyphicon-asterisk"></i>
+            </div>
+            <input class="form-control" type="text" name="reference_id" placeholder="{{locale.reference_id}}"  />
+        </div>
+    </div>
+</div>
+<div class="row no-gutter control-group">
+    <div class="col-xs-12 left-inner-addon">
+        <input class="form-control" type="text" name="usage" placeholder="{{locale.usage}}" value="{{faker.usage}}" />
+    </div>
+</div>
+
+<div class="row no-gutter control-group">
+    <div class="col-xs-12 left-inner-addon">
+        <div class="icon-group">
+            <div class="icon-container">
+                <i class="glyphicon glyphicon-asterisk"></i>
+            </div>
+            <input class="form-control" type="text" name="remote_ip" placeholder="{{locale.remote_ip}}" value="{{faker.remote_ip}}" />
+        </div>
+    </div>
+</div>
+<div class="row no-gutter control-group">
+    <div class="col-xs-12 left-inner-addon">
+        <div class="icon-group">
+            <div class="icon-container">
+                <i class="glyphicon glyphicon-asterisk"></i>
+            </div>
+            <input class="form-control" type="text" name="currency" placeholder="{{locale.currency}}" value="{{faker.currency}}" />
+        </div>
+    </div>
+</div>
+<fieldset>
+    <legend>Items</legend>
+
+    <ol class="items" >
+        <li class="item" >
+            <div class="row no-gutter control-group">
+                <div class="col-xs-12 left-inner-addon">
+                    <div class="icon-group">
+                        <div class="icon-container">
+                            <i class="glyphicon glyphicon-asterisk"></i>
+                        </div>
+                        <input class="form-control" type="text" name="items[item0][name]" placeholder="{{locale.name}}" value="item-1" />
+                    </div>
+                </div>
+            </div>
+            <div class="row no-gutter control-group">
+                <div class="col-xs-12 left-inner-addon">
+                    <div class="icon-group">
+                        <div class="icon-container">
+                            <i class="glyphicon glyphicon-asterisk"></i>
+                        </div>
+                        <select class="form-control" name="items[item0][item_type]" placeholder="{{locale.item_type}}" >
+                            <option>physical</option>
+                            <option>discount</option>
+                            <option>shipping_fee</option>
+                            <option>digital</option>
+                            <option>gift_card</option>
+                            <option>store_credit</option>
+                            <option>surcharge</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="row no-gutter control-group">
+                <div class="col-xs-12 left-inner-addon">
+                    <div class="icon-group">
+                        <div class="icon-container">
+                            <i class="glyphicon glyphicon-asterisk"></i>
+                        </div>
+                        <input class="form-control" type="text" name="items[item0][quantity]" placeholder="{{locale.quantity}}" value="1" />
+                    </div>
+                </div>
+            </div>
+            <div class="row no-gutter control-group">
+                <div class="col-xs-12 left-inner-addon">
+                    <div class="icon-group">
+                        <div class="icon-container">
+                            <i class="glyphicon glyphicon-asterisk"></i>
+                        </div>
+                        <input class="form-control" type="text" name="items[item0][unit_price]" placeholder="{{locale.unit_price}}" value="17" />
+                    </div>
+                </div>
+            </div>
+            <div class="row no-gutter control-group">
+                <div class="col-xs-12 left-inner-addon">
+                    <input class="form-control" type="text" name="items[item0][tax_rate]" placeholder="{{locale.tax_rate}}" value="{{faker.shipping.name}}" />
+                </div>
+            </div>
+            <div class="row no-gutter control-group">
+                <div class="col-xs-12 left-inner-addon">
+                    <input class="form-control" type="text" name="items[item0][total_discount_amount]" placeholder="{{locale.total_discount_amount}}" value="{{faker.shipping.name}}" />
+                </div>
+            </div>
+            <div class="row no-gutter control-group">
+                <div class="col-xs-12 left-inner-addon">
+                    <input class="form-control" type="text" name="items[item0][reference]" placeholder="{{locale.reference}}" value="{{faker.shipping.name}}" />
+                </div>
+            </div>
+            <div class="row no-gutter control-group">
+                <div class="col-xs-12 left-inner-addon">
+                    <input class="form-control" type="text" name="items[item0][image_url]" placeholder="{{locale.image_url}}" value="{{faker.shipping.name}}" />
+                </div>
+            </div>
+            <div class="row no-gutter control-group">
+                <div class="col-xs-12 left-inner-addon">
+                    <input class="form-control" type="text" name="items[item0][product_url]" placeholder="{{locale.product_url}}" value="{{faker.shipping.name}}" />
+                </div>
+            </div>
+            <div class="row no-gutter control-group">
+                <div class="col-xs-12 left-inner-addon">
+                    <input class="form-control" type="text" name="items[item0][quantity_unit]" placeholder="{{locale.quantity_unit}}" value="{{faker.shipping.name}}" />
+                </div>
+            </div>
+            <div class="row no-gutter control-group">
+                <div class="col-xs-12">
+                    <button class="btn btn-sm btn-default delete-item hidden">
+                        <i class="glyphicon glyphicon-remove" ></i>
+                        Delete item
+                    </button>
+                </div>
+            </div>
+        </li>
+    </ol>
+
+    <div class="row no-gutter control-group">
+        <div class="col-xs-12 text-center">
+            <button class="btn btn-default" id="add-item">
+                <i class="glyphicon glyphicon-plus" ></i>
+                Add item
+            </button>
+        </div>
+    </div>
+
+</fieldset>
+<div class="row no-gutter control-group">
+    <div class="col-xs-12 submit">
+        <input class="form-control" class="submit" type="submit" />
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+
+        var items_counter = 1;
+
+        function replaceItemInputAttributes(item) {
+            var inputs = item.find(':input').not('.delete-item');
+
+            inputs.not('[name*="item_type"]').val('');
+
+            inputs.attr('name', function(index, currentValue) {
+                return currentValue.replace('[item0]', '[item' + items_counter + ']');
+            });
+
+            item.find('.delete-item').removeClass('hidden');
+        }
+
+        $('#add-item').click(function (e) {
+            e.preventDefault();
+            var newItem = $('.item').first().clone();
+
+            replaceItemInputAttributes(newItem);
+
+            $('.items').append(newItem);
+
+            items_counter++;
+        });
+
+        $(document).on('click', '.delete-item', function() {
+            $(this).parents('.item').remove();
+        });
+
+    });
+</script>

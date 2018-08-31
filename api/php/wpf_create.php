@@ -74,8 +74,6 @@ try {
             \Genesis\API\Constants\Transaction\Types::PPRO,
         \Genesis\API\Constants\Payment\Methods::SAFETY_PAY  =>
             \Genesis\API\Constants\Transaction\Types::PPRO,
-        \Genesis\API\Constants\Payment\Methods::TELEINGRESO =>
-            \Genesis\API\Constants\Transaction\Types::PPRO,
         \Genesis\API\Constants\Payment\Methods::TRUST_PAY   =>
             \Genesis\API\Constants\Transaction\Types::PPRO,
     );

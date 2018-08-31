@@ -60,6 +60,10 @@ $genesis
 	->request()
         ->setDynamicMerchantName($_POST['dynamic_descriptor']['merchant_name'])
         ->setDynamicMerchantCity($_POST['dynamic_descriptor']['merchant_city']);
+// Reference id for split payments
+$genesis
+    ->request()
+        ->setReferenceId($_POST['reference_id']);
 
 $output = null;
 

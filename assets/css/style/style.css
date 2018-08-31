@@ -2,7 +2,7 @@
 .container {margin:0 auto;}
 .form {margin:0 auto;}
     .form .icon-group .icon-container {position:absolute;padding:10px;}
-    .form .icon-group input[type="text"] {text-indent:22px;}
+    .form .icon-group input[type="text"], .form .icon-group select {text-indent:22px;}
 .no-gutter {margin:15px;}
 .code-drops {display:none}
 .dropdown-menu {text-align:center}
@@ -26,3 +26,6 @@ footer .supported-languages {font-size:22pt;}
         footer .supported-languages a .icon-ruby:hover,     footer .supported-languages a.active .icon-ruby {color:#B21301;}
         footer .supported-languages a .icon-python:hover,   footer .supported-languages a.active .icon-python {color:#FFDA5F;}
 footer .copyright-notice {float:right;line-height:52px;font-family:Tahoma,sans-serif;font-size:9pt;margin-right:16px;}
+.items {padding: 0;list-style: none;}
+    .item {counter-increment: item;}
+    .item:before {margin-right: 10px;content: "Item " counter(item);padding-left: 10px;border-bottom: 1px solid #e5e5e5;display: block;}

@@ -87,6 +87,7 @@ translation.lang['en_US'] = {
     p24                             : "P24",
     sdd_sale                        : "SDD Sale",
     earthport                       : "Earthport",
+    klarna_authorize                : "Klarna Authorize",
 
     //Payment Methods
     eps                             : "eps",
@@ -142,5 +143,24 @@ translation.lang['en_US'] = {
 
     product_code                    : "Product Code",
     product_num                     : "Product Number",
-    product_desc                    : "Product Description"
+    product_desc                    : "Product Description",
+
+    //GiftCards
+    gift_card_number : "Card Number",
+    gift_cvv         : "Verification code",
+
+    //Klarna Items
+    name                 : "Name",
+    item_type            : "Item Type",
+    quantity             : "Quantity",
+    unit_price           : "Unit Price",
+    tax_rate             : "Tax Rate",
+    total_discount_amount: "Total Discount Amount",
+    total_amount         : "Total Amount",
+    total_tax_amount     : "Total Tax Amount",
+    reference            : "Reference",
+    image_url            : "Image URL",
+    product_url          : "Product URL",
+    quantity_unit        : "Quantity Unit"
+
 };
